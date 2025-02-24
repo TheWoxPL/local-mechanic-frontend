@@ -26,7 +26,7 @@ export const TopBar = () => {
             id="options"
           >
             <option value="val1" select-name="val1">
-              val1
+              val1kj
             </option>
           </select>
         </form>
