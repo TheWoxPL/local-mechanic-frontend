@@ -1,17 +1,63 @@
 @use '../../assets/styles/theme.scss';
-.container{
-  background-color: green;
-  height: 200px;
+.container {
+  background-color: theme.$color-red;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 
-  .top{
-    .location{
-      
+  .top {
+    display: flex;
+    height: 45px;
+    align-items: center;
+    justify-content: space-between;
+
+    .localization {
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        color: theme.$color-wheat;
+        font-weight: bold;
+      }
+      .input {
+        display: flex;
+      }
     }
-    img{
-      width: 40px;
+    img {
+      height: 36px;
+      background-color: theme.$mask-black-10;
+      border-radius: 10px;
     }
   }
-  .bottom{
+  .bottom {
+    height: 50px;
 
+    form {
+      height: 100%;
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .search {
+        display: flex;
+        height: 32px;
+        border: none;
+        width: 330px;
+        border-radius: 10px;
+        padding: 2px 8px;
+        background-color: theme.$color-wheat;
+      }
+      .options {
+        background-color: theme.$color-wheat;
+        display: flex;
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+      }
+    }
   }
 }

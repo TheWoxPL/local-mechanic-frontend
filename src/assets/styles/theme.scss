@@ -1,1 +1,41 @@
 @use './baseStyles.scss';
+
+// COLORS
+$color-red: #d84040;
+$color-red-dark: #a31d1d;
+$color-wheat: #f8f2de;
+$color-wheat-dark: #ecdcbf;
+$color-white: #fff;
+$color-black: #000;
+
+// MASKS
+$mask-white-10: rgba(255, 255, 255, 0.1);
+$mask-white-20: rgba(255, 255, 255, 0.2);
+$mask-white-30: rgba(255, 255, 255, 0.3);
+$mask-white-40: rgba(255, 255, 255, 0.4);
+$mask-white-50: rgba(255, 255, 255, 0.5);
+$mask-white-60: rgba(255, 255, 255, 0.6);
+$mask-white-70: rgba(255, 255, 255, 0.7);
+$mask-white-80: rgba(255, 255, 255, 0.8);
+$mask-white-90: rgba(255, 255, 255, 0.9);
+
+$mask-black-10: rgba(0, 0, 0, 0.1);
+$mask-black-20: rgba(0, 0, 0, 0.2);
+$mask-black-30: rgba(0, 0, 0, 0.3);
+$mask-black-40: rgba(0, 0, 0, 0.4);
+$mask-black-50: rgba(0, 0, 0, 0.5);
+$mask-black-60: rgba(0, 0, 0, 0.6);
+$mask-black-70: rgba(0, 0, 0, 0.7);
+$mask-black-80: rgba(0, 0, 0, 0.8);
+$mask-black-90: rgba(0, 0, 0, 0.9);
+
+// FONT SIZES
+$font-size-desktop: 24px;
+$font-size-desktop-small: 20px;
+$font-size-desktop-large: 32px;
+$font-size-desktop-title: 64px;
+$font-size-mobile: 20px;
+$font-size-mobile-tiny: 14px;
+$font-size-mobile-small: 16px;
+$font-size-mobile-large: 24px;
+$font-size-mobile-title: 32px;
