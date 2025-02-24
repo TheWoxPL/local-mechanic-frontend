@@ -1,0 +1,17 @@
+@use '../../assets/styles/theme.scss';
+.container{
+  background-color: green;
+  height: 200px;
+
+  .top{
+    .location{
+      
+    }
+    img{
+      width: 40px;
+    }
+  }
+  .bottom{
+
+  }
+}

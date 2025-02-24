@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
-import { IndexPage } from './pages/indexPage/indexPage';
+import { IndexPage } from 'src/pages/indexPage/indexPage';
 
 export function App() {
   return (
