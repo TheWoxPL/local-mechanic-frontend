@@ -4,13 +4,13 @@
     "paths": {
       "src/*": ["src/*"]
     },
-    "module": "commonjs",
+    "module": "es2020",
+    "target": "es2021",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
     "incremental": true,
@@ -22,6 +22,7 @@
     "noFallthroughCasesInSwitch": false,
     "jsx": "react-jsx",
     "strict": true,
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "moduleResolution": "node" 
   }
 }
