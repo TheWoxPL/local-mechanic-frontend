@@ -21,6 +21,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": false,
     "jsx": "react-jsx",
-    "strict": true
+    "strict": true,
+    "typeRoots": ["node_modules/@types"]
   }
 }
