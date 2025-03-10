@@ -22,7 +22,6 @@ export async function callApi<T>(
     body: body ? JSON.stringify(body) : undefined,
   };
 
-  console.log(baseURL + path, options);
   const response = await fetch(baseURL + path, options);
   return response.json();
 }

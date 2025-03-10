@@ -1,0 +1,89 @@
+@use '../../assets/styles/theme.scss';
+.container {
+  width: 100%;
+  max-width: 382px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .email,
+    .password {
+      border: none;
+      border-bottom: 2px solid theme.$mask-black-20;
+      background-color: theme.$mask-black-10;
+      margin-bottom: 20px;
+      padding: 10px;
+
+      &:focus,
+      :active {
+        outline: none;
+        border-bottom: 2px solid theme.$color-red;
+        border-bottom: 2px solid theme.$mask-black-50;
+      }
+    }
+
+    .loginButton {
+      width: 100%;
+      border: none;
+      background-color: theme.$mask-black-90;
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      height: 35px;
+      font-size: 1.6rem;
+      transition: 0.2s ease-in-out;
+
+      &:active,
+      :focus {
+        transform: scale(1.05);
+        transition: 0.2s ease-in-out;
+      }
+    }
+  }
+  .orContinueWithText {
+    color: theme.$mask-black-50;
+    margin: 30px 0px 30px 0px;
+  }
+  .googleButton {
+    width: 100%;
+    border: none;
+    background-color: theme.$mask-black-20;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 1.6rem;
+    transition: 0.2s ease-in-out;
+
+    &:active,
+    :focus {
+      transform: scale(1.05);
+      transition: 0.2s ease-in-out;
+    }
+
+    img {
+      height: 120%;
+    }
+  }
+  .createAccountText {
+    color: theme.$mask-black-50;
+  }
+  .createAccountLink {
+    color: theme.$mask-black-80;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
