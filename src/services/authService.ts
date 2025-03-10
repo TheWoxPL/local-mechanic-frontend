@@ -6,25 +6,14 @@ import {
 } from 'firebase/auth';
 
 import { auth } from '../config/firebaseConfig';
+import ApiUtils from 'src/shared/api/apiUtils';
 
 export const googleLogin = async () => {
   const provider = new GoogleAuthProvider();
   try {
-    const result = await signInWithPopup(auth, provider);
-    const token = await result.user.getIdToken();
-    // console.log('Token:', token);
-    const response = await fetch(
-      'http://localhost:4455/api/v1/auth/verify-token',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-    // console.log('Verify Token Response:', response);
-    return response.json();
+    await signInWithPopup(auth, provider);
+    const response = await ApiUtils.auth.verifyToken();
+    return response;
   } catch (error) {
     console.error('Login failed:', error);
   }

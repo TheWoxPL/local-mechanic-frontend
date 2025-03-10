@@ -1,4 +1,5 @@
 import { getToken, googleLogin, logout } from '../../services/authService';
+import ApiUtils from 'src/shared/api/apiUtils';
 
 const LoginPageDev: React.FC = () => {
   const handleAdminRoute = async () => {
@@ -39,7 +40,7 @@ const LoginPageDev: React.FC = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       const data = await response.text();
       console.log('Customer Route Response:', data);
@@ -64,7 +65,7 @@ const LoginPageDev: React.FC = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       const data = await response.text();
       console.log('Entrepreneur Route Response:', data);
@@ -89,7 +90,7 @@ const LoginPageDev: React.FC = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       const data = await response.text();
       console.log('Customer Route Response:', data);
@@ -114,7 +115,7 @@ const LoginPageDev: React.FC = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
       const data = await response.text();
       console.log('Response:', data);
@@ -125,6 +126,14 @@ const LoginPageDev: React.FC = () => {
     }
   };
 
+  async function handlingApiCallVerifyToken(): Promise<void> {
+    try {
+      await ApiUtils.auth.verifyToken();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div>
       <button onClick={googleLogin}>Login with Google</button>
@@ -134,6 +143,9 @@ const LoginPageDev: React.FC = () => {
       <button onClick={logout}>Logout</button>
       <button onClick={addCustomerRole}>Add customer role</button>
       <button onClick={addEntrepreneurRole}>Add entrepreneur role</button>
+      <button onClick={async () => handlingApiCallVerifyToken()}>
+        ApiUtils verifyToken
+      </button>
     </div>
   );
 };
