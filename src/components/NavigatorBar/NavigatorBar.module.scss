@@ -1,4 +1,19 @@
 @use '../../assets/styles/theme.scss';
+@keyframes indicator {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  50% {
+    width: 15px;
+    opacity: 0.5;
+  }
+  100% {
+    width: 30px;
+    opacity: 1;
+  }
+}
+
 .container {
   padding: 0px 50px;
   box-sizing: border-box;
@@ -10,6 +25,11 @@
   justify-content: space-between;
   position: fixed;
   bottom: 0px;
+
+  a{
+    text-decoration: none;
+    color: black;
+  }
 
   .item {
     display: flex;
@@ -24,6 +44,7 @@
       content: '';
       width: 0px;
       transition: 0.2s ease-in-out;
+      animation: indicator 0.1s ease-in-out;
     }
 
     img {
