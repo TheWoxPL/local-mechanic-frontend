@@ -4,7 +4,7 @@ import styles from './homePage.module.scss';
 export const HomePage = () => {
   return (
     <div className={styles.container}>
-      <NavigatorBar />
+      <NavigatorBar indicatorIndex={0} />
     </div>
   );
 };
