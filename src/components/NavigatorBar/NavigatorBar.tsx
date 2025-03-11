@@ -7,7 +7,7 @@ import ProfileSVG from 'src/assets/svgs/profile.svg';
 export const NavigatorBar = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.item}>
+      <div className={`${styles.item} ${styles.itemActive}`}>
         <img src={HomeSVG} alt="Home Page" />
         <span>Home</span>
       </div>

@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{ts,tsx,jsx}\"",
     "prepare": "husky install",
-    "check-branch-name": "chmod 755 ./.husky/hooks/check-branch-naming.sh && sh ./.husky/hooks/check-branch-naming.sh"
+    "check-branch-name": "chmod 755 ./.husky/hooks/check-branch-naming.sh && sh ./.husky/hooks/check-branch-naming.sh",
+    "prepare:husky": "chmod +x .husky/pre-commit"
   },
   "dependencies": {
     "firebase": "^11.4.0",

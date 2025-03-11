@@ -1,1 +1,1 @@
-export * from './system-status.enum'
+export * from './system-status.enum';

@@ -18,6 +18,13 @@
     width: 75px;
     align-items: center;
     position: static;
+    transition: 0.2s ease-in-out;
+    
+    &::after {
+      content: '';
+      width: 0px;
+      transition: 0.2s ease-in-out;
+    }
 
     img {
       margin-top: 5px;
@@ -26,6 +33,24 @@
 
     span {
       font-size: 1.3rem;
+    }
+  }
+
+  .itemActive {
+    transform: scale(1.05);
+    transition: 0.2s ease-in-out;
+    font-weight: 700;
+
+    &::after {
+      transition: 0.2s ease-in-out;
+      content: '';
+      width: 30px;
+      height: 4px;
+      background-color: transparent;
+      position: absolute;
+      bottom: 46px;
+      background-color: rgb(0, 0, 0);
+      border-radius: 10px;
     }
   }
 }

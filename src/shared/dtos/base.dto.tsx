@@ -1,4 +1,3 @@
-
 import { BasicDto } from './basic.dto';
 
 export class BaseDto extends BasicDto {
