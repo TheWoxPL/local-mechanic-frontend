@@ -7,12 +7,17 @@ import {
 
 import { auth } from '../config/firebaseConfig';
 import ApiUtils from 'src/shared/api/apiUtils';
+import { AuthContext } from 'src/context/authContext';
+import { useContext } from 'react';
 
 export const googleLogin = async () => {
+  const { setUser } = useContext(AuthContext);
   const provider = new GoogleAuthProvider();
   try {
     await signInWithPopup(auth, provider);
     const response = await ApiUtils.auth.verifyToken();
+    const { setUser } = AuthContext;
+    setUser(response.user);
     return response;
   } catch (error) {
     console.error('Login failed:', error);
@@ -29,4 +34,8 @@ export const logout = async () => {
 export const getToken = async () => {
   const auth = getAuth();
   return await auth.currentUser?.getIdToken();
+};
+
+export const isUserLogged = async () => {
+  return await ApiUtils.auth.isUserLogged();
 };

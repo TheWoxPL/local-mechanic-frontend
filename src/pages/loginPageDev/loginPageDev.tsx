@@ -128,7 +128,7 @@ const LoginPageDev: React.FC = () => {
 
   async function handlingApiCallVerifyToken(): Promise<void> {
     try {
-      await ApiUtils.auth.verifyToken();
+      console.log(await ApiUtils.auth.verifyToken());
     } catch (error) {
       console.log(error);
     }
