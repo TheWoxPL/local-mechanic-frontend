@@ -5,7 +5,12 @@ import { ResponseTokenDTO } from '../dtos';
 class ApiUtils {
   static auth = {
     async verifyToken(): Promise<ResponseTokenDTO> {
-      return await callApi('/auth/verify-token', 'POST');
+      const response = await callApi('/auth/verify-token', 'POST');
+      return new ResponseTokenDTO(response.data);
+    },
+    async isUserLogged(): Promise<boolean> {
+      const response = await callApi('/auth/verify-token', 'POST');
+      return response.statusCode === 200 ? true : false;
     },
   };
 }
