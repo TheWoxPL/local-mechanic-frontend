@@ -1,4 +1,4 @@
-import { getToken } from 'src/services/authService';
+import { AuthService } from 'src/services/authService';
 import { CallApiResponseDTO } from 'src/shared/dtos/call-api-reponse.dto';
 
 export async function callApi<T>(
@@ -8,7 +8,7 @@ export async function callApi<T>(
 ): Promise<CallApiResponseDTO<T>> {
   const baseURL: string = import.meta.env.VITE_APP_API_BASE_URL;
   const allowedMethods: string[] = ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE'];
-  const token = (await getToken()) || '';
+  const token = (await AuthService.getToken()) || '';
 
   if (!allowedMethods.includes(method.toUpperCase())) {
     throw new Error(`Method ${method} is not allowed.`);
