@@ -1,8 +1,18 @@
 import { Link } from 'react-router';
 import styles from './LoginForm.module.scss';
 import GoogleLogoSVG from 'src/assets/svgs/google-logo.svg';
+import { AuthService } from 'src/services/authService';
 
-export const LoginForm = () => {
+interface LoginFormProps {
+  updateCurrentUser: () => void;
+}
+
+export const LoginForm: React.FC<LoginFormProps> = ({ updateCurrentUser }) => {
+  const handleGoogleLogin = async () => {
+    await AuthService.googleLogin();
+    updateCurrentUser();
+  };
+
   return (
     <div className={styles.container}>
       <form>
@@ -23,7 +33,7 @@ export const LoginForm = () => {
         <input type="submit" className={styles.loginButton} value="Login" />
       </form>
       <span className={styles.orContinueWithText}> Or continue with</span>
-      <button className={styles.googleButton}>
+      <button className={styles.googleButton} onClick={handleGoogleLogin}>
         <img src={GoogleLogoSVG} alt="Google logo" />
         Google
       </button>
