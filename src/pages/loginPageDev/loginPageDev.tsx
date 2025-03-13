@@ -1,9 +1,18 @@
-import { getToken, googleLogin, logout } from '../../services/authService';
+import { useState } from 'react';
+import { AuthService } from '../../services/authService';
 import ApiUtils from 'src/shared/api/apiUtils';
 
 const LoginPageDev: React.FC = () => {
+  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+  const [isUserLogged, setIsUserLogged] = useState(AuthService.isUserLogged());
+
+  const updateCurrentUser = () => {
+    setCurrentUser(AuthService.getCurrentUser());
+    setIsUserLogged(AuthService.isUserLogged());
+  };
+
   const handleAdminRoute = async () => {
-    const token = await getToken();
+    const token = await AuthService.getToken();
     if (token === null) {
       alert('Please login first');
       return;
@@ -27,7 +36,7 @@ const LoginPageDev: React.FC = () => {
   };
 
   const handleCustomerRoute = async () => {
-    const token = await getToken();
+    const token = await AuthService.getToken();
     if (token === null) {
       alert('Please login first');
       return;
@@ -52,7 +61,7 @@ const LoginPageDev: React.FC = () => {
   };
 
   const handleEntrepreneurRoute = async () => {
-    const token = await getToken();
+    const token = await AuthService.getToken();
     if (token === null) {
       alert('Please login first');
       return;
@@ -77,7 +86,7 @@ const LoginPageDev: React.FC = () => {
   };
 
   const addCustomerRole = async () => {
-    const token = await getToken();
+    const token = await AuthService.getToken();
     if (token === null) {
       alert('Please login first');
       return;
@@ -102,7 +111,7 @@ const LoginPageDev: React.FC = () => {
   };
 
   const addEntrepreneurRole = async () => {
-    const token = await getToken();
+    const token = await AuthService.getToken();
     if (token === null) {
       alert('Please login first');
       return;
@@ -134,18 +143,33 @@ const LoginPageDev: React.FC = () => {
     }
   }
 
+  const handleLogin = async () => {
+    await AuthService.googleLogin();
+    updateCurrentUser();
+  };
+
+  const handleLogout = async () => {
+    await AuthService.logout();
+    updateCurrentUser();
+  };
+
   return (
     <div>
-      <button onClick={googleLogin}>Login with Google</button>
+      <button onClick={handleLogin}>Login with Google</button>
       <button onClick={handleAdminRoute}>Test ADMIN Route</button>
       <button onClick={handleCustomerRoute}>Test customer Route</button>
       <button onClick={handleEntrepreneurRoute}>Test entrepreneur Route</button>
-      <button onClick={logout}>Logout</button>
+      <button onClick={handleLogout}>Logout</button>
       <button onClick={addCustomerRole}>Add customer role</button>
       <button onClick={addEntrepreneurRole}>Add entrepreneur role</button>
       <button onClick={async () => handlingApiCallVerifyToken()}>
         ApiUtils verifyToken
       </button>
+      <button onClick={() => console.log(currentUser)}>Current user</button>
+      <hr></hr>
+      <b>CurrentUser: {currentUser === null ? 'null' : currentUser.username}</b>
+      <br></br>
+      <b>IsUserLogged: {isUserLogged.toString()}</b>
     </div>
   );
 };
