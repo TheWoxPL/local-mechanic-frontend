@@ -1,7 +1,10 @@
 import styles from './MechanicInfo.module.scss';
 import AvatarMechanicSVG from 'src/assets/svgs/avatar-mechanic.svg';
+import { useNavigate } from 'react-router';
 
 export const MechanicInfo = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <div className={styles.mechanicAvatar}>
@@ -12,7 +15,12 @@ export const MechanicInfo = () => {
           Are you mechanic? Do you want make advertisement of your services?
           Click below to become an entrepreneur.
         </span>
-        <button className={styles.submitButton}>Submit</button>
+        <button
+          className={styles.submitButton}
+          onClick={() => navigate('/register-company')}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );

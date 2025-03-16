@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fa5151;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  .header {
+    font-size: 2.5rem;
+    color: white;
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 0px;
+    
+    img{
+      height: 50px;
+    }
+
+    .text{
+      height: fit-content;
+      align-self: center;
+      color: black;
+    }
+  }
+}
