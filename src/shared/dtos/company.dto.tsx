@@ -1,0 +1,9 @@
+import { BaseDto } from './base.dto';
+
+export class CompanyDTO extends BaseDto {
+  companyName!: string;
+  description?: string;
+  foundDate!: Date;
+  owners?: string;
+  verifiedOwners!: string[];
+}

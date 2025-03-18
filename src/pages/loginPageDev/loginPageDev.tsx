@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AuthService } from '../../services/authService';
 import ApiUtils from 'src/shared/api/apiUtils';
+import { CreateCompanyDTO } from 'src/shared/dtos';
 
 const LoginPageDev: React.FC = () => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
@@ -153,6 +154,20 @@ const LoginPageDev: React.FC = () => {
     updateCurrentUser();
   };
 
+  const handleGetToken = async () => {
+    console.log(await AuthService.getToken());
+  };
+
+  const handleAddCompany = async () => {
+    const data = new CreateCompanyDTO();
+    data.companyName = 'Mock Company';
+    data.description = 'Mock Description';
+    data.foundDate = new Date();
+    data.owners = 'Mock Owner';
+    data.verifiedOwners = [];
+    console.log(await ApiUtils.companies.addCompany(data));
+  };
+
   return (
     <div>
       <button onClick={handleLogin}>Login with Google</button>
@@ -166,6 +181,8 @@ const LoginPageDev: React.FC = () => {
         ApiUtils verifyToken
       </button>
       <button onClick={() => console.log(currentUser)}>Current user</button>
+      <button onClick={handleGetToken}>Get token</button>
+      <button onClick={handleAddCompany}>Add company</button>
       <hr></hr>
       <b>CurrentUser: {currentUser === null ? 'null' : currentUser.username}</b>
       <br></br>

@@ -14,6 +14,8 @@ export async function callApi<T>(
     throw new Error(`Method ${method} is not allowed.`);
   }
 
+  console.log('Body:', body);
+
   const options: RequestInit = {
     method,
     headers: {
@@ -24,10 +26,14 @@ export async function callApi<T>(
   };
 
   const response = await fetch(baseURL + path, options);
+  const contentType = response.headers.get('Content-Type');
+  const data = contentType.includes('application/json')
+    ? response.json()
+    : response.text();
   return new CallApiResponseDTO<T>({
     statusCode: response.status,
     path: path,
     message: response.statusText,
-    data: await response.json(),
+    data: await data,
   });
 }
