@@ -29,15 +29,14 @@
     flex-direction: column;
     padding-bottom: 7px;
 
-    .name{
+    .name {
       font-weight: 900;
       align-self: flex-start;
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
-    .text {
+    .address {
       font-size: 1.3rem;
-      padding-bottom: 5px;
     }
     .submitButton {
       width: 120px;

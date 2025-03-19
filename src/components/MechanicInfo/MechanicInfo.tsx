@@ -11,6 +11,7 @@ export const MechanicInfo = () => {
         <img src={AvatarMechanicSVG} alt="Mechanic svg" />
       </div>
       <div className={styles.info}>
+        <span className={styles.name}>Become an entrepreneur</span>
         <span className={styles.text}>
           Are you mechanic? Do you want make advertisement of your services?
           Click below to become an entrepreneur.

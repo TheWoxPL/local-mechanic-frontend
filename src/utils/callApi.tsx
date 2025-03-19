@@ -14,8 +14,6 @@ export async function callApi<T>(
     throw new Error(`Method ${method} is not allowed.`);
   }
 
-  console.log('Body:', body);
-
   const options: RequestInit = {
     method,
     headers: {

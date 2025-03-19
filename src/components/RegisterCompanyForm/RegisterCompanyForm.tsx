@@ -2,21 +2,26 @@ import { FormEvent, useState } from 'react';
 import styles from './RegisterCompanyForm.module.scss';
 import ApiUtils from 'src/shared/api/apiUtils';
 import { CreateCompanyDTO } from 'src/shared/dtos';
+import { useNavigate } from 'react-router';
 
 export const RegisterCompanyForm = () => {
+  const navigate = useNavigate();
+
   const [companyName, setCompanyName] = useState('');
   const [foundDate, setFoundDate] = useState(new Date());
   const [description, setDescription] = useState('');
   const [localization, setLocalization] = useState('');
 
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = new CreateCompanyDTO();
     data.companyName = companyName;
     data.description = description;
     data.foundDate = foundDate;
-    ApiUtils.companies.addCompany(data);
+    await ApiUtils.companies.addCompany(data).then(() => {
+      navigate('/profile');
+    });
   };
 
   return (

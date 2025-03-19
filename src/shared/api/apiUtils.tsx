@@ -1,6 +1,6 @@
 import { callApi } from '../../utils/callApi';
 // import DtoMapping from '../../utils/dtoMapping';
-import { ResponseTokenDTO, CreateCompanyDTO } from '../dtos';
+import { ResponseTokenDTO, CreateCompanyDTO, CompanyDTO } from '../dtos';
 // import { CompanyDTO } from '../dtos/company.dto';
 
 class ApiUtils {
@@ -21,6 +21,13 @@ class ApiUtils {
         '/companies/add-company',
         'POST',
         createCompanyDTO
+      );
+      return response.data;
+    },
+    async getUserCompanies(): Promise<CompanyDTO[]> {
+      const response = await callApi<CompanyDTO[]>(
+        '/companies/get-user-companies',
+        'GET'
       );
       return response.data;
     },

@@ -8,6 +8,7 @@ import { MechanicInfo } from 'src/components/MechanicInfo/MechanicInfo';
 import { ProfileInfo } from 'src/components/ProfileInfo/ProfileInfo';
 import { useState } from 'react';
 import { ResponseTokenDTO } from 'src/shared/dtos';
+import { AllCompaniesOnProfile } from 'src/components/AllCompaniesOnProfile/AllCompaniesOnProfile';
 
 export const ProfilePage = () => {
   const [currentUser, setCurrentUser] = useState<ResponseTokenDTO | null>(
@@ -37,6 +38,7 @@ export const ProfilePage = () => {
         <>
           <ProfileInfo currentUser={currentUser} />
           <MechanicInfo />
+          <AllCompaniesOnProfile />
           <button className={styles.logoutButton} onClick={handleLogout}>
             Logout
           </button>

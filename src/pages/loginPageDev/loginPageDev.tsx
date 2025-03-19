@@ -168,6 +168,10 @@ const LoginPageDev: React.FC = () => {
     console.log(await ApiUtils.companies.addCompany(data));
   };
 
+  const handleGetCompanies = async () => {
+    console.log(await ApiUtils.companies.getUserCompanies());
+  };
+
   return (
     <div>
       <button onClick={handleLogin}>Login with Google</button>
@@ -183,6 +187,7 @@ const LoginPageDev: React.FC = () => {
       <button onClick={() => console.log(currentUser)}>Current user</button>
       <button onClick={handleGetToken}>Get token</button>
       <button onClick={handleAddCompany}>Add company</button>
+      <button onClick={handleGetCompanies}>Get companies</button>
       <hr></hr>
       <b>CurrentUser: {currentUser === null ? 'null' : currentUser.username}</b>
       <br></br>
