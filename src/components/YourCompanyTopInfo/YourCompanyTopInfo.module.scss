@@ -1,0 +1,93 @@
+@use '../../assets/styles/theme.scss';
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+  background-color: #954545;
+  color: white;
+
+  .info {
+    display: flex;
+    width: 100%;
+
+    .avatar {
+      background-color: rgb(255, 255, 255);
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      padding: 3px;
+      border-radius: 50px;
+      margin: 5px;
+      align-self: center;
+
+      img{
+        width: 100%;
+      }
+    }
+    .infoDetails {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 5px;
+
+      span{
+        margin-top: 5px;
+      }
+
+      .companyName{
+        font-weight: 900;
+      }
+    }
+    .editSide {
+      padding: 5px;
+
+      button {
+        font-size: 1.8rem;
+        border-radius: 10px;
+        background-color: #d9d9d9;
+        height: 34px;
+        width: 71px;
+        text-align: center;
+        border: none;
+        -webkit-box-shadow: 0px 4px 4px 0px rgba(88, 88, 88, 0.801);
+        -moz-box-shadow: 0px 4px 4px 0px rgba(88, 88, 88, 0.801);
+        box-shadow: 0px 4px 4px 0px rgba(88, 88, 88, 0.801);
+      }
+    }
+  }
+  .owners {
+    display: flex;
+    align-items: center;
+
+    span{
+      padding-left: 5px;
+      padding-right: 10px;
+    }
+
+    .oneOwner{
+      padding: 4px 12px;
+      min-width: 30px;
+      text-align: center;
+      font-size: 1.6rem;
+      height: 18px;
+      border-radius: 10px;
+      background-color: #ffffff7c;
+      margin-right: 10px;
+    }
+
+    .oneOwnerCreator{
+      background-color: #009c05;
+      font-weight: 900;
+    }
+  }
+  .description {
+    background-color: #aa6060;
+    margin: 10px  5px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  
+  }
+}

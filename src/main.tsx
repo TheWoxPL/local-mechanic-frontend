@@ -12,6 +12,7 @@ import LoginViewDev from './pages/loginPageDev/loginPageDev';
 import { FavouritePage } from './pages/favouritePage/favouritePage';
 import { OrdersPage } from './pages/ordersPage/ordersPage';
 import { RegisterCompanyPage } from './pages/registerCompanyPage/registerCompanyPage';
+import { YourCompanyPage } from './pages/yourCompanyPage/yourCompanyPage';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/register-company" element={<RegisterCompanyPage />} />
+        <Route path="/your-company" element={<YourCompanyPage />} />
         {/* <Route path="/login" element={<Login />} /> */}
         {/* TODO: delete line below before merge, to tests only */}
         <Route path="/dev" element={<LoginViewDev />} />
