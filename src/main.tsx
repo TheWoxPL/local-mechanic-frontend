@@ -13,23 +13,26 @@ import { FavouritePage } from './pages/favouritePage/favouritePage';
 import { OrdersPage } from './pages/ordersPage/ordersPage';
 import { RegisterCompanyPage } from './pages/registerCompanyPage/registerCompanyPage';
 import { YourCompanyPage } from './pages/yourCompanyPage/yourCompanyPage';
+import { AuthContextProvider } from './context';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/favourite" element={<FavouritePage />} />
-        <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/register-company" element={<RegisterCompanyPage />} />
-        <Route path="/your-company" element={<YourCompanyPage />} />
-        {/* <Route path="/login" element={<Login />} /> */}
-        {/* TODO: delete line below before merge, to tests only */}
-        <Route path="/dev" element={<LoginViewDev />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/favourite" element={<FavouritePage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/register-company" element={<RegisterCompanyPage />} />
+          <Route path="/your-company" element={<YourCompanyPage />} />
+          {/* <Route path="/login" element={<Login />} /> */}
+          {/* TODO: delete line below before merge, to tests only */}
+          <Route path="/dev" element={<LoginViewDev />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthContextProvider>
   </StrictMode>
 );

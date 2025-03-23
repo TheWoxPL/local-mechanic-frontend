@@ -1,16 +1,11 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { AuthService } from '../../services/authService';
 import ApiUtils from 'src/shared/api/apiUtils';
 import { CreateCompanyDTO } from 'src/shared/dtos';
+import { UserAuth } from 'src/context/AuthContext';
 
 const LoginPageDev: React.FC = () => {
-  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
-  const [isUserLogged, setIsUserLogged] = useState(AuthService.isUserLogged());
-
-  const updateCurrentUser = () => {
-    setCurrentUser(AuthService.getCurrentUser());
-    setIsUserLogged(AuthService.isUserLogged());
-  };
+  const { user, loading, login, logout } = UserAuth();
 
   const handleAdminRoute = async () => {
     const token = await AuthService.getToken();
@@ -144,16 +139,6 @@ const LoginPageDev: React.FC = () => {
     }
   }
 
-  const handleLogin = async () => {
-    await AuthService.googleLogin();
-    updateCurrentUser();
-  };
-
-  const handleLogout = async () => {
-    await AuthService.logout();
-    updateCurrentUser();
-  };
-
   const handleGetToken = async () => {
     console.log(await AuthService.getToken());
   };
@@ -172,26 +157,41 @@ const LoginPageDev: React.FC = () => {
     console.log(await ApiUtils.companies.getUserCompanies());
   };
 
+  const handleContextLogin = async () => {
+    await login();
+  };
+  const handleContextLogout = async () => {
+    await logout();
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('UseEffect fetching: ', await AuthService.getToken());
+      console.log('Loading: ', loading);
+      console.log('user', user);
+    };
+    fetchData();
+  }, [loading, user]);
+
   return (
     <div>
-      <button onClick={handleLogin}>Login with Google</button>
       <button onClick={handleAdminRoute}>Test ADMIN Route</button>
       <button onClick={handleCustomerRoute}>Test customer Route</button>
       <button onClick={handleEntrepreneurRoute}>Test entrepreneur Route</button>
-      <button onClick={handleLogout}>Logout</button>
       <button onClick={addCustomerRole}>Add customer role</button>
       <button onClick={addEntrepreneurRole}>Add entrepreneur role</button>
       <button onClick={async () => handlingApiCallVerifyToken()}>
         ApiUtils verifyToken
       </button>
-      <button onClick={() => console.log(currentUser)}>Current user</button>
       <button onClick={handleGetToken}>Get token</button>
       <button onClick={handleAddCompany}>Add company</button>
       <button onClick={handleGetCompanies}>Get companies</button>
-      <hr></hr>
-      <b>CurrentUser: {currentUser === null ? 'null' : currentUser.username}</b>
       <br></br>
-      <b>IsUserLogged: {isUserLogged.toString()}</b>
+      <hr></hr>
+      <button onClick={handleContextLogin}>Login</button>
+      <button onClick={handleContextLogout}>Logout</button>
+      <hr></hr>
+      <b>User: {user ? user.email : 'logged out'}</b>
     </div>
   );
 };
