@@ -9,6 +9,7 @@ export async function callApi<T>(
   const baseURL: string = import.meta.env.VITE_APP_API_BASE_URL;
   const allowedMethods: string[] = ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE'];
   const token = await AuthService.getToken();
+  console.log(token);
 
   if (!allowedMethods.includes(method.toUpperCase())) {
     throw new Error(`Method ${method} is not allowed.`);

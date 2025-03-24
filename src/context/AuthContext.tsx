@@ -7,9 +7,10 @@ import ApiUtils from 'src/shared/api/apiUtils';
 const AuthContext = createContext({
   user: null,
   roles: [],
+  loadRoles: () => {},
   loading: true,
-  login: () => Promise.resolve(),
-  logout: () => Promise.resolve(),
+  login: async () => {},
+  logout: async () => {},
 });
 
 export const AuthContextProvider = ({ children }) => {
@@ -23,6 +24,11 @@ export const AuthContextProvider = ({ children }) => {
 
   const logout = async () => {
     await AuthService.logout();
+  };
+
+  const loadRoles = async () => {
+    const response = await ApiUtils.auth.getRoles();
+    setRoles(response);
   };
 
   useEffect(() => {
@@ -39,7 +45,9 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, roles, loading, logout, login }}>
+    <AuthContext.Provider
+      value={{ user, roles, loadRoles, loading, logout, login }}
+    >
       {children}
     </AuthContext.Provider>
   );

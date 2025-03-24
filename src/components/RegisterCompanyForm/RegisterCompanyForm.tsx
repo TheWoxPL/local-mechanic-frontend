@@ -3,9 +3,11 @@ import styles from './RegisterCompanyForm.module.scss';
 import ApiUtils from 'src/shared/api/apiUtils';
 import { CreateCompanyDTO } from 'src/shared/dtos';
 import { useNavigate } from 'react-router';
+import { UserAuth } from 'src/context';
 
 export const RegisterCompanyForm = () => {
   const navigate = useNavigate();
+  const { loadRoles } = UserAuth();
 
   const [companyName, setCompanyName] = useState('');
   const [foundDate, setFoundDate] = useState(new Date());
@@ -19,7 +21,9 @@ export const RegisterCompanyForm = () => {
     data.companyName = companyName;
     data.description = description;
     data.foundDate = foundDate;
-    await ApiUtils.companies.addCompany(data).then(() => {
+    await ApiUtils.companies.addCompany(data).then(async () => {
+      // TODO: remove loadRoles when roles will correctly changed in authContext
+      loadRoles();
       navigate('/profile');
     });
   };
