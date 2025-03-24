@@ -1,50 +1,36 @@
 import { NavigatorBar } from 'src/components/NavigatorBar/NavigatorBar';
 import styles from './profilePage.module.scss';
-import { AuthService } from 'src/services/authService';
 import { LoginForm } from 'src/components/LoginForm/LoginForm';
 import { LoginTopLogo } from 'src/components/LoginTopLogo/LoginTopLogo';
-
 import { MechanicInfo } from 'src/components/MechanicInfo/MechanicInfo';
 import { ProfileInfo } from 'src/components/ProfileInfo/ProfileInfo';
-import { useState } from 'react';
-import { ResponseTokenDTO } from 'src/shared/dtos';
 import { AllCompaniesOnProfile } from 'src/components/AllCompaniesOnProfile/AllCompaniesOnProfile';
+import { UserAuth } from 'src/context';
 
 export const ProfilePage = () => {
-  const [currentUser, setCurrentUser] = useState<ResponseTokenDTO | null>(
-    AuthService.getCurrentUser()
-  );
-  const [isUserLogged, setIsUserLogged] = useState<boolean>(
-    AuthService.isUserLogged()
-  );
+  const { user, loading, logout } = UserAuth();
 
-  const updateCurrentUser = () => {
-    setCurrentUser(AuthService.getCurrentUser());
-    setIsUserLogged(AuthService.isUserLogged());
-  };
+  if (loading) {
+    return <div></div>;
+  }
 
-  const handleLogout = async () => {
-    await AuthService.logout();
-    updateCurrentUser();
-  };
   return (
     <div className={styles.container}>
-      {!isUserLogged ? (
+      {!user ? (
         <>
           <LoginTopLogo />
-          <LoginForm updateCurrentUser={updateCurrentUser} />
+          <LoginForm />
         </>
       ) : (
         <>
-          <ProfileInfo currentUser={currentUser} />
+          <ProfileInfo currentUser={user} />
           <MechanicInfo />
           <AllCompaniesOnProfile />
-          <button className={styles.logoutButton} onClick={handleLogout}>
+          <button className={styles.logoutButton} onClick={logout}>
             Logout
           </button>
         </>
       )}
-
       <NavigatorBar indicatorIndex={3} />
     </div>
   );
