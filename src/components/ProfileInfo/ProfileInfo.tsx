@@ -12,7 +12,7 @@ export const ProfileInfo = () => {
       </div>
       <div className={styles.info}>
         <span className={styles.hello}>Hello {user.username}!</span>
-        <span className={styles.date}>since: 12 nov 2019</span>
+        <span className={styles.date}>since: 17 dec 2019</span>
         <button className={styles.editDataButton}>Edit data</button>
       </div>
     </div>
