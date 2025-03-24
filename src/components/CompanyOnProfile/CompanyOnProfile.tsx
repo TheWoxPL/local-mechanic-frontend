@@ -4,14 +4,12 @@ interface CompanyOnProfileProps {
   avatar: { src: string; alt: string };
   companyName: string;
   address: string;
-  companyId: string;
 }
 
 export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
   avatar,
   companyName,
   address,
-  companyId,
 }) => {
   return (
     <div className={styles.container}>
@@ -23,7 +21,7 @@ export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
         <span className={styles.address}>{address}</span>
         <button
           className={styles.submitButton}
-          onClick={() => console.log(companyId)}
+          onClick={() => console.log(companyName)}
         >
           Show details
         </button>
