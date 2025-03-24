@@ -13,6 +13,13 @@ class ApiUtils {
       const response = await callApi('/auth/verify-token', 'POST');
       return response.statusCode === 200 ? true : false;
     },
+    async getRoles(): Promise<string[]> {
+      const response = await callApi<ResponseTokenDTO>(
+        '/auth/verify-token',
+        'POST'
+      );
+      return response.data.roles;
+    },
   };
 
   static companies = {

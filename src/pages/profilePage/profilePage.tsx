@@ -2,13 +2,11 @@ import { NavigatorBar } from 'src/components/NavigatorBar/NavigatorBar';
 import styles from './profilePage.module.scss';
 import { LoginForm } from 'src/components/LoginForm/LoginForm';
 import { LoginTopLogo } from 'src/components/LoginTopLogo/LoginTopLogo';
-import { MechanicInfo } from 'src/components/MechanicInfo/MechanicInfo';
-import { ProfileInfo } from 'src/components/ProfileInfo/ProfileInfo';
-import { AllCompaniesOnProfile } from 'src/components/AllCompaniesOnProfile/AllCompaniesOnProfile';
 import { UserAuth } from 'src/context';
+import { ProfileLogged } from 'src/components/ProfileLogged/ProfileLogged';
 
 export const ProfilePage = () => {
-  const { user, loading, logout } = UserAuth();
+  const { user, loading } = UserAuth();
 
   if (loading) {
     return <div></div>;
@@ -16,19 +14,12 @@ export const ProfilePage = () => {
 
   return (
     <div className={styles.container}>
-      {!user ? (
+      {user ? (
+        <ProfileLogged />
+      ) : (
         <>
           <LoginTopLogo />
           <LoginForm />
-        </>
-      ) : (
-        <>
-          <ProfileInfo currentUser={user} />
-          <MechanicInfo />
-          <AllCompaniesOnProfile />
-          <button className={styles.logoutButton} onClick={logout}>
-            Logout
-          </button>
         </>
       )}
       <NavigatorBar indicatorIndex={3} />

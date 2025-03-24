@@ -31,7 +31,7 @@ export const LoginForm = () => {
         Google
       </button>
       <span className={styles.createAccountText}>
-        Don't have account?
+        Don't have account? &nbsp;
         <Link to="/" className={styles.createAccountLink}>
           Create now
         </Link>
