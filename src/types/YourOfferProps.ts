@@ -1,6 +1,5 @@
-export interface OfferProps {
+export interface YourOfferProps {
   uuid: string;
-  isFavorite: boolean;
   img: string;
   name: string;
   company: string;
@@ -12,4 +11,7 @@ export interface OfferProps {
   distance: string;
   estimatedTime: string;
   availability: string;
+  orders: number;
+  views: number;
+  favourites: number;
 }
