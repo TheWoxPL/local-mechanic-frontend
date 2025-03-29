@@ -1,16 +1,20 @@
 import styles from './CompanyOnProfile.module.scss';
+import { useNavigate } from 'react-router';
 
 interface CompanyOnProfileProps {
   avatar: { src: string; alt: string };
   companyName: string;
   address: string;
+  uuid: string;
 }
 
 export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
   avatar,
   companyName,
   address,
+  uuid,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className={styles.container}>
       <div className={styles.mechanicAvatar}>
@@ -21,7 +25,7 @@ export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
         <span className={styles.address}>{address}</span>
         <button
           className={styles.submitButton}
-          onClick={() => console.log(companyName)}
+          onClick={() => navigate(`/your-company/${uuid}`)}
         >
           Show details
         </button>

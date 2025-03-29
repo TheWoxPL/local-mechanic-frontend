@@ -29,6 +29,7 @@ export const AllCompaniesOnProfile = () => {
             avatar={{ src: AvatarMechanicSVG, alt: 'Mechanic avatar' }}
             companyName={company.companyName}
             address={'Address'}
+            uuid={company.id}
           />
         ))}
       </div>

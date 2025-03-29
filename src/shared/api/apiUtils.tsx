@@ -38,6 +38,14 @@ class ApiUtils {
       );
       return response.data;
     },
+
+    async getCompanyById(uuid: string): Promise<CompanyDTO> {
+      const response = await callApi<CompanyDTO>(
+        '/companies/get-company/' + uuid,
+        'GET'
+      );
+      return response.data;
+    },
   };
 }
 

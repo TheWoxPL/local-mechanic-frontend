@@ -1,7 +1,35 @@
+import { UserAuth } from 'src/context';
 import styles from './YourCompanyTopInfo.module.scss';
 import AvatarSVG from 'src/assets/svgs/avatar-mechanic.svg';
+import { useEffect, useState } from 'react';
+import ApiUtils from 'src/shared/api/apiUtils';
+import { useParams } from 'react-router';
+import { CompanyDTO } from 'src/shared/dtos';
 
 export const YourCompanyTopInfo = () => {
+  const { uuid } = useParams<{ uuid: string }>();
+  const { loading } = UserAuth();
+  const [companyData, setCompanyData] = useState<CompanyDTO>();
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await ApiUtils.companies.getCompanyById(uuid);
+        setCompanyData(data);
+      } catch (error) {
+        console.error('Error fetching company data:', error);
+      } finally {
+        setIsFetching(false);
+      }
+    };
+    fetchData();
+  }, [uuid, loading]);
+
+  if (loading || isFetching) {
+    return <div></div>;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.info}>
@@ -9,9 +37,9 @@ export const YourCompanyTopInfo = () => {
           <img src={AvatarSVG} alt="Avatar" />
         </div>
         <div className={styles.infoDetails}>
-          <span className={styles.companyName}>Company name inc.</span>
-          <span>st. długa 12a, cracow</span>
-          <span>12.12.2001</span>
+          <span className={styles.companyName}>{companyData.companyName}</span>
+          <span>address</span>
+          <span>created at</span>
           <span>Services: 21</span>
         </div>
         <div className={styles.editSide}>
@@ -23,11 +51,7 @@ export const YourCompanyTopInfo = () => {
         <div className={`${styles.oneOwner} ${styles.oneOwnerCreator}`}>Me</div>
         <div className={styles.oneOwner}>John Doe</div>
       </div>
-      <div className={styles.description}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque laborum
-        nemo itaque unde maxime possimus mollitia rem sit voluptate saepe
-        molestiae amet incidunt eveniet fugiat totam, sapiente ab ullam dolorum.
-      </div>
+      <div className={styles.description}>{companyData.description}</div>
     </div>
   );
 };

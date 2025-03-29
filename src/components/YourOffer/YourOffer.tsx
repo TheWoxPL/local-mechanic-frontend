@@ -4,11 +4,9 @@ import MapPointSVG from 'src/assets/svgs/map-point.svg';
 import ClockSVG from 'src/assets/svgs/clock.svg';
 import TrashSVG from 'src/assets/svgs/trash.svg';
 import EditSVG from 'src/assets/svgs/edit.svg';
-import { useEffect } from 'react';
 import { YourOfferProps } from 'src/types/YourOfferProps';
 
 export const YourOffer: React.FC<YourOfferProps> = ({
-  uuid,
   img,
   rating,
   countOpinions,
@@ -24,12 +22,6 @@ export const YourOffer: React.FC<YourOfferProps> = ({
   views,
   favourites,
 }) => {
-  useEffect(() => {
-    console.log('Orders', orders);
-    console.log('Views', views);
-    console.log('Uuid', uuid);
-  });
-
   return (
     <div className={styles.container}>
       <div className={styles.top}>
