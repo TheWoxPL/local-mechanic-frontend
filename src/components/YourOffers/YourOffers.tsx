@@ -3,8 +3,14 @@ import styles from './YourOffers.module.scss';
 import img from '../../assets/images/car-fix.jpg';
 import { YourOfferProps } from 'src/types';
 import { AddServiceForm } from '../AddServiceForm/AddServiceForm';
+import { useState } from 'react';
 
 export const YourOffers = () => {
+  const [isAddServiceFormVisible, setIsAddServiceFormVisible] = useState(false);
+  const handleAddNewServiceClick = () => {
+    setIsAddServiceFormVisible(true);
+  };
+
   const offers: YourOfferProps[] = [
     {
       uuid: Math.random().toString(),
@@ -112,9 +118,13 @@ export const YourOffers = () => {
 
   return (
     <div className={styles.container}>
-      <AddServiceForm />
+      {isAddServiceFormVisible && (
+        <AddServiceForm
+          setIsAddServiceFormVisible={setIsAddServiceFormVisible}
+        />
+      )}
       <div className={styles.AddService}>
-        <button>Add new service</button>
+        <button onClick={handleAddNewServiceClick}>Add new service</button>
       </div>
       <div className={styles.line}></div>
       <div className={styles.allOffers}>
