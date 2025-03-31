@@ -2,6 +2,7 @@ import { YourOffer } from '../YourOffer/YourOffer';
 import styles from './YourOffers.module.scss';
 import img from '../../assets/images/car-fix.jpg';
 import { YourOfferProps } from 'src/types';
+import { AddServiceForm } from '../AddServiceForm/AddServiceForm';
 
 export const YourOffers = () => {
   const offers: YourOfferProps[] = [
@@ -111,6 +112,7 @@ export const YourOffers = () => {
 
   return (
     <div className={styles.container}>
+      <AddServiceForm />
       <div className={styles.AddService}>
         <button>Add new service</button>
       </div>

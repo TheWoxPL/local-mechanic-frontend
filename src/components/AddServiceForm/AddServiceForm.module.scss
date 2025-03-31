@@ -1,0 +1,129 @@
+@use '../../assets/styles/theme.scss';
+.container {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.459);
+  align-items: center;
+  justify-content: center;
+
+  .close{
+    width: 25px;
+    filter: invert(1);
+    z-index: 1;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .form{
+    background-color: rgb(255, 255, 255);
+    width: 85%;
+    max-width: 450px;
+    min-height: 500px;
+    padding: 20px;
+    padding-top: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    
+
+    form{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .row{
+        display: flex;
+        flex-direction: column;
+
+        label{
+          font-size: 1.4rem;
+          margin-bottom: 2px;
+        }
+        input, select{
+          border-radius: 10px;
+          border: black 1px solid;
+          padding: 8px 8px 6px 8px;
+          font-size: 1.6rem;
+          background-color: #F1F1F1;
+        }
+      }
+    }
+
+    .estimatedTime{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      
+      .timeUnitArea{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 40px;
+
+        input{
+          width: 100%;
+        }
+
+        select{
+          min-width: 200px;
+        }
+      }
+    }
+
+    .price{
+      width: 100%;
+
+      .priceArea{
+        display: flex;
+        gap: 5px;
+
+        .row{
+          select[name="currency"] {
+            border: 1px solid rgb(0, 134, 11);
+            color: rgb(0, 134, 11);
+            font-weight: 900;
+          }
+
+          select[name="serviceUnit"] {
+            min-width: 140px;
+          }
+          input{
+            max-width: 70px;
+          }
+        }
+
+        .per{
+          display: flex;
+          justify-content: flex-end;
+          padding: 7px 0px;
+          margin-top: auto;
+        }
+
+
+      }
+    }
+    .submitButton{
+      width: 120px;
+      font-size: 1.5rem;
+      font-weight: 900;
+      background-color: #CD4A4D;
+      border: 0px;
+      padding: 6px 0px;
+      border-radius: 15px;
+      color: white;
+      align-self: center;
+      font-weight: bold;
+      position: absolute;
+      bottom: 20px;
+      -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+      -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+    }
+  }
+}
