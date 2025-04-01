@@ -23,7 +23,10 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path="/" element={<ProtectedRoute />}>
             <Route path="/register-company" element={<RegisterCompanyPage />} />
-            <Route path="/your-company/:uuid" element={<YourCompanyPage />} />
+            <Route
+              path="/your-company/:companyId"
+              element={<YourCompanyPage />}
+            />
           </Route>
 
           <Route path="/" element={<App />} />

@@ -4,24 +4,36 @@ import MapPointSVG from 'src/assets/svgs/map-point.svg';
 import ClockSVG from 'src/assets/svgs/clock.svg';
 import TrashSVG from 'src/assets/svgs/trash.svg';
 import EditSVG from 'src/assets/svgs/edit.svg';
-import { YourOfferProps } from 'src/types/YourOfferProps';
 
-export const YourOffer: React.FC<YourOfferProps> = ({
-  img,
-  rating,
-  countOpinions,
-  name,
-  company,
-  location,
-  distance,
+import img from '../../assets/images/car-fix.jpg';
+import { ServiceDTO } from 'src/shared/dtos';
+
+export const YourOffer: React.FC<ServiceDTO> = ({
+  // rating,
+  // countOpinions,
+  title,
+  description,
   estimatedTime,
-  availability,
+  timeUnit,
+  serviceAvailability,
   price,
+  currency,
   serviceUnit,
-  orders,
-  views,
-  favourites,
+  // location,
+  // distance,
+  company,
+  // orders,
+  // views,
+  // favourites,
 }) => {
+  const rating = 4.6;
+  const countOpinions = 14;
+  const location = 'Kraków, Długa 12a';
+  const distance = '3.5km';
+  const orders = 5;
+  const views = 22;
+  const favourites = 2;
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -36,8 +48,11 @@ export const YourOffer: React.FC<YourOfferProps> = ({
         <div className={styles.right}>
           <div className={styles.header}>
             <div className={styles.title}>
-              <div className={styles.name}>{name}</div>
-              <div className={styles.company}>{company}</div>
+              <div className={styles.name}>{title}</div>
+              <div className={styles.company}>
+                {company.companyName}
+                {description}
+              </div>
             </div>
             <img className={styles.delete} src={TrashSVG} alt="Trash svg" />
           </div>
@@ -53,18 +68,24 @@ export const YourOffer: React.FC<YourOfferProps> = ({
             <div className={styles.oneShortInfo}>
               <img src={ClockSVG} alt="alternative" />
               <div className={styles.info}>
-                <div className={styles.main}>{estimatedTime}</div>
+                <div className={styles.main}>
+                  {estimatedTime} {timeUnit.name}
+                </div>
               </div>
             </div>
           </div>
 
           <div className={styles.bottom}>
             <div className={styles.availability}>
-              dostępność: <span className={styles.bold}>{availability}</span>
+              dostępność:{' '}
+              <span className={styles.bold}>{serviceAvailability.name}</span>
             </div>
             <div className={styles.price}>
-              <div className={styles.charge}>{price}</div>
-              <div className={styles.serviceUnit}>{serviceUnit}</div>
+              <div className={styles.charge}>
+                {price}
+                {currency.name}
+              </div>
+              <div className={styles.serviceUnit}>{serviceUnit.name}</div>
             </div>
           </div>
         </div>

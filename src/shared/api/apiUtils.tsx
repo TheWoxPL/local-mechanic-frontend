@@ -8,6 +8,7 @@ import {
   ServiceUnitDTO,
   ServiceAvailabilityDTO,
   TimeUnitDTO,
+  ServiceDTO,
 } from '../dtos';
 // import { CompanyDTO } from '../dtos/company.dto';
 
@@ -80,6 +81,15 @@ class ApiUtils {
     async getTimeUnits(): Promise<TimeUnitDTO[]> {
       const response = await callApi<TimeUnitDTO[]>(
         '/static-data/get-time-units',
+        'GET'
+      );
+      return response.data;
+    },
+  };
+  static services = {
+    async getAllServicesByCompanyId(companyId): Promise<ServiceDTO[]> {
+      const response = await callApi<ServiceDTO[]>(
+        '/services/get-services/' + companyId,
         'GET'
       );
       return response.data;

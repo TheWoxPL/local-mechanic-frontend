@@ -7,3 +7,4 @@ export * from './service-unit.dto';
 export * from './currency.dto';
 export * from './service-availability.dto';
 export * from './time-unit.dto';
+export * from './service.dto';
