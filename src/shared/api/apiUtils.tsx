@@ -1,6 +1,14 @@
 import { callApi } from '../../utils/callApi';
 // import DtoMapping from '../../utils/dtoMapping';
-import { ResponseTokenDTO, CreateCompanyDTO, CompanyDTO } from '../dtos';
+import {
+  ResponseTokenDTO,
+  CreateCompanyDTO,
+  CompanyDTO,
+  CurrencyDTO,
+  ServiceUnitDTO,
+  ServiceAvailabilityDTO,
+  TimeUnitDTO,
+} from '../dtos';
 // import { CompanyDTO } from '../dtos/company.dto';
 
 class ApiUtils {
@@ -42,6 +50,36 @@ class ApiUtils {
     async getCompanyById(uuid: string): Promise<CompanyDTO> {
       const response = await callApi<CompanyDTO>(
         '/companies/get-company/' + uuid,
+        'GET'
+      );
+      return response.data;
+    },
+  };
+  static staticData = {
+    async getCurrencies(): Promise<CurrencyDTO[]> {
+      const response = await callApi<CurrencyDTO[]>(
+        '/static-data/get-currencies',
+        'GET'
+      );
+      return response.data;
+    },
+    async getServiceUnits(): Promise<ServiceUnitDTO[]> {
+      const response = await callApi<ServiceUnitDTO[]>(
+        '/static-data/get-service-units',
+        'GET'
+      );
+      return response.data;
+    },
+    async getServiceAvailabilities(): Promise<ServiceAvailabilityDTO[]> {
+      const response = await callApi<ServiceAvailabilityDTO[]>(
+        '/static-data/get-service-availabilities',
+        'GET'
+      );
+      return response.data;
+    },
+    async getTimeUnits(): Promise<TimeUnitDTO[]> {
+      const response = await callApi<TimeUnitDTO[]>(
+        '/static-data/get-time-units',
         'GET'
       );
       return response.data;

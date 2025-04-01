@@ -3,3 +3,7 @@ export * from './basic.dto';
 export * from './response-token.dto';
 export * from './create-company.dto';
 export * from './company.dto';
+export * from './service-unit.dto';
+export * from './currency.dto';
+export * from './service-availability.dto';
+export * from './time-unit.dto';
