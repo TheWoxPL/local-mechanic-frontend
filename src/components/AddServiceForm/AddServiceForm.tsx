@@ -3,6 +3,7 @@ import CloseSVG from '../../assets/svgs/close.svg';
 import { useEffect, useState } from 'react';
 import ApiUtils from 'src/shared/api/apiUtils';
 import {
+  CreateServiceDTO,
   CurrencyDTO,
   ServiceAvailabilityDTO,
   ServiceUnitDTO,
@@ -11,10 +12,14 @@ import {
 
 interface AddServiceFormProps {
   setIsAddServiceFormVisible: (isVisible: boolean) => void;
+  companyId: string;
+  fetchServices: () => void;
 }
 
 export const AddServiceForm: React.FC<AddServiceFormProps> = ({
   setIsAddServiceFormVisible,
+  companyId,
+  fetchServices,
 }) => {
   const [isFetching, setIsFetching] = useState(true);
   const [currencies, setCurrencies] = useState<CurrencyDTO[]>([]);
@@ -23,14 +28,16 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
   const [serviceAvailabilities, setServiceAvailabilities] = useState<
     ServiceAvailabilityDTO[]
   >([]);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<CreateServiceDTO>({
     title: '',
+    description: '',
     estimatedTime: '',
-    timeUnit: '',
-    availability: '',
-    price: '',
-    currency: '',
-    serviceUnit: '',
+    timeUnitId: '',
+    serviceAvailabilityId: '',
+    price: 0,
+    currencyId: '',
+    serviceUnitId: '',
+    companyId: companyId,
   });
 
   useEffect(() => {
@@ -45,6 +52,13 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
         setCurrencies(fetchedCurrencies);
         setServiceAvailabilities(fetchedServiceAvailabilities);
         setTimeUnits(fetchedTimeUnits);
+        setFormData((prev) => ({
+          ...prev,
+          timeUnitId: fetchedTimeUnits[0].id,
+          serviceAvailabilityId: fetchedServiceAvailabilities[0].id,
+          currencyId: fetchedCurrencies[0].id,
+          serviceUnitId: fetchedServiceUnits[0].id,
+        }));
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -64,8 +78,11 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    await ApiUtils.services.addService(formData);
+    setIsAddServiceFormVisible(false);
+    fetchServices();
   };
 
   const handleClose = () => {
@@ -94,6 +111,18 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
               placeholder="tires change etc."
               value={formData.title}
               onChange={handleChange}
+              required
+            />
+          </div>
+          <div className={styles.row}>
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              placeholder="We offer professional and..."
+              value={formData.description}
+              onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.estimatedTime}>
@@ -106,6 +135,7 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
                   placeholder="one, few, 1-2..."
                   value={formData.estimatedTime}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className={styles.row}>
@@ -113,7 +143,7 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
                 <select
                   name="timeUnit"
                   id="timeUnit"
-                  value={formData.timeUnit}
+                  value={formData.timeUnitId}
                   onChange={handleChange}
                 >
                   {timeUnits.map((timeUnit) => {
@@ -132,7 +162,7 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
             <select
               name="availability"
               id="availability"
-              value={formData.availability}
+              value={formData.serviceAvailabilityId}
               onChange={handleChange}
             >
               {serviceAvailabilities.map((serviceAvailability) => {
@@ -153,11 +183,12 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
               <div className={styles.row}>
                 <label htmlFor="price">Price</label>
                 <input
-                  type="text"
+                  type="number"
                   id="price"
-                  placeholder="one, few, 1-2..."
+                  placeholder="eg. 100"
                   value={formData.price}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className={styles.row}>
@@ -165,7 +196,7 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
                 <select
                   name="currency"
                   id="currency"
-                  value={formData.currency}
+                  value={formData.currencyId}
                   onChange={handleChange}
                 >
                   {currencies.map((currency) => {
@@ -185,7 +216,7 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
                 <select
                   name="serviceUnit"
                   id="serviceUnit"
-                  value={formData.serviceUnit}
+                  value={formData.serviceUnitId}
                   onChange={handleChange}
                 >
                   {serviceUnits.map((unit) => {

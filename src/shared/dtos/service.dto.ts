@@ -8,6 +8,8 @@ import {
 } from '../dtos/';
 
 export class ServiceDTO extends BaseDto {
+  id!: string;
+
   title!: string;
 
   description?: string;

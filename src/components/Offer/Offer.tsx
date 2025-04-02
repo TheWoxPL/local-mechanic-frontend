@@ -80,7 +80,7 @@ export const Offer: React.FC<OfferProps> = ({
 
         <div className={styles.bottom}>
           <div className={styles.availability}>
-            dostępność: <span className={styles.bold}>{availability}</span>
+            availability: <span className={styles.bold}>{availability}</span>
           </div>
           <div className={styles.price}>
             <div className={styles.charge}>{price}</div>

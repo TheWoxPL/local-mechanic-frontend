@@ -7,7 +7,7 @@ import { useParams } from 'react-router';
 import { CompanyDTO } from 'src/shared/dtos';
 
 export const YourCompanyTopInfo = () => {
-  const { uuid } = useParams<{ uuid: string }>();
+  const { companyId } = useParams<{ companyId: string }>();
   const { loading } = UserAuth();
   const [companyData, setCompanyData] = useState<CompanyDTO>();
   const [isFetching, setIsFetching] = useState(true);
@@ -15,7 +15,7 @@ export const YourCompanyTopInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await ApiUtils.companies.getCompanyById(uuid);
+        const data = await ApiUtils.companies.getCompanyById(companyId);
         setCompanyData(data);
       } catch (error) {
         console.error('Error fetching company data:', error);
@@ -24,7 +24,7 @@ export const YourCompanyTopInfo = () => {
       }
     };
     fetchData();
-  }, [uuid, loading]);
+  }, [companyId, loading]);
 
   if (loading || isFetching) {
     return <div></div>;

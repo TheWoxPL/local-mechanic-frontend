@@ -8,3 +8,4 @@ export * from './currency.dto';
 export * from './service-availability.dto';
 export * from './time-unit.dto';
 export * from './service.dto';
+export * from './create-service.dto';

@@ -7,10 +7,15 @@ import EditSVG from 'src/assets/svgs/edit.svg';
 
 import img from '../../assets/images/car-fix.jpg';
 import { ServiceDTO } from 'src/shared/dtos';
+import { useState } from 'react';
+import ApiUtils from 'src/shared/api/apiUtils';
 
-export const YourOffer: React.FC<ServiceDTO> = ({
+export const YourOffer: React.FC<
+  ServiceDTO & { fetchServices: () => void }
+> = ({
   // rating,
   // countOpinions,
+  id,
   title,
   description,
   estimatedTime,
@@ -25,6 +30,7 @@ export const YourOffer: React.FC<ServiceDTO> = ({
   // orders,
   // views,
   // favourites,
+  fetchServices,
 }) => {
   const rating = 4.6;
   const countOpinions = 14;
@@ -34,9 +40,43 @@ export const YourOffer: React.FC<ServiceDTO> = ({
   const views = 22;
   const favourites = 2;
 
+  const [isConfirmRemoveVisible, setIsConfirmRemoveVisible] = useState(false);
+
+  const handleRemoveClick = () => {
+    setIsConfirmRemoveVisible(true);
+  };
+
+  const handleConfirmRemove = async () => {
+    await ApiUtils.services.deleteServiceById(id);
+    // setIsConfirmRemoveVisible(false);
+    fetchServices();
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.top}>
+      <div
+        className={`${styles.confirmRemove} ${
+          isConfirmRemoveVisible ? styles.visible : ''
+        }`}
+      >
+        <div className={styles.title}>Remove ?</div>
+        <div className={styles.buttons}>
+          <button className={styles.yes} onClick={handleConfirmRemove}>
+            Yes
+          </button>
+          <button
+            className={styles.no}
+            onClick={() => setIsConfirmRemoveVisible(false)}
+          >
+            No
+          </button>
+        </div>
+      </div>
+      <div
+        className={`${styles.top} ${
+          isConfirmRemoveVisible ? styles.blurred : ''
+        }`}
+      >
         <div className={styles.left}>
           <div className={styles.opinions}>
             <div className={styles.rating}>{rating}</div>
@@ -54,7 +94,12 @@ export const YourOffer: React.FC<ServiceDTO> = ({
                 {description}
               </div>
             </div>
-            <img className={styles.delete} src={TrashSVG} alt="Trash svg" />
+            <img
+              className={styles.delete}
+              src={TrashSVG}
+              alt="Trash svg"
+              onClick={handleRemoveClick}
+            />
           </div>
 
           <div className={styles.shortInfo}>
@@ -77,20 +122,26 @@ export const YourOffer: React.FC<ServiceDTO> = ({
 
           <div className={styles.bottom}>
             <div className={styles.availability}>
-              dostępność:{' '}
+              availability:{' '}
               <span className={styles.bold}>{serviceAvailability.name}</span>
             </div>
             <div className={styles.price}>
               <div className={styles.charge}>
                 {price}
-                {currency.name}
+                <span>{currency.name}</span>
               </div>
-              <div className={styles.serviceUnit}>{serviceUnit.name}</div>
+              <div className={styles.serviceUnit}>
+                <span>per </span> <span>{serviceUnit.name}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className={styles.bottomData}>
+      <div
+        className={`${styles.bottomData} ${
+          isConfirmRemoveVisible ? styles.blurred : ''
+        }`}
+      >
         <div className={styles.data}>
           <div className={styles.oneData}>views: {views}</div>
           <div className={styles.oneData}>orders: {orders}</div>

@@ -9,6 +9,7 @@ import {
   ServiceAvailabilityDTO,
   TimeUnitDTO,
   ServiceDTO,
+  CreateServiceDTO,
 } from '../dtos';
 // import { CompanyDTO } from '../dtos/company.dto';
 
@@ -92,6 +93,18 @@ class ApiUtils {
         '/services/get-services/' + companyId,
         'GET'
       );
+      return response.data;
+    },
+    async addService(createServiceDTO: CreateServiceDTO): Promise<unknown> {
+      const response = await callApi(
+        '/services/add-service',
+        'POST',
+        createServiceDTO
+      );
+      return response.data;
+    },
+    async deleteServiceById(serviceId: string): Promise<unknown> {
+      const response = await callApi('/services/' + serviceId, 'DELETE');
       return response.data;
     },
   };

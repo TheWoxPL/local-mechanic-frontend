@@ -13,7 +13,6 @@ export const AllCompaniesOnProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       ApiUtils.companies.getUserCompanies().then((response) => {
-        // console.log(response)
         setCompanies(response);
       });
     };

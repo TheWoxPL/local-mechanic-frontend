@@ -1,7 +1,7 @@
 import { YourOffer } from '../YourOffer/YourOffer';
 import styles from './YourOffers.module.scss';
 import { AddServiceForm } from '../AddServiceForm/AddServiceForm';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ServiceDTO } from 'src/shared/dtos';
 import ApiUtils from 'src/shared/api/apiUtils';
 
@@ -17,22 +17,24 @@ export const YourOffers = ({ companyId }: YourOffersProps) => {
   const handleAddNewServiceClick = () => {
     setIsAddServiceFormVisible(true);
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (companyId !== undefined) {
-          const fetchedServices =
-            await ApiUtils.services.getAllServicesByCompanyId(companyId);
-          setYourServices(fetchedServices);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setIsFetching(false);
+
+  const fetchServices = useCallback(async () => {
+    try {
+      if (companyId !== undefined) {
+        const fetchedServices =
+          await ApiUtils.services.getAllServicesByCompanyId(companyId);
+        setYourServices(fetchedServices);
       }
-    };
-    fetchData();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setIsFetching(false);
+    }
   }, [companyId]);
+
+  useEffect(() => {
+    fetchServices();
+  }, [fetchServices]);
 
   if (isFetching) {
     return <div></div>;
@@ -43,6 +45,8 @@ export const YourOffers = ({ companyId }: YourOffersProps) => {
       {isAddServiceFormVisible && (
         <AddServiceForm
           setIsAddServiceFormVisible={setIsAddServiceFormVisible}
+          companyId={companyId}
+          fetchServices={fetchServices}
         />
       )}
       <div className={styles.AddService}>
@@ -51,7 +55,13 @@ export const YourOffers = ({ companyId }: YourOffersProps) => {
       <div className={styles.line}></div>
       <div className={styles.allOffers}>
         {yourServices.map((offer) => {
-          return <YourOffer key={offer.id} {...offer} />;
+          return (
+            <YourOffer
+              key={offer.id}
+              {...offer}
+              fetchServices={fetchServices}
+            />
+          );
         })}
       </div>
     </div>

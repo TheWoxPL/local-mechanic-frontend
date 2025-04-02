@@ -3,21 +3,88 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  
 
-  .top{
+  .confirmRemove {
+    background-color: #662222;
+    position: absolute;
+    z-index: 1;
+    width: 70%;
+    max-width: 300px;
+    height: 110px;
+    align-self: center;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 10px 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-weight: 900;
+    opacity: 0;
+    transform: scale(0.5); 
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+    
+    &.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 30px;
+      
+      button {
+        font-size: 2.2rem;
+        font-weight: 900;
+        padding: 5px 10px;
+        width: 100%;
+        margin: 5px;
+        border-radius: 10px;
+        border: 3px solid;
+      }
+
+      .yes {
+        color: #268d4c;
+        border-color: #268d4c;
+        background-color: inherit;
+      }
+      .no {
+        color: #BC2525;
+        border-color: #BC2525;
+        background-color: inherit;
+      }
+    }
+  }
+
+  .top {
     display: flex;
     min-height: 120px;
     border-radius: 10px;
     overflow: hidden;
+    transition: filter 0.3s ease;
+    pointer-events: auto;
+    
+    &.blurred{
+      pointer-events: none;
+      filter: blur(2px);
+    }
 
-    .left{
+    .left {
       flex: 1;
       overflow: hidden;
       position: relative;
       justify-content: center;
-  
-      .opinions{
+
+      .opinions {
         display: flex;
         flex-direction: row;
         background-color: rgb(255, 255, 255);
@@ -32,124 +99,134 @@
         border-radius: 10px;
         font-size: 1.1rem;
         align-items: center;
-    
-        .rating{
+
+        .rating {
           min-width: 15px;
           padding-right: 3px;
         }
-        
-        img{
+
+        img {
           width: 15px;
           padding-right: 3px;
           top: -1px;
         }
-        .opinionsCount{
-          color:#767676
+        .opinionsCount {
+          color: #767676;
         }
       }
-  
-      img{
+
+      img {
         align-self: center;
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
-  
     }
-  
-    .right{
-      background-color: #FF5555;
+
+    .right {
+      background-color: #ff5555;
       flex: 2;
       padding-left: 5px;
       color: white;
       display: flex;
       justify-content: space-between;
       flex-direction: column;
-  
-      .header{
+
+      .header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         margin-top: 5px;
         margin-bottom: 5px;
-  
-        .title{
-          .name{
+
+        .title {
+          .name {
             font-weight: 900;
             font-size: 1.6rem;
           }
-          .company{
+          .company {
             margin-top: -2px;
             font-size: 1.2rem;
           }
         }
-        .delete{
+        .delete {
           width: 30px;
           padding: 0px 5px;
         }
       }
-  
-      .shortInfo{
+
+      .shortInfo {
         display: flex;
         margin-right: 10px;
         margin-bottom: auto;
         padding-left: 10px;
         flex-direction: column;
-  
-        .oneShortInfo{
+
+        .oneShortInfo {
           display: flex;
           align-items: center;
           width: 100%;
-          
-          img{
+
+          img {
             width: 21px;
             margin: 0px;
           }
-          .info{
+          .info {
             display: block;
             flex-direction: row;
             font-size: 1.1rem;
             margin-left: 5px;
-  
-            .main{
+
+            .main {
               font-weight: bold;
             }
           }
         }
       }
-  
-      .bottom{
+
+      .bottom {
         display: flex;
         justify-content: space-between;
         padding-right: 5px;
         margin-bottom: 3px;
-        
-        .availability{
+
+        .availability {
           font-size: 1.2rem;
           height: fit-content;
           margin-top: auto;
-  
-          .bold{
+
+          .bold {
             font-weight: bold;
           }
         }
-        .price{
-          text-align: center;
-          .charge{
-            font-size: 2.0rem;
+        .price {
+          text-align: right;
+          max-width: 40%;
+          .charge {
+            font-size: 2rem;
             font-weight: bold;
+
+            span {
+              font-size: 1rem;
+              margin-left: 2px;
+            }
           }
-          .serviceUnit{
+          .serviceUnit {
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
             margin-top: -5px;
             font-size: 1.2rem;
+            span{
+              padding-left: 4px;
+            }
           }
         }
       }
-    } 
+    }
   }
 
-  
-  .bottomData{
+  .bottomData {
     padding: 20px 5px 5px 5px;
     z-index: -1;
     top: -15px;
@@ -157,25 +234,31 @@
     background-color: #838383;
     border-radius: 10px;
     display: flex;
+    pointer-events: auto;
     -webkit-box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
     -moz-box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
-    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.288);
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.288);    transition: filter 0.3s ease;
+    
+    &.blurred{
+      pointer-events: none;
+      filter: blur(2px);
+    }
 
-    .data{
+    .data {
       width: 100%;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
 
-      .oneData{
-        font-size: 1.2rem; 
+      .oneData {
+        font-size: 1.2rem;
         margin-right: 5px;
         padding-right: 5px;
         color: white;
         font-weight: 900;
       }
     }
-    img{
+    img {
       width: 20px;
       border-left: 2px solid white;
       padding-left: 5px;
