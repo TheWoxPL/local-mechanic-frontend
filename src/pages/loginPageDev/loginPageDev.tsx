@@ -157,6 +157,10 @@ const LoginPageDev: React.FC = () => {
     console.log(await ApiUtils.companies.getUserCompanies());
   };
 
+  const handleGenerateServicesForUser = async () => {
+    console.log(await ApiUtils.services.generateServicesForUser());
+  };
+
   const handleContextLogin = async () => {
     await login();
   };
@@ -186,6 +190,7 @@ const LoginPageDev: React.FC = () => {
       <button onClick={handleGetToken}>Get token</button>
       <button onClick={handleAddCompany}>Add company</button>
       <button onClick={handleGetCompanies}>Get companies</button>
+      <button onClick={handleGenerateServicesForUser}>Generate services</button>
       <br></br>
       <hr></hr>
       <button onClick={handleContextLogin}>Login</button>

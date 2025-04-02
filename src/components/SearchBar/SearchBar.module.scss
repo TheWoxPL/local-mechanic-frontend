@@ -4,8 +4,9 @@
   flex-direction: column;
   display: flex;
   background-color: #CD4A4D;
-  display: flex;
   flex-direction: row;
+  position: fixed;
+  z-index: 1;
 
   .logo{
     padding: 5px;

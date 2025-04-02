@@ -107,6 +107,13 @@ class ApiUtils {
       const response = await callApi('/services/' + serviceId, 'DELETE');
       return response.data;
     },
+    async generateServicesForUser(): Promise<ServiceDTO[]> {
+      const response = await callApi<ServiceDTO[]>(
+        '/services/generate-services-for-user/',
+        'GET'
+      );
+      return response.data;
+    },
   };
 }
 

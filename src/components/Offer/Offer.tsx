@@ -5,27 +5,36 @@ import HeartRedSVG from 'src/assets/svgs/heart-red.svg';
 import MapPointSVG from 'src/assets/svgs/map-point.svg';
 import ClockSVG from 'src/assets/svgs/clock.svg';
 import { useState } from 'react';
-import { OfferProps } from 'src/types';
+import { ServiceDTO } from 'src/shared/dtos';
+import img from '../../assets/images/car-fix.jpg';
 
-export const Offer: React.FC<OfferProps> = ({
-  uuid,
-  isFavorite,
-  img,
-  rating,
-  countOpinions,
-  name,
-  company,
-  location,
-  distance,
+export const Offer: React.FC<ServiceDTO> = ({
+  // rating,
+  // countOpinions,
+  id,
+  title,
+  description,
   estimatedTime,
-  availability,
+  timeUnit,
+  serviceAvailability,
   price,
+  currency,
   serviceUnit,
+  // location,
+  // distance,
+  company,
+  // orders,
+  // views,
+  // favourites,
 }) => {
-  const [isFavourite, setIsFavourite] = useState(isFavorite);
+  const [isFavourite, setIsFavourite] = useState(false);
+  const rating = 4.6;
+  const countOpinions = 14;
+  const location = 'Kraków, Długa 12a';
+  const distance = '3.5km';
 
   const handleFavouriteClick = () => {
-    console.log(uuid);
+    console.log(id);
     setIsFavourite((prevState) => !prevState);
   };
 
@@ -42,8 +51,11 @@ export const Offer: React.FC<OfferProps> = ({
       <div className={styles.right}>
         <div className={styles.header}>
           <div className={styles.title}>
-            <div className={styles.name}>{name}</div>
-            <div className={styles.company}>{company}</div>
+            <div className={styles.name}>{title}</div>
+            <div className={styles.company}>
+              {company.companyName}
+              {description}
+            </div>
           </div>
           {isFavourite ? (
             <img
@@ -73,18 +85,26 @@ export const Offer: React.FC<OfferProps> = ({
           <div className={styles.oneShortInfo}>
             <img src={ClockSVG} alt="alternative" />
             <div className={styles.info}>
-              <div className={styles.main}>{estimatedTime}</div>
+              <div className={styles.main}>
+                {estimatedTime} {timeUnit.name}
+              </div>
             </div>
           </div>
         </div>
 
         <div className={styles.bottom}>
           <div className={styles.availability}>
-            availability: <span className={styles.bold}>{availability}</span>
+            availability:{' '}
+            <span className={styles.bold}>{serviceAvailability.name}</span>
           </div>
           <div className={styles.price}>
-            <div className={styles.charge}>{price}</div>
-            <div className={styles.serviceUnit}>{serviceUnit}</div>
+            <div className={styles.charge}>
+              {price}
+              <span>{currency.name}</span>
+            </div>
+            <div className={styles.serviceUnit}>
+              <span>per </span> <span>{serviceUnit.name}</span>
+            </div>
           </div>
         </div>
       </div>
