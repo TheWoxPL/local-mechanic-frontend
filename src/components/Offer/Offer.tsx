@@ -7,6 +7,7 @@ import ClockSVG from 'src/assets/svgs/clock.svg';
 import { useState } from 'react';
 import { ServiceDTO } from 'src/shared/dtos';
 import img from '../../assets/images/car-fix.jpg';
+import { useNavigate } from 'react-router';
 
 export const Offer: React.FC<ServiceDTO> = ({
   // rating,
@@ -32,14 +33,19 @@ export const Offer: React.FC<ServiceDTO> = ({
   const countOpinions = 14;
   const location = 'Kraków, Długa 12a';
   const distance = '3.5km';
+  const navigate = useNavigate();
 
   const handleFavouriteClick = () => {
     console.log(id);
     setIsFavourite((prevState) => !prevState);
   };
-
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={() => {
+        navigate('/offer-details');
+      }}
+    >
       <div className={styles.left}>
         <div className={styles.opinions}>
           <div className={styles.rating}>{rating}</div>
