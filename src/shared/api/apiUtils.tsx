@@ -33,8 +33,8 @@ class ApiUtils {
   };
 
   static companies = {
-    async addCompany(createCompanyDTO: CreateCompanyDTO): Promise<unknown> {
-      const response = await callApi(
+    async addCompany(createCompanyDTO: CreateCompanyDTO): Promise<CompanyDTO> {
+      const response = await callApi<CompanyDTO>(
         '/companies/add-company',
         'POST',
         createCompanyDTO

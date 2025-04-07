@@ -11,6 +11,7 @@ export const AllCompaniesOnProfile = () => {
   const [companies, setCompanies] = useState<CompanyDTO[]>([]);
 
   useEffect(() => {
+    console.log('asd');
     const fetchData = async () => {
       ApiUtils.companies.getUserCompanies().then((response) => {
         setCompanies(response);
@@ -24,7 +25,7 @@ export const AllCompaniesOnProfile = () => {
       <div className={styles.companies}>
         {companies.map((company) => (
           <CompanyOnProfile
-            key={company.companyName}
+            key={company.id}
             avatar={{ src: AvatarMechanicSVG, alt: 'Mechanic avatar' }}
             companyName={company.companyName}
             address={'Address'}
@@ -32,12 +33,6 @@ export const AllCompaniesOnProfile = () => {
           />
         ))}
       </div>
-      {/* <CompanyOnProfile
-        avatar={{ src: AvatarMechanicSVG, alt: 'Mechanic avatar' }}
-        companyName={'Mock company'}
-        address={'Dluga 16a, cracow'}
-        companyId={'1'}
-      /> */}
       <button
         className={styles.addCompanyButton}
         onClick={() => navigate('/register-company')}
