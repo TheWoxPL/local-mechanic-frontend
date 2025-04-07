@@ -24,6 +24,8 @@ export const AuthContextProvider = ({ children }) => {
 
   const logout = async () => {
     await AuthService.logout();
+    setUser(null);
+    setRoles([]);
   };
 
   const loadRoles = async () => {
