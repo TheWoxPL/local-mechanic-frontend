@@ -23,5 +23,5 @@ export interface YourOfferProps {
   serviceAvailability: ServiceAvailabilityDTO;
   orders: number;
   views: number;
-  favourites: number;
+  favorites: number;
 }

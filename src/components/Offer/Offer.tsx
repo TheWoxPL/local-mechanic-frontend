@@ -26,19 +26,19 @@ export const Offer: React.FC<ServiceDTO> = ({
   company,
   // orders,
   // views,
-  // favourites,
+  // favorites,
 }) => {
-  const [isFavourite, setIsFavourite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const rating = 4.6;
   const countOpinions = 14;
   const location = 'Kraków, Długa 12a';
   const distance = '3.5km';
   const navigate = useNavigate();
 
-  const handleFavouriteClick = (event: React.MouseEvent) => {
+  const handleFavoriteClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     console.log(id);
-    setIsFavourite((prevState) => !prevState);
+    setIsFavorite((prevState) => !prevState);
   };
   return (
     <div
@@ -64,19 +64,19 @@ export const Offer: React.FC<ServiceDTO> = ({
               {description}
             </div>
           </div>
-          {isFavourite ? (
+          {isFavorite ? (
             <img
-              className={styles.favourite}
+              className={styles.favorite}
               src={HeartRedSVG}
-              alt="Favourite, filled read heart"
-              onClick={handleFavouriteClick}
+              alt="Favorite, filled read heart"
+              onClick={handleFavoriteClick}
             />
           ) : (
             <img
-              className={styles.favourite}
+              className={styles.favorite}
               src={HeartSVG}
-              alt="Favourite, empty heart"
-              onClick={handleFavouriteClick}
+              alt="Favorite, empty heart"
+              onClick={handleFavoriteClick}
             />
           )}
         </div>

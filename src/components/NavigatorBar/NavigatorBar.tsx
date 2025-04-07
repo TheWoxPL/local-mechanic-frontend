@@ -26,7 +26,7 @@ export const NavigatorBar: React.FC<NavigatorBarProps> = ({
           <span>Home</span>
         </div>
       </Link>
-      <Link to={'/favourite'}>
+      <Link to={'/favorite'}>
         <div
           className={
             indicatorIndex === 1
@@ -34,8 +34,8 @@ export const NavigatorBar: React.FC<NavigatorBarProps> = ({
               : `${styles.item}`
           }
         >
-          <img src={HeartSVG} alt="Favourite offers" />
-          <span>Favourite</span>
+          <img src={HeartSVG} alt="Favorite offers" />
+          <span>Favorite</span>
         </div>
       </Link>
       <Link to={'/orders'}>

@@ -1,7 +1,7 @@
 import { NavigatorBar } from 'src/components/NavigatorBar/NavigatorBar';
-import styles from './favouritePage.module.scss';
+import styles from './favoritePage.module.scss';
 
-export const FavouritePage = () => {
+export const FavoritePage = () => {
   return (
     <div className={styles.container}>
       <NavigatorBar indicatorIndex={1} />

@@ -29,7 +29,7 @@ export const YourOffer: React.FC<
   company,
   // orders,
   // views,
-  // favourites,
+  // favorites,
   fetchServices,
 }) => {
   const rating = 4.6;
@@ -38,7 +38,7 @@ export const YourOffer: React.FC<
   const distance = '3.5km';
   const orders = 5;
   const views = 22;
-  const favourites = 2;
+  const favorites = 2;
 
   const [isConfirmRemoveVisible, setIsConfirmRemoveVisible] = useState(false);
 
@@ -145,7 +145,7 @@ export const YourOffer: React.FC<
         <div className={styles.data}>
           <div className={styles.oneData}>views: {views}</div>
           <div className={styles.oneData}>orders: {orders}</div>
-          <div className={styles.oneData}>favourites: {favourites}</div>
+          <div className={styles.oneData}>favorites: {favorites}</div>
         </div>
         <img src={EditSVG} alt=" Edit icon" />
       </div>

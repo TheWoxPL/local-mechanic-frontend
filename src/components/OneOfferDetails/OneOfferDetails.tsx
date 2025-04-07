@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 export const OneOfferDetails = () => {
   const navigate = useNavigate();
-  const [isFavourite, setIsFavourite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -21,10 +21,10 @@ export const OneOfferDetails = () => {
           <img src={BackSVG} alt="back button" />
         </div>
         <div
-          className={styles.favourite}
-          onClick={() => setIsFavourite((prev) => !prev)}
+          className={styles.favorite}
+          onClick={() => setIsFavorite((prev) => !prev)}
         >
-          {isFavourite ? (
+          {isFavorite ? (
             <img src={HeartRedSVG} alt="heart button" />
           ) : (
             <img src={HeartSVG} alt="heart button" />
