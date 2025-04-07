@@ -35,7 +35,8 @@ export const Offer: React.FC<ServiceDTO> = ({
   const distance = '3.5km';
   const navigate = useNavigate();
 
-  const handleFavouriteClick = () => {
+  const handleFavouriteClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
     console.log(id);
     setIsFavourite((prevState) => !prevState);
   };
