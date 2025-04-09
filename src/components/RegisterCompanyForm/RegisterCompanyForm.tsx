@@ -13,6 +13,10 @@ export const RegisterCompanyForm = () => {
   const [foundDate, setFoundDate] = useState(new Date());
   const [description, setDescription] = useState('');
   const [localization, setLocalization] = useState('');
+  const [workingHours, setWorkingHours] = useState<{
+    from: number;
+    to: number;
+  }>({ from: 8, to: 16 });
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,6 +25,7 @@ export const RegisterCompanyForm = () => {
     data.companyName = companyName;
     data.description = description;
     data.foundDate = foundDate;
+    data.workingHours = workingHours;
     await ApiUtils.companies
       .addCompany(data)
       .then(async (response: CompanyDTO) => {
@@ -76,6 +81,35 @@ export const RegisterCompanyForm = () => {
             value={localization}
             onChange={(e) => setLocalization(e.target.value)}
           />
+        </div>
+        <div className={styles.inputField}>
+          <label>Working hours</label>
+          <div className={styles.workingHours}>
+            <input
+              min={0}
+              max={24}
+              type="number"
+              placeholder="8"
+              value={workingHours.from}
+              onChange={(e) =>
+                setWorkingHours({
+                  ...workingHours,
+                  from: Number(e.target.value),
+                })
+              }
+            />
+            <span>-</span>
+            <input
+              min={0}
+              max={24}
+              type="number"
+              placeholder="16"
+              value={workingHours.to}
+              onChange={(e) =>
+                setWorkingHours({ ...workingHours, to: Number(e.target.value) })
+              }
+            />
+          </div>
         </div>
         <input type="submit" className={styles.submitButton} />
       </form>

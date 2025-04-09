@@ -6,4 +6,8 @@ export class CompanyDTO extends BaseDto {
   foundDate!: Date;
   owners?: string;
   verifiedOwners!: string[];
+  workingHours?: {
+    from: number;
+    to: number;
+  };
 }

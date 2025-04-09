@@ -4,4 +4,8 @@ export class CreateCompanyDTO {
   foundDate!: Date;
   owners?: string;
   verifiedOwners!: string[];
+  workingHours?: {
+    from: number;
+    to: number;
+  };
 }
