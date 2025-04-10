@@ -130,19 +130,20 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
               <div className={styles.row}>
                 <label htmlFor="estimatedTime">Estimated time</label>
                 <input
-                  type="text"
+                  type="number"
                   id="estimatedTime"
-                  placeholder="one, few, 1-2..."
+                  placeholder="5, 10, 60 etc."
+                  min={0}
                   value={formData.estimatedTime}
                   onChange={handleChange}
                   required
                 />
               </div>
               <div className={styles.row}>
-                <label htmlFor="timeUnit">Time unit</label>
+                <label htmlFor="timeUnitId">Time unit</label>
                 <select
                   name="timeUnit"
-                  id="timeUnit"
+                  id="timeUnitId"
                   value={formData.timeUnitId}
                   onChange={handleChange}
                 >
@@ -158,10 +159,10 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
             </div>
           </div>
           <div className={styles.row}>
-            <label htmlFor="availability">Service availability</label>
+            <label htmlFor="serviceAvailabilityId">Service availability</label>
             <select
               name="availability"
-              id="availability"
+              id="serviceAvailabilityId"
               value={formData.serviceAvailabilityId}
               onChange={handleChange}
             >
@@ -192,10 +193,10 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
                 />
               </div>
               <div className={styles.row}>
-                <label htmlFor="currency">Currency</label>
+                <label htmlFor="currencyId">Currency</label>
                 <select
                   name="currency"
-                  id="currency"
+                  id="currencyId"
                   value={formData.currencyId}
                   onChange={handleChange}
                 >
@@ -212,10 +213,10 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
               <div className={styles.per}>per</div>
 
               <div className={styles.row}>
-                <label htmlFor="serviceUnit">Service unit</label>
+                <label htmlFor="serviceUnitId">Service unit</label>
                 <select
                   name="serviceUnit"
-                  id="serviceUnit"
+                  id="serviceUnitId"
                   value={formData.serviceUnitId}
                   onChange={handleChange}
                 >
