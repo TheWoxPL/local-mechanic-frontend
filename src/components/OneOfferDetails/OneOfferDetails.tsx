@@ -8,10 +8,16 @@ import MapPointSVG from '../../assets/svgs/map-point.svg';
 import ClockSVG from '../../assets/svgs/clock.svg';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
+import Calendar from '../Calendar/Calendar';
 
 export const OneOfferDetails = () => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const handleSelectData = (date: Date) => {
+    setSelectedDate(date);
+  };
 
   return (
     <div className={styles.container}>
@@ -73,8 +79,10 @@ export const OneOfferDetails = () => {
           </div>
         </div>
       </div>
-      <div className={styles.reservation}></div>
-      <button className={styles.orderButton}>Order</button>
+      <div className={styles.reservation}>
+        <Calendar handleSelectData={handleSelectData} />
+      </div>
+      {selectedDate && <button className={styles.orderButton}>Order</button>}
     </div>
   );
 };
