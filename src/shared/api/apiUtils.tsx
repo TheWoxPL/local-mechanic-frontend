@@ -14,6 +14,12 @@ import {
 // import { CompanyDTO } from '../dtos/company.dto';
 
 class ApiUtils {
+  static default = {
+    async helloWorld(): Promise<ResponseTokenDTO> {
+      const response = await callApi('/', 'GET');
+      return new ResponseTokenDTO(response.data);
+    },
+  };
   static auth = {
     async verifyToken(): Promise<ResponseTokenDTO> {
       const response = await callApi('/auth/verify-token', 'POST');

@@ -167,6 +167,15 @@ const LoginPageDev: React.FC = () => {
   const handleContextLogout = async () => {
     await logout();
   };
+  const handleStaticDataVercel = async () => {
+    fetch('https://nest-firebase-auth.vercel.app/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'same-origin', // Or 'include'
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -191,6 +200,7 @@ const LoginPageDev: React.FC = () => {
       <button onClick={handleAddCompany}>Add company</button>
       <button onClick={handleGetCompanies}>Get companies</button>
       <button onClick={handleGenerateServicesForUser}>Generate services</button>
+      <button onClick={handleStaticDataVercel}>StaticData vercel</button>
       <br></br>
       <hr></hr>
       <button onClick={handleContextLogin}>Login</button>
