@@ -168,13 +168,29 @@ const LoginPageDev: React.FC = () => {
     await logout();
   };
   const handleStaticDataVercel = async () => {
-    fetch('https://nest-firebase-auth.vercel.app/', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'same-origin', // Or 'include'
-    });
+    try {
+      const response = await fetch(
+        'https://local-mechanic-backend.vercel.app/api/v1/hello',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'same-origin', // Or 'include'
+        }
+      );
+      if (response.ok) {
+        const text = await response.text();
+        console.log('Response:', text);
+        alert('Response: ' + text);
+      } else {
+        console.error('Error:', response);
+        alert('Error: ' + response.statusText);
+      }
+    } catch (error) {
+      console.error('Fetch failed:', error);
+      alert('Fetch failed');
+    }
   };
 
   useEffect(() => {
