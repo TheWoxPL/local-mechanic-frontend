@@ -170,7 +170,7 @@ const LoginPageDev: React.FC = () => {
   const handleStaticDataVercel = async () => {
     try {
       const response = await fetch(
-        'https://local-mechanic-backend.vercel.app/api/v1/hello',
+        'https://local-mechanic-backend.vercel.app/api/v1',
         {
           method: 'GET',
           headers: {
