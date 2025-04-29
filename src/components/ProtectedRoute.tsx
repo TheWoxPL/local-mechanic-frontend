@@ -9,15 +9,11 @@ export const ProtectedRoute = () => {
 
   useEffect(() => {
     if (!loading && user === null) {
-      navigate('/login');
+      navigate('/profile');
     }
   }, [user, loading, navigate]);
 
   if (loading) {
-    return null;
-  }
-
-  if (user === null) {
     return null;
   }
 
