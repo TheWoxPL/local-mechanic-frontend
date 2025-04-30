@@ -44,7 +44,7 @@ export const Offer: React.FC<ServiceDTO> = ({
     <div
       className={styles.container}
       onClick={() => {
-        navigate('/offer-details');
+        navigate('/offer-details/' + id);
       }}
     >
       <div className={styles.left}>
