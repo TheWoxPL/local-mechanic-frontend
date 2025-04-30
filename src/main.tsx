@@ -27,14 +27,16 @@ createRoot(document.getElementById('root')!).render(
               path="/your-company/:companyId"
               element={<YourCompanyPage />}
             />
-
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/favorite" element={<FavoritePage />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/offer-details" element={<OfferDetailsPage />} />
+            <Route
+              path="/offer-details/:offerId"
+              element={<OfferDetailsPage />}
+            />
           </Route>
 
           {/* TODO: delete line below before merge, to tests only */}

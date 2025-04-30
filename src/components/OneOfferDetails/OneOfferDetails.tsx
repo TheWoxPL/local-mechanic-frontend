@@ -12,7 +12,13 @@ import Calendar from '../Calendar/Calendar';
 import ApiUtils from 'src/shared/api/apiUtils';
 import { CreateOrderDto } from 'src/shared/dtos/create-order.dto';
 
-export const OneOfferDetails = () => {
+interface OneOfferDetailsProps {
+  offerId: string;
+}
+
+export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
+  offerId,
+}) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -39,6 +45,7 @@ export const OneOfferDetails = () => {
 
   return (
     <div className={styles.container}>
+      {offerId}
       <div className={styles.top}>
         <img src={ServiceIMG} alt="service image" />
         <div className={styles.back} onClick={() => navigate(-1)}>
