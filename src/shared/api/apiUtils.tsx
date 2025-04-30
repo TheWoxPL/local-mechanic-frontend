@@ -11,6 +11,7 @@ import {
   ServiceDTO,
   CreateServiceDTO,
 } from '../dtos';
+import { CreateOrderDto } from '../dtos/create-order.dto';
 // import { CompanyDTO } from '../dtos/company.dto';
 
 class ApiUtils {
@@ -117,6 +118,16 @@ class ApiUtils {
       const response = await callApi<ServiceDTO[]>(
         '/services/generate-services-for-user/',
         'GET'
+      );
+      return response.data;
+    },
+  };
+  static orders = {
+    async addOrder(createOrderDTO: CreateOrderDto): Promise<void> {
+      const response = await callApi<void>(
+        '/orders/add-order/',
+        'POST',
+        createOrderDTO
       );
       return response.data;
     },

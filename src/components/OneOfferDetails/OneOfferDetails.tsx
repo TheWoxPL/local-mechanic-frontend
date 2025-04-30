@@ -9,6 +9,8 @@ import ClockSVG from '../../assets/svgs/clock.svg';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import Calendar from '../Calendar/Calendar';
+import ApiUtils from 'src/shared/api/apiUtils';
+import { CreateOrderDto } from 'src/shared/dtos/create-order.dto';
 
 export const OneOfferDetails = () => {
   const navigate = useNavigate();
@@ -17,6 +19,22 @@ export const OneOfferDetails = () => {
 
   const handleSelectData = (date: Date) => {
     setSelectedDate(date);
+  };
+
+  const handleOrder = async () => {
+    try {
+      const createOrderDto: CreateOrderDto = {
+        serviceId: '680a24f049aa72be2ca93c56',
+        scheduledDate: new Date(selectedDate!),
+        notes: 'mock',
+        price: 120,
+      };
+      await ApiUtils.orders.addOrder(createOrderDto).finally(() => {
+        navigate('/orders');
+      });
+    } catch (error) {
+      console.error('Error creating order:', error);
+    }
   };
 
   return (
@@ -82,7 +100,11 @@ export const OneOfferDetails = () => {
       <div className={styles.reservation}>
         <Calendar handleSelectData={handleSelectData} />
       </div>
-      {selectedDate && <button className={styles.orderButton}>Order</button>}
+      {selectedDate && (
+        <button className={styles.orderButton} onClick={handleOrder}>
+          Order
+        </button>
+      )}
     </div>
   );
 };
