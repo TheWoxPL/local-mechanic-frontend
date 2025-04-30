@@ -2,6 +2,7 @@ import { Outlet } from 'react-router';
 import { UserAuth } from 'src/context/AuthContext';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
+import Spinner from './Spinner/Spinner';
 
 export const ProtectedRoute = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export const ProtectedRoute = () => {
   }, [user, loading, navigate]);
 
   if (loading) {
-    return null;
+    return <Spinner />;
   }
 
   return <Outlet />;
