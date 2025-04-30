@@ -12,6 +12,7 @@ import {
   CreateServiceDTO,
 } from '../dtos';
 import { CreateOrderDto } from '../dtos/create-order.dto';
+import { OrderDto } from '../dtos/order.dto';
 // import { CompanyDTO } from '../dtos/company.dto';
 
 class ApiUtils {
@@ -128,6 +129,13 @@ class ApiUtils {
         '/orders/add-order/',
         'POST',
         createOrderDTO
+      );
+      return response.data;
+    },
+    async getUserOrders(): Promise<OrderDto[]> {
+      const response = await callApi<OrderDto[]>(
+        '/orders/get-user-orders/',
+        'GET'
       );
       return response.data;
     },

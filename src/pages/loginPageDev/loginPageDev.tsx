@@ -193,6 +193,10 @@ const LoginPageDev: React.FC = () => {
     }
   };
 
+  const handleUserOrders = async () => {
+    console.log(await ApiUtils.orders.getUserOrders());
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       console.log('UseEffect fetching: ', await AuthService.getToken());
@@ -217,6 +221,7 @@ const LoginPageDev: React.FC = () => {
       <button onClick={handleGetCompanies}>Get companies</button>
       <button onClick={handleGenerateServicesForUser}>Generate services</button>
       <button onClick={handleStaticDataVercel}>StaticData vercel</button>
+      <button onClick={handleUserOrders}>User orders</button>
       <br></br>
       <hr></hr>
       <button onClick={handleContextLogin}>Login</button>
