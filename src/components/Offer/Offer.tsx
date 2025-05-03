@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { ServiceDTO } from 'src/shared/dtos';
 import img from '../../assets/images/car-fix.jpg';
 import { useNavigate } from 'react-router';
+import ApiUtils from 'src/shared/api/apiUtils';
 
 export const Offer: React.FC<ServiceDTO> = ({
   // rating,
@@ -36,9 +37,16 @@ export const Offer: React.FC<ServiceDTO> = ({
   const distance = '3.5km';
   const navigate = useNavigate();
 
-  const handleFavoriteClick = (event: React.MouseEvent) => {
+  const handleFavoriteClick = async (event: React.MouseEvent) => {
     event.stopPropagation();
-    console.log(id);
+
+    if (isFavoriteVisibility === false) {
+      await ApiUtils.favorites.addServiceToFavorites(id);
+    }
+    if (isFavoriteVisibility === true) {
+      await ApiUtils.favorites.removeServiceFromFavorites(id);
+    }
+
     setIsFavoriteVisibility((prevState) => !prevState);
   };
   return (

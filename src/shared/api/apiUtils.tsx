@@ -155,6 +155,25 @@ class ApiUtils {
       return response.data;
     },
   };
+
+  static favorites = {
+    async addServiceToFavorites(serviceId: string): Promise<unknown> {
+      const response = await callApi<unknown>(
+        '/favorites/add-to-favorites/',
+        'POST',
+        { serviceId }
+      );
+      return response.data;
+    },
+    async removeServiceFromFavorites(serviceId: string): Promise<unknown> {
+      const response = await callApi<unknown>(
+        '/favorites/remove-from-favorites/',
+        'DELETE',
+        { serviceId }
+      );
+      return response.data;
+    },
+  };
 }
 
 export default ApiUtils;
