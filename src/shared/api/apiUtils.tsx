@@ -173,6 +173,14 @@ class ApiUtils {
       );
       return response.data;
     },
+    async isServiceFavorite(serviceId: string): Promise<boolean> {
+      const response = await callApi<boolean>(
+        '/favorites/is-service-favorite/',
+        'POST',
+        { serviceId }
+      );
+      return response.data;
+    },
   };
 }
 
