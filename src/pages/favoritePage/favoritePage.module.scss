@@ -3,5 +3,35 @@
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
+
+  .topInfo{
+    background-color: red;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+
+    span{
+      font-size: 1.7rem;
+      color:rgb(61, 61, 61);
+
+      span{
+        font-weight: bolder;
+        color: black
+      }
+    }
+  }
+
+  .offers{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
+    padding-top: 10px;
+    margin-top: 40px;
+    max-height: calc(100% - 100px);
+    position: fixed;
+    overflow-x: scroll;
+  }
 }
 

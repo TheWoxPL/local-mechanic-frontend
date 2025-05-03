@@ -27,4 +27,6 @@ export class ServiceDTO extends BaseDto {
   serviceUnit!: ServiceUnitDTO;
 
   company!: CompanyDTO;
+
+  isFavorite?: boolean;
 }

@@ -129,7 +129,15 @@ class ApiUtils {
       );
       return response.data;
     },
+    async getFavoritesForUser(): Promise<ServiceDTO[]> {
+      const response = await callApi<ServiceDTO[]>(
+        '/services/get-favorite-services-for-user/',
+        'GET'
+      );
+      return response.data;
+    },
   };
+
   static orders = {
     async addOrder(createOrderDTO: CreateOrderDto): Promise<void> {
       const response = await callApi<void>(

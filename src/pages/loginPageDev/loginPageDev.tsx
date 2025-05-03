@@ -196,6 +196,9 @@ const LoginPageDev: React.FC = () => {
   const handleUserOrders = async () => {
     console.log(await ApiUtils.orders.getUserOrders());
   };
+  const handleUserFavorites = async () => {
+    console.log(await ApiUtils.services.getFavoritesForUser());
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -222,6 +225,7 @@ const LoginPageDev: React.FC = () => {
       <button onClick={handleGenerateServicesForUser}>Generate services</button>
       <button onClick={handleStaticDataVercel}>StaticData vercel</button>
       <button onClick={handleUserOrders}>User orders</button>
+      <button onClick={handleUserFavorites}>User favorites</button>
       <br></br>
       <hr></hr>
       <button onClick={handleContextLogin}>Login</button>
