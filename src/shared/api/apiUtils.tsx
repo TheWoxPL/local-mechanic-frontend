@@ -103,6 +103,13 @@ class ApiUtils {
       );
       return response.data;
     },
+    async getServiceById(serviceId): Promise<ServiceDTO> {
+      const response = await callApi<ServiceDTO>(
+        '/services/get-service-by-id/' + serviceId,
+        'GET'
+      );
+      return response.data;
+    },
     async addService(createServiceDTO: CreateServiceDTO): Promise<unknown> {
       const response = await callApi(
         '/services/add-service',

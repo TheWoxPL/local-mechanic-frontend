@@ -8,6 +8,10 @@ const Calendar: React.FC<CalendarProps> = ({ handleSelectData }) => {
   const generateSequence = (num: number) =>
     Array.from({ length: num }, (_, i) => i);
 
+  const handleTimeslotClicked = (startTimeEventEmit) => {
+    handleSelectData(startTimeEventEmit.startTime);
+  };
+
   const availableTimeslots = generateSequence(9).map((id) => {
     return {
       id,
@@ -36,7 +40,7 @@ const Calendar: React.FC<CalendarProps> = ({ handleSelectData }) => {
       primaryColor="#dd3737"
       eventDurationInMinutes={30}
       availableTimeslots={availableTimeslots}
-      onStartTimeSelect={() => handleSelectData(new Date())}
+      onStartTimeSelect={handleTimeslotClicked}
     />
   );
 };

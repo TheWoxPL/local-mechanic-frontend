@@ -3,10 +3,10 @@ import styles from './offerDetailsPage.module.scss';
 import { useParams } from 'react-router';
 
 export const OfferDetailsPage = () => {
-  const { offerId } = useParams<{ offerId: string }>();
+  const { serviceId } = useParams<{ serviceId: string }>();
   return (
     <div className={styles.container}>
-      <OneOfferDetails offerId={offerId} />
+      <OneOfferDetails serviceId={serviceId} />
       <NavigatorBar indicatorIndex={null} />
     </div>
   );

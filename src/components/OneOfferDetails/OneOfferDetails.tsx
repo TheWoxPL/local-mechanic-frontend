@@ -7,21 +7,45 @@ import StarSVG from '../../assets/svgs/star.svg';
 import MapPointSVG from '../../assets/svgs/map-point.svg';
 import ClockSVG from '../../assets/svgs/clock.svg';
 import { useNavigate } from 'react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Calendar from '../Calendar/Calendar';
 import ApiUtils from 'src/shared/api/apiUtils';
 import { CreateOrderDto } from 'src/shared/dtos/create-order.dto';
+import { ServiceDTO } from 'src/shared/dtos';
+import Spinner from '../Spinner/Spinner';
 
 interface OneOfferDetailsProps {
-  offerId: string;
+  serviceId: string;
 }
 
 export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
-  offerId,
+  serviceId,
 }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [service, setService] = useState<ServiceDTO>(null);
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    const fetchService = async () => {
+      try {
+        const fetchedService =
+          await ApiUtils.services.getServiceById(serviceId);
+        setService(fetchedService);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsFetching(false);
+      }
+    };
+
+    fetchService();
+  }, [serviceId]);
+
+  if (isFetching) {
+    return <Spinner />;
+  }
 
   const handleSelectData = (date: Date) => {
     setSelectedDate(date);
@@ -30,10 +54,10 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
   const handleOrder = async () => {
     try {
       const createOrderDto: CreateOrderDto = {
-        serviceId: '680a24f049aa72be2ca93c56',
+        serviceId: serviceId,
         scheduledDate: new Date(selectedDate!),
         notes: 'mock',
-        price: 120,
+        price: service.price,
       };
       await ApiUtils.orders.addOrder(createOrderDto).finally(() => {
         navigate('/orders');
@@ -45,7 +69,6 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
 
   return (
     <div className={styles.container}>
-      {offerId}
       <div className={styles.top}>
         <img src={ServiceIMG} alt="service image" />
         <div className={styles.back} onClick={() => navigate(-1)}>
@@ -68,13 +91,9 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
         </div>
       </div>
       <div className={styles.info}>
-        <div className={styles.title}>Tire Change</div>
-        <div className={styles.company}>serwis motoryzacyjny sp. z o o </div>
-        <div className={styles.description}>
-          Lorem ipsum lorem ipsum lorem asdasdjasdj abj bd bsa b bja bhjbsa
-          hjasbb hdba sdadadsajdbsjhbd jabajssajbsahdbasjdbad bsadjbsajdhabsa
-          dbsadjasbd jsabda
-        </div>
+        <div className={styles.title}>{service.title}</div>
+        <div className={styles.company}>{service.company.companyName}</div>
+        <div className={styles.description}>{service.description}</div>
         <div className={styles.shortInfo}>
           <div className={styles.shortInfoLeft}>
             <div className={styles.oneShortInfo}>
@@ -88,18 +107,18 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
               <img src={ClockSVG} alt="alternative" />
               <div className={styles.info}>
                 <div className={styles.main}>
-                  {'1-2'} {'H'}
+                  {service.estimatedTime} {service.timeUnit.name}
                 </div>
               </div>
             </div>
           </div>
           <div className={styles.price}>
             <div className={styles.charge}>
-              {2500}
-              <span>{'PLN'}</span>
+              {service.price}
+              <span>{service.currency.name}</span>
             </div>
             <div className={styles.serviceUnit}>
-              <span>per </span> <span>{'service'}</span>
+              <span>per </span> <span>{service.serviceUnit.name}</span>
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route
-              path="/offer-details/:offerId"
+              path="/offer-details/:serviceId"
               element={<OfferDetailsPage />}
             />
           </Route>
