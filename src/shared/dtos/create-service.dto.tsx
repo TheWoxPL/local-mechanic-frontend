@@ -8,4 +8,5 @@ export class CreateServiceDTO {
   currencyId!: string;
   serviceUnitId!: string;
   companyId!: string;
+  file?: File;
 }

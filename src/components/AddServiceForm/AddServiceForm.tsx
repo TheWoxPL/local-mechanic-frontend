@@ -1,6 +1,6 @@
 import styles from './AddServiceForm.module.scss';
 import CloseSVG from '../../assets/svgs/close.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import ApiUtils from 'src/shared/api/apiUtils';
 import {
   CreateServiceDTO,
@@ -39,6 +39,9 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
     serviceUnitId: '',
     companyId: companyId,
   });
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,6 +90,67 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
 
   const handleClose = () => {
     setIsAddServiceFormVisible(false);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        file,
+      }));
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const file = e.dataTransfer.files[0];
+      setFormData((prev) => ({
+        ...prev,
+        file,
+      }));
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemoveImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setImagePreview(null);
+    setFormData((prev) => {
+      const newFormData = { ...prev };
+      delete newFormData.file;
+      return newFormData;
+    });
+
+    // Reset the file input by recreating it
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   if (isFetching) {
@@ -184,6 +248,7 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
               <div className={styles.row}>
                 <label htmlFor="price">Price</label>
                 <input
+                  className={styles.priceInput}
                   type="number"
                   id="price"
                   placeholder="eg. 100"
@@ -231,6 +296,52 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
               </div>
             </div>
           </div>
+
+          <div className={styles.row}>
+            <label htmlFor="file">Upload Service Image</label>
+            <div
+              className={`${styles.imageUploader} ${isDragging ? styles.dragging : ''}`}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
+              {imagePreview ? (
+                <div className={styles.previewContainer}>
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className={styles.imagePreview}
+                  />
+                  <button
+                    type="button"
+                    className={styles.removeButton}
+                    onClick={handleRemoveImage}
+                  >
+                    ×
+                  </button>
+                </div>
+              ) : (
+                <div className={styles.uploadPlaceholder}>
+                  <p className={styles.dropText}>
+                    <span className={styles.highlight}>Click to upload</span> or
+                    drag and drop
+                  </p>
+                  <p className={styles.allowedFiles}>
+                    PNG, JPG or JPEG (max. 5MB)
+                  </p>
+                </div>
+              )}
+              <input
+                type="file"
+                id="file"
+                ref={fileInputRef}
+                className={styles.fileInput}
+                onChange={handleFileChange}
+                accept="image/png, image/jpeg, image/jpg"
+              />
+            </div>
+          </div>
+
           <input type="submit" className={styles.submitButton} />
         </form>
       </div>
