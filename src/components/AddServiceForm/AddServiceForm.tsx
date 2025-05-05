@@ -6,6 +6,7 @@ import {
   CreateServiceDTO,
   CurrencyDTO,
   ServiceAvailabilityDTO,
+  ServiceDTO,
   ServiceUnitDTO,
   TimeUnitDTO,
 } from 'src/shared/dtos';
@@ -83,9 +84,27 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await ApiUtils.services.addService(formData);
-    setIsAddServiceFormVisible(false);
-    fetchServices();
+
+    try {
+      const serviceData = { ...formData };
+      delete serviceData.file;
+
+      const createdService: ServiceDTO =
+        await ApiUtils.services.addService(serviceData);
+
+      if (formData.file) {
+        const formDataForFile = new FormData();
+        formDataForFile.append('file', formData.file);
+        formDataForFile.append('serviceId', createdService.id);
+
+        await ApiUtils.services.uploadServiceImage(formDataForFile);
+      }
+
+      setIsAddServiceFormVisible(false);
+      fetchServices();
+    } catch (error) {
+      console.error('Error creating service:', error);
+    }
   };
 
   const handleClose = () => {
@@ -147,7 +166,6 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
       return newFormData;
     });
 
-    // Reset the file input by recreating it
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }

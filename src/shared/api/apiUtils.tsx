@@ -110,8 +110,10 @@ class ApiUtils {
       );
       return response.data;
     },
-    async addService(createServiceDTO: CreateServiceDTO): Promise<unknown> {
-      const response = await callApi(
+    async addService(
+      createServiceDTO: CreateServiceDTO | FormData
+    ): Promise<ServiceDTO> {
+      const response = await callApi<ServiceDTO>(
         '/services/add-service',
         'POST',
         createServiceDTO
@@ -133,6 +135,14 @@ class ApiUtils {
       const response = await callApi<ServiceDTO[]>(
         '/services/get-favorite-services-for-user/',
         'GET'
+      );
+      return response.data;
+    },
+    async uploadServiceImage(formData: FormData): Promise<unknown> {
+      const response = await callApi(
+        '/services/upload-image-to-service',
+        'POST',
+        formData
       );
       return response.data;
     },
