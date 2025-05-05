@@ -160,12 +160,14 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.form}>
-        <img
-          src={CloseSVG}
-          alt="close svg"
-          className={styles.close}
-          onClick={handleClose}
-        />
+        <div className={styles.close}>
+          <img
+            src={CloseSVG}
+            alt="close svg"
+            className={styles.closeButton}
+            onClick={handleClose}
+          />
+        </div>
         <form onSubmit={handleSubmit}>
           <div className={styles.row}>
             <label htmlFor="title">Service title</label>

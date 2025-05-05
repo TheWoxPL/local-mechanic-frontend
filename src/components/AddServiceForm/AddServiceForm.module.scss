@@ -20,19 +20,27 @@ $transition-speed: 0.3s;
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
 
-  .close {
-    width: 28px;
-    height: 28px;
-    filter: invert(1);
-    z-index: 20;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    cursor: pointer;
-    transition: transform $transition-speed ease;
+  .close{
+    margin: -10px 0px -10px auto;
 
-    &:hover {
-      transform: rotate(90deg) scale(1.1);
+
+    .closeButton {
+      width: 20px;
+      height: 20px;
+      filter: invert(1);
+      z-index: 1;
+      top: 25px;
+      right: 15px;
+      cursor: pointer;
+      transition: transform $transition-speed ease;
+      background-color: rgb(0, 0, 0);
+      padding: 5px;
+      border-radius: 25px;
+      border: 2px dashed rgb(99, 99, 99);
+  
+      &:hover {
+        transform: rotate(90deg) scale(1.1);
+      }
     }
   }
 
@@ -124,7 +132,11 @@ $transition-speed: 0.3s;
         }
 
         select {
-          min-width: 200px;
+          min-width: 170px;
+        }
+
+        label{
+          min-width: 110px;
         }
       }
     }
@@ -189,7 +201,6 @@ $transition-speed: 0.3s;
       overflow: hidden;
       background-color: #f9f9f9;
       transition: all $transition-speed ease;
-      margin-bottom: 25px;
       cursor: pointer;
 
       &:hover {
@@ -328,11 +339,8 @@ $transition-speed: 0.3s;
       border-radius: 30px;
       color: white;
       align-self: center;
-
       transition: all $transition-speed ease;
-      position: sticky;
-      bottom: 10px;
-      z-index: 5; 
+      z-index: 5;
       overflow: hidden;
       box-shadow: 0px 4px 10px rgba(205, 74, 77, 0.3);
 
