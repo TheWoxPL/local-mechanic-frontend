@@ -5,7 +5,7 @@ import ClockSVG from 'src/assets/svgs/clock.svg';
 import TrashSVG from 'src/assets/svgs/trash.svg';
 import EditSVG from 'src/assets/svgs/edit.svg';
 
-import img from '../../assets/images/car-fix.jpg';
+import img from '../../assets/images/default-car-service.png';
 import { ServiceDTO } from 'src/shared/dtos';
 import { useState } from 'react';
 import ApiUtils from 'src/shared/api/apiUtils';
@@ -31,6 +31,7 @@ export const YourOffer: React.FC<
   // views,
   // favorites,
   fetchServices,
+  imageUrl,
 }) => {
   const rating = 4.6;
   const countOpinions = 14;
@@ -83,7 +84,7 @@ export const YourOffer: React.FC<
             <img src={StarSVG} alt="Star svg" />
             <div className={styles.opinionsCount}>({countOpinions})</div>
           </div>
-          <img src={img} alt="Image of service" />
+          <img src={imageUrl || img} alt="Image of service" />
         </div>
         <div className={styles.right}>
           <div className={styles.header}>

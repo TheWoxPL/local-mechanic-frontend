@@ -29,4 +29,6 @@ export class ServiceDTO extends BaseDto {
   company!: CompanyDTO;
 
   isFavorite?: boolean;
+
+  imageUrl?: string;
 }

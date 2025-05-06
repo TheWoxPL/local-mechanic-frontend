@@ -1,5 +1,5 @@
 import styles from './OneOfferDetails.module.scss';
-import ServiceIMG from '../../assets/images/car-fix.jpg';
+import ServiceIMG from '../../assets/images/default-car-service.png';
 import BackSVG from '../../assets/svgs/back.svg';
 import HeartSVG from '../../assets/svgs/heart.svg';
 import HeartRedSVG from '../../assets/svgs/heart-red.svg';
@@ -70,7 +70,7 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <img src={ServiceIMG} alt="service image" />
+        <img src={service.imageUrl || ServiceIMG} alt="service image" />
         <div className={styles.back} onClick={() => navigate(-1)}>
           <img src={BackSVG} alt="back button" />
         </div>

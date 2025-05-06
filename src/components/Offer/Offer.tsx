@@ -6,7 +6,7 @@ import MapPointSVG from 'src/assets/svgs/map-point.svg';
 import ClockSVG from 'src/assets/svgs/clock.svg';
 import { useState } from 'react';
 import { ServiceDTO } from 'src/shared/dtos';
-import img from '../../assets/images/car-fix.jpg';
+import img from '../../assets/images/default-car-service.png';
 import { useNavigate } from 'react-router';
 import ApiUtils from 'src/shared/api/apiUtils';
 
@@ -29,6 +29,7 @@ export const Offer: React.FC<ServiceDTO> = ({
   // orders,
   // views,
   // favorites,
+  imageUrl,
 }) => {
   const [isFavoriteVisibility, setIsFavoriteVisibility] = useState(isFavorite);
   const rating = 4.6;
@@ -62,7 +63,7 @@ export const Offer: React.FC<ServiceDTO> = ({
           <img src={StarSVG} alt="Star svg" />
           <div className={styles.opinionsCount}>({countOpinions})</div>
         </div>
-        <img src={img} alt="Image of service" />
+        <img src={imageUrl || img} alt="Image of service" />
       </div>
       <div className={styles.right}>
         <div className={styles.header}>
