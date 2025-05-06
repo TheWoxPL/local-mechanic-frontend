@@ -40,7 +40,7 @@ export default function RegisterPage() {
     },
   });
 
-  const onSubmit = async (data: { email: string; password: string }) => {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
     setError('');
 

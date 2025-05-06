@@ -5,7 +5,9 @@ import AvatarSVG from 'src/assets/svgs/avatar.svg';
 export const ProfileInfo = () => {
   const { user } = UserAuth();
   // TypeScript may show an error here, but everything works fine in runtime.
-  const createdAt = new Date(parseInt(user.metadata.createdAt))
+  const createdAt = new Date(
+    parseInt((user.metadata as { createdAt: string }).createdAt)
+  )
     .toLocaleDateString('en-GB', {
       day: '2-digit',
       month: 'short',
