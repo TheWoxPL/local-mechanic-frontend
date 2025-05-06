@@ -17,7 +17,6 @@ export const YourOffer: React.FC<
   // countOpinions,
   id,
   title,
-  description,
   estimatedTime,
   timeUnit,
   serviceAvailability,
@@ -90,10 +89,7 @@ export const YourOffer: React.FC<
           <div className={styles.header}>
             <div className={styles.title}>
               <div className={styles.name}>{title}</div>
-              <div className={styles.company}>
-                {company.companyName}
-                {description}
-              </div>
+              <div className={styles.company}>{company.companyName}</div>
             </div>
             <img
               className={styles.delete}
