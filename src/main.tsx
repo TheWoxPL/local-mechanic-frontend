@@ -15,6 +15,7 @@ import { YourCompanyPage } from './pages/yourCompanyPage/yourCompanyPage';
 import { AuthContextProvider } from './context';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { OfferDetailsPage } from './pages/offerDetailsPage/offerDetailsPage';
+import RegisterPage from './pages/registerPage/RegisterPage';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -41,6 +42,7 @@ createRoot(document.getElementById('root')!).render(
 
           {/* TODO: delete line below before merge, to tests only */}
           <Route path="/dev" element={<LoginViewDev />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>

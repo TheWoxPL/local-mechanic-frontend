@@ -3,6 +3,8 @@ import {
   GoogleAuthProvider,
   signOut,
   getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 
 import { auth } from '../config/firebaseConfig';
@@ -26,5 +28,21 @@ export class AuthService {
   static async getToken() {
     const authInstance = getAuth();
     return await authInstance.currentUser?.getIdToken();
+  }
+
+  static async registerWithEmailAndPasswordFirebase(
+    email: string,
+    password: string
+  ) {
+    const authInstance = getAuth();
+    return await createUserWithEmailAndPassword(authInstance, email, password);
+  }
+
+  static async loginWithEmailAndPasswordFirebase(
+    email: string,
+    password: string
+  ) {
+    const authInstance = getAuth();
+    return await signInWithEmailAndPassword(authInstance, email, password);
   }
 }

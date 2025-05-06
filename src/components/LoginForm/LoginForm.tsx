@@ -32,7 +32,7 @@ export const LoginForm = () => {
       </button>
       <span className={styles.createAccountText}>
         Don't have account? &nbsp;
-        <Link to="/" className={styles.createAccountLink}>
+        <Link to="/register" className={styles.createAccountLink}>
           Create now
         </Link>
       </span>
