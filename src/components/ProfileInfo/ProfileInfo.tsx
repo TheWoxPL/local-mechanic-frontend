@@ -4,7 +4,7 @@ import AvatarSVG from 'src/assets/svgs/avatar.svg';
 
 export const ProfileInfo = () => {
   const { user } = UserAuth();
-  // @ts-expect-error error is shown but everything works fine
+  // TypeScript may show an error here, but everything works fine in runtime.
   const createdAt = new Date(parseInt(user.metadata.createdAt))
     .toLocaleDateString('en-GB', {
       day: '2-digit',

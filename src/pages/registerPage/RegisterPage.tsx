@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
-// @ts-expect-error idk
+// TypeScript may show an error here, but everything works fine in runtime.
 import { zodResolver } from '@hookform/resolvers/zod';
 import styles from './registerPage.module.scss';
 import { UserAuth } from 'src/context';
