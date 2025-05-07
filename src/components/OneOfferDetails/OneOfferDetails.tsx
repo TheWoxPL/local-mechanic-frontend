@@ -33,6 +33,10 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
         const fetchedService =
           await ApiUtils.services.getServiceById(serviceId);
         setService(fetchedService);
+
+        const favoriteResponse =
+          await ApiUtils.favorites.isServiceFavorite(serviceId);
+        setIsFavorite(favoriteResponse.isFavorite);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -42,6 +46,19 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
 
     fetchService();
   }, [serviceId]);
+
+  const handleFavoriteToggle = async () => {
+    try {
+      if (isFavorite) {
+        await ApiUtils.favorites.removeServiceFromFavorites(serviceId);
+      } else {
+        await ApiUtils.favorites.addServiceToFavorites(serviceId);
+      }
+      setIsFavorite((prev) => !prev);
+    } catch (error) {
+      console.error('Error toggling favorite status:', error);
+    }
+  };
 
   if (isFetching) {
     return <Spinner />;
@@ -74,10 +91,7 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
         <div className={styles.back} onClick={() => navigate(-1)}>
           <img src={BackSVG} alt="back button" />
         </div>
-        <div
-          className={styles.favorite}
-          onClick={() => setIsFavorite((prev) => !prev)}
-        >
+        <div className={styles.favorite} onClick={handleFavoriteToggle}>
           {isFavorite ? (
             <img src={HeartRedSVG} alt="heart button" />
           ) : (

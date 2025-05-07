@@ -190,8 +190,10 @@ class ApiUtils {
       );
       return response.data;
     },
-    async isServiceFavorite(serviceId: string): Promise<boolean> {
-      const response = await callApi<boolean>(
+    async isServiceFavorite(
+      serviceId: string
+    ): Promise<{ isFavorite: boolean }> {
+      const response = await callApi<{ isFavorite: boolean }>(
         '/favorites/is-service-favorite/',
         'POST',
         { serviceId }
