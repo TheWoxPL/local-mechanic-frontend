@@ -6,7 +6,7 @@ import { UserAuth } from 'src/context';
 import { RoleType } from 'src/shared/enums';
 
 export const ProfileLogged = () => {
-  const { logout, roles } = UserAuth();
+  const { roles } = UserAuth();
 
   if (!roles) {
     return <div></div>;
@@ -20,9 +20,6 @@ export const ProfileLogged = () => {
       ) : (
         <MechanicInfo />
       )}
-      <button className={styles.logoutButton} onClick={logout}>
-        Logout
-      </button>
     </div>
   );
 };

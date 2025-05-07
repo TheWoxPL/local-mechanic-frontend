@@ -3,7 +3,7 @@ import styles from './ProfileInfo.module.scss';
 import AvatarSVG from 'src/assets/svgs/avatar.svg';
 
 export const ProfileInfo = () => {
-  const { user } = UserAuth();
+  const { user, logout } = UserAuth();
   // TypeScript may show an error here, but everything works fine in runtime.
   const createdAt = new Date(
     parseInt((user.metadata as { createdAt: string }).createdAt)
@@ -25,7 +25,12 @@ export const ProfileInfo = () => {
           Hello {user.displayName || user.email}!
         </span>
         <span className={styles.date}>since: {createdAt}</span>
-        <button className={styles.editDataButton}>Edit data</button>
+        <div className={styles.buttonsArea}>
+          <button className={styles.editDataButton}>Edit data</button>
+          <button className={styles.logoutButton} onClick={logout}>
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );

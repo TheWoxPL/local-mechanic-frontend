@@ -42,20 +42,42 @@
     .date {
       font-size: 1.5rem;
     }
-    .editDataButton {
-      width: 120px;
-      font-size: 1.5rem;
-      font-weight: 900;
-      background-color: #ff8080;
-      border: 0px;
-      padding: 6px 0px;
-      border-radius: 15px;
-      margin-top: 5px;
-      color: white;
+    .buttonsArea{
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      align-items: center;
       margin-top: auto;
-      -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
-      -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
-      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+      padding-bottom: 3px;
+      
+      .editDataButton {
+        width: 120px;
+        font-size: 1.5rem;
+        font-weight: 900;
+        background-color: #f7f7f7;
+        border: 0px;
+        padding: 6px 0px;
+        border-radius: 15px;
+        margin-top: 5px;
+        color: rgb(145, 0, 0);
+        -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+        -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+      }
+      .logoutButton{
+        width: 120px;
+        font-size: 1.5rem;
+        font-weight: 900;
+        background-color: #ff8080;
+        border: 0px;
+        padding: 6px 0px;
+        border-radius: 15px;
+        margin-top: 5px;
+        color: white;
+        -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+        -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.39);
+      }
     }
   }
 }
