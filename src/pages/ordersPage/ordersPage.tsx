@@ -10,13 +10,11 @@ import Spinner from 'src/components/Spinner/Spinner';
 
 type ViewMode = 'upcoming' | 'completed';
 
-// Helper functions
 const isOrderExpired = (scheduledDate: Date): boolean => {
   const now = new Date();
   return new Date(scheduledDate) < now;
 };
 
-// Format date parts
 const formatDate = (
   dateString: string | Date
 ): { day: string; monthYear: string; time: string } => {
@@ -55,13 +53,12 @@ export const OrdersPage = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('upcoming');
   const [loading, setLoading] = useState(true);
   const [animating, setAnimating] = useState(false);
+  const [resigningOrder, setResigningOrder] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // Refs for swipe gesture
   const touchStartX = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Load orders from API
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -78,7 +75,6 @@ export const OrdersPage = () => {
     fetchOrders();
   }, []);
 
-  // Filter orders based on viewMode
   useEffect(() => {
     if (orders.length > 0) {
       if (viewMode === 'upcoming') {
@@ -95,22 +91,22 @@ export const OrdersPage = () => {
     }
   }, [orders, viewMode]);
 
-  // Handle resign order action
   const handleResignOrder = async (orderId: string) => {
     try {
-      // In a real implementation, this would call the backend API
+      setResigningOrder(orderId);
+      await ApiUtils.orders.resignOrder(orderId);
       setOrders(orders.filter((order) => order.id !== orderId));
     } catch (error) {
       console.error('Error canceling order:', error);
+    } finally {
+      setResigningOrder(null);
     }
   };
 
-  // Navigate to order details
   const handleOrderDetails = (serviceId: string) => {
     navigate(`/offer-details/${serviceId}`);
   };
 
-  // Switch tab between upcoming and completed
   const switchTab = (mode: ViewMode) => {
     if (animating || mode === viewMode) return;
 
@@ -124,7 +120,6 @@ export const OrdersPage = () => {
     }, 100);
   };
 
-  // Swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -135,13 +130,10 @@ export const OrdersPage = () => {
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartX.current - touchEndX;
 
-    // Swipe threshold (80px)
     if (Math.abs(diff) > 80) {
       if (diff > 0) {
-        // Swipe left -> Switch to completed
         if (viewMode === 'upcoming') switchTab('completed');
       } else {
-        // Swipe right -> Switch to upcoming
         if (viewMode === 'completed') switchTab('upcoming');
       }
     }
@@ -149,7 +141,6 @@ export const OrdersPage = () => {
     touchStartX.current = null;
   };
 
-  // Show loading state
   if (loading) {
     return (
       <div className={styles.container}>
@@ -159,7 +150,6 @@ export const OrdersPage = () => {
     );
   }
 
-  // Get first letter for service logo
   const getServiceInitial = (title: string): string => {
     return title.charAt(0).toUpperCase();
   };
@@ -263,8 +253,11 @@ export const OrdersPage = () => {
                       <button
                         className={styles.resign}
                         onClick={() => handleResignOrder(order.id)}
+                        disabled={resigningOrder === order.id}
                       >
-                        Resign
+                        {resigningOrder === order.id
+                          ? 'Resigning...'
+                          : 'Resign'}
                       </button>
                     </div>
                   )}
@@ -317,7 +310,6 @@ export const OrdersPage = () => {
           </div>
         )}
       </div>
-
       <NavigatorBar indicatorIndex={2} />
     </div>
   );

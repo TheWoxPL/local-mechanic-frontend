@@ -164,6 +164,13 @@ class ApiUtils {
       );
       return response.data;
     },
+    async resignOrder(orderId: string): Promise<void> {
+      const response = await callApi<void>(
+        `/orders/resign-order/${orderId}`,
+        'DELETE'
+      );
+      return response.data;
+    },
   };
 
   static favorites = {
