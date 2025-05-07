@@ -1,61 +1,183 @@
 @use '../../assets/styles/theme.scss';
+
 .container {
   width: 100%;
-  flex-direction: column;
   display: flex;
-  background-color: #CD4A4D;
-  flex-direction: row;
+  flex-direction: column;
+  background-color: rgb(189, 9, 9);
   position: fixed;
-  z-index: 1;
+  z-index: 10;
+  padding: 8px 12px;
+  color: white;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+
+
+  &.minimized {
+    padding: 6px 0px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    .topSection {
+      margin-bottom: 0;
+      height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+
+    .searchControls {
+      transform: scale(0.95);
+
+      .searchInputContainer {
+        height: 38px;
+      }
+
+      .filterButton {
+        height: 38px;
+        width: 38px;
+
+        img{
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
+}
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 
   .logo{
-    padding: 5px;
-    display: flex;
-    margin-right: 5px;
+    margin-top: -5px;
+    height: 30px;
   }
-  .search{
-    display: flex;
-    position: relative;
-    padding: 6px;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+}
 
-    label{
-      position: absolute;
-      left: 12px;
-      display: flex;
-      align-items: center;
+.locationArea {
+  display: flex;
+  flex-direction: column;
+}
 
-      img{
-        position: relative;
-        width: 18px;
-        filter: invert(1);
-      }
+.locationLabel {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 2px;
+  opacity: 0.9;
+  text-align: end;
+}
 
-    }
-    input{
-      border-radius: 10px;
-      border: none;
-      width: 100%;
-      padding: 5px 30px 5px 30px;
-    }
-    
-    .resetButton{
-      background-color: transparent;
-      display: flex;
-      align-items: center;
-      position: absolute;
-      right: 4px;
-      border: none;
-      height: auto;
-      top: 9px;
+.locationValue {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: -6px;
+}
 
-      img{
-        width: 17px;
-        filter: invert(1);
-      }
-    }
-
+.locationPin {
+  margin-right: 5px;
+  font-size: 16px;
+  img{
+    width: 20px;
   }
+}
+
+.locationText {
+  margin-right: 5px;
+}
+
+.locationDropdown {
+  font-size: 10px;
+  margin-top: 3px;
+  opacity: 0.8;
+}
+
+.notificationButton {
+  background: none;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+
+  img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.searchControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchInputContainer {
+  flex: 1;
+  position: relative;
+  height: 46px;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.searchIcon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.5;
+  margin-right: 8px;
+  filter: invert(1);
+}
+
+.searchInput {
+  border: none;
+  background: none;
+  height: 100%;
+  width: 100%;
+  font-size: 15px;
+  color: #333;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #999;
+  }
+}
+
+.filterButton {
+  background-color: white;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #850000;
+  cursor: pointer;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.scrollInfo {
+  color: white;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-right: 10px;
 }
