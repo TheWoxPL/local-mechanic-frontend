@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 import MapPointSVG from 'src/assets/svgs/map-point.svg';
 import ClockSVG from 'src/assets/svgs/clock.svg';
 import Spinner from 'src/components/Spinner/Spinner';
+import { ConfirmationModal } from 'src/components/ConfirmationModal/ConfirmationModal';
 
 type ViewMode = 'upcoming' | 'completed';
 
@@ -54,6 +55,7 @@ export const OrdersPage = () => {
   const [loading, setLoading] = useState(true);
   const [animating, setAnimating] = useState(false);
   const [resigningOrder, setResigningOrder] = useState<string | null>(null);
+  const [orderToCancel, setOrderToCancel] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const touchStartX = useRef<number | null>(null);
@@ -100,7 +102,16 @@ export const OrdersPage = () => {
       console.error('Error canceling order:', error);
     } finally {
       setResigningOrder(null);
+      setOrderToCancel(null);
     }
+  };
+
+  const openCancelConfirmation = (orderId: string) => {
+    setOrderToCancel(orderId);
+  };
+
+  const closeCancelConfirmation = () => {
+    setOrderToCancel(null);
   };
 
   const handleOrderDetails = (serviceId: string) => {
@@ -161,6 +172,17 @@ export const OrdersPage = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
+      <ConfirmationModal
+        isOpen={orderToCancel !== null}
+        title="Cancel Order"
+        message="Are you sure you want to cancel this order? This action cannot be undone."
+        onConfirm={() => orderToCancel && handleResignOrder(orderToCancel)}
+        onCancel={closeCancelConfirmation}
+        confirmText="Yes, Cancel"
+        cancelText="No, Keep It"
+        isLoading={resigningOrder !== null}
+      />
+
       <div className={styles.header}>
         <h1>My Orders</h1>
       </div>
@@ -252,7 +274,7 @@ export const OrdersPage = () => {
                       </button>
                       <button
                         className={styles.resign}
-                        onClick={() => handleResignOrder(order.id)}
+                        onClick={() => openCancelConfirmation(order.id)}
                         disabled={resigningOrder === order.id}
                       >
                         {resigningOrder === order.id

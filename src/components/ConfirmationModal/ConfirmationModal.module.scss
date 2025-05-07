@@ -15,14 +15,15 @@
   background-color: white;
   border-radius: 12px;
   padding: 24px;
-  width: 90%;
+  width: 70%;
   max-width: 400px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.3s ease;
+  max-width: 300px;
 }
 
 .modalTitle {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   margin: 0 0 16px;
   color: #333;
 }
@@ -30,7 +31,7 @@
 .modalMessage {
   margin: 0 0 24px;
   color: #666;
-  font-size: 0.95rem;
+  font-size: 1.3rem;
   line-height: 1.5;
 }
 
