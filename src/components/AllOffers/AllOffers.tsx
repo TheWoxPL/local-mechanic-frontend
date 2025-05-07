@@ -1,26 +1,13 @@
 import { Offer } from '../Offer/Offer';
 import styles from './AllOffers.module.scss';
 import { UserAuth } from 'src/context';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { ServiceDTO } from 'src/shared/dtos';
 import ApiUtils from 'src/shared/api/apiUtils';
 
-interface AllOffersProps {
-  onScroll?: (position: number) => void;
-}
-
-export const AllOffers = ({ onScroll }: AllOffersProps) => {
+export const AllOffers = () => {
   const { loading } = UserAuth();
   const [services, setServices] = useState<ServiceDTO[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-    const { scrollTop } = event.currentTarget;
-
-    if (onScroll) {
-      onScroll(scrollTop);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,11 +27,7 @@ export const AllOffers = ({ onScroll }: AllOffersProps) => {
   }
 
   return (
-    <div
-      className={styles.container}
-      ref={containerRef}
-      onScroll={handleScroll}
-    >
+    <div className={styles.container}>
       {services.map((offer) => {
         return <Offer key={offer.id} {...offer} />;
       })}

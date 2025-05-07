@@ -1,23 +1,20 @@
 import styles from './SearchBar.module.scss';
 import SearchSVG from 'src/assets/svgs/search.svg';
+import { useState, useEffect, useRef } from 'react';
 import MapPointSVG from 'src/assets/svgs/map-point.svg';
-import { useState } from 'react';
 import LogoSVG from 'src/assets/svgs/logo-text.svg';
 import FilterSVG from 'src/assets/svgs/filter.svg';
 
-interface SearchBarProps {
-  isScrolled?: boolean;
-  scrollPosition?: number;
-  scrollDirection?: 'up' | 'down' | null;
-}
-
-export const SearchBar = ({
-  isScrolled = false,
-  scrollDirection = null,
-}: SearchBarProps) => {
+export const SearchBar = () => {
   const [searchText, setSearchText] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [location, setLocation] = useState('Cracow, Poland');
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(
+    null
+  );
+  const lastScrollPosition = useRef(0);
+  const scrollThreshold = 20;
 
   const handleSearchTextChange = (e) => {
     setSearchText(e.target.value);
@@ -27,6 +24,26 @@ export const SearchBar = ({
     if (!isScrolled) return '';
     return scrollDirection === 'down' ? styles.minimized : styles.scrolledUp;
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrolledState = currentScrollY > scrollThreshold;
+      if (currentScrollY > lastScrollPosition.current) {
+        setScrollDirection('down');
+      } else if (currentScrollY < lastScrollPosition.current) {
+        setScrollDirection('up');
+      }
+
+      setIsScrolled(scrolledState);
+      lastScrollPosition.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div className={`${styles.container} ${getScrollClass()}`}>
