@@ -4,8 +4,8 @@
   flex-direction: column;
   
   .back, .front{
-    border-bottom-left-radius: 280px;
-    border-bottom-right-radius: 280px;
+    border-bottom-left-radius: 390px;
+    border-bottom-right-radius: 390px;
     -webkit-box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
     -moz-box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
     box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
@@ -14,18 +14,19 @@
   .back{
     width: 100%;
     background-color: rgb(255, 255, 255);
-    height: 230px;
+    height: 200px;
     
     .front{
       width: 100%;
       display: flex;
       justify-content: center;
       background-color: rgb(209, 58, 31);
-      height: 220px;
+      height: 190px;
 
       img{
         width: 85%;
         max-width: 300px;
+        margin-top: -40px;
       }
     }
   }
