@@ -11,10 +11,10 @@ import {
   TimeUnitDTO,
   ServiceDTO,
   CreateServiceDTO,
+  SearchSuggestionDto,
+  CreateOrderDto,
+  OrderDto,
 } from '../dtos';
-import { CreateOrderDto } from '../dtos/create-order.dto';
-import { OrderDto } from '../dtos/order.dto';
-// import { CompanyDTO } from '../dtos/company.dto';
 
 class ApiUtils {
   static default = {
@@ -206,6 +206,16 @@ class ApiUtils {
         '/favorites/is-service-favorite/',
         'POST',
         { serviceId }
+      );
+      return response.data;
+    },
+  };
+
+  static search = {
+    async getSuggestions(query: string): Promise<SearchSuggestionDto[]> {
+      const response = await callApi<SearchSuggestionDto[]>(
+        `/search/suggestions?query=${encodeURIComponent(query)}`,
+        'GET'
       );
       return response.data;
     },

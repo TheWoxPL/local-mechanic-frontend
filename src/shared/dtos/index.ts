@@ -9,3 +9,6 @@ export * from './service-availability.dto';
 export * from './time-unit.dto';
 export * from './service.dto';
 export * from './create-service.dto';
+export * from './search-suggestion.dto';
+export * from './create-order.dto';
+export * from './order.dto';

@@ -3,19 +3,15 @@ import SearchSVG from 'src/assets/svgs/search.svg';
 import FilterSVG from 'src/assets/svgs/filter.svg';
 import BackSVG from 'src/assets/svgs/back.svg';
 import { useRef, useEffect } from 'react';
-
-interface SearchSuggestion {
-  id: number;
-  name: string;
-  category: string;
-}
+import { SearchSuggestionDto } from 'src/shared/dtos';
 
 interface SearchBarSuggestionsListProps {
   searchText: string;
-  suggestions: SearchSuggestion[];
+  suggestions: SearchSuggestionDto[];
   onSearchTextChange: (value: string) => void;
-  onSuggestionClick: (suggestion: SearchSuggestion) => void;
+  onSuggestionClick: (suggestion: SearchSuggestionDto) => void;
   onClose: () => void;
+  isLoading?: boolean;
 }
 
 export const SearchBarSuggestionsList = ({
@@ -24,10 +20,10 @@ export const SearchBarSuggestionsList = ({
   onSearchTextChange,
   onSuggestionClick,
   onClose,
+  isLoading = false,
 }: SearchBarSuggestionsListProps) => {
   const overlayInputRef = useRef<HTMLInputElement>(null);
 
-  // Focus on the overlay input after render
   useEffect(() => {
     if (overlayInputRef.current) {
       overlayInputRef.current.focus();
@@ -65,7 +61,9 @@ export const SearchBarSuggestionsList = ({
       </div>
 
       <div className={styles.suggestionsContainer}>
-        {suggestions.length > 0 ? (
+        {isLoading ? (
+          <div className={styles.noResults}>Loading suggestions...</div>
+        ) : suggestions.length > 0 ? (
           suggestions.map((suggestion) => (
             <div
               key={suggestion.id}

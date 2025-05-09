@@ -5,37 +5,15 @@ import MapPointSVG from 'src/assets/svgs/map-point.svg';
 import LogoSVG from 'src/assets/svgs/logo-text.svg';
 import FilterSVG from 'src/assets/svgs/filter.svg';
 import { SearchBarSuggestionsList } from '../SearchBarSuggestionsList/SearchBarSuggestionsList';
-
-// Mock data for search suggestions
-const MOCK_SUGGESTIONS = [
-  { id: 1, name: 'Oil Change Service', category: 'Maintenance' },
-  { id: 2, name: 'Tire Replacement', category: 'Tires' },
-  { id: 3, name: 'Brake Repair', category: 'Repair' },
-  { id: 4, name: 'Engine Diagnostics', category: 'Diagnostics' },
-  { id: 5, name: 'Air Conditioning Service', category: 'Maintenance' },
-  { id: 6, name: 'Battery Replacement', category: 'Electrical' },
-  { id: 7, name: 'Wheel Alignment', category: 'Tires' },
-  { id: 8, name: 'Suspension Repair', category: 'Repair' },
-  { id: 9, name: 'Transmission Service', category: 'Maintenance' },
-  { id: 10, name: 'Exhaust System Repair', category: 'Repair' },
-  { id: 11, name: 'Radiator Flush', category: 'Maintenance' },
-  { id: 12, name: 'Car Detailing', category: 'Cosmetic' },
-  { id: 13, name: 'Headlight Replacement', category: 'Electrical' },
-  { id: 14, name: 'Windshield Repair', category: 'Glass' },
-  { id: 15, name: 'Fuel System Cleaning', category: 'Maintenance' },
-  { id: 16, name: 'Clutch Replacement', category: 'Transmission' },
-];
-
-interface SearchSuggestion {
-  id: number;
-  name: string;
-  category: string;
-}
+import ApiUtils from 'src/shared/api/apiUtils';
+import { SearchSuggestionDto } from 'src/shared/dtos';
+import { debounce } from 'lodash';
 
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([]);
+  const [suggestions, setSuggestions] = useState<SearchSuggestionDto[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [location, setLocation] = useState('Cracow, Poland');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,18 +25,31 @@ export const SearchBar = () => {
   const searchInputRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Debounced search function to prevent too many API calls
+  const debouncedSearch = useRef(
+    debounce(async (query: string) => {
+      if (query.trim() === '') {
+        setSuggestions([]);
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const results = await ApiUtils.search.getSuggestions(query);
+        setSuggestions(results);
+      } catch (error) {
+        console.error('Error fetching search suggestions:', error);
+        setSuggestions([]);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 300)
+  ).current;
+
   const handleSearchTextChange = (value: string) => {
     setSearchText(value);
-
-    if (value.trim() === '') {
-      setSuggestions([]);
-    } else {
-      // Filter suggestions based on input
-      const filteredSuggestions = MOCK_SUGGESTIONS.filter((item) =>
-        item.name.toLowerCase().includes(value.toLowerCase())
-      );
-      setSuggestions(filteredSuggestions);
-    }
+    setIsLoading(true);
+    debouncedSearch(value);
   };
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +58,12 @@ export const SearchBar = () => {
 
   const handleSearchFocus = () => {
     setShowSuggestions(true);
-    // Prevent scrolling of the background
     document.body.style.overflow = 'hidden';
+
+    if (searchText.trim() === '') {
+      setIsLoading(true);
+      debouncedSearch('');
+    }
   };
 
   const handleSuggestionsClose = () => {
@@ -76,11 +71,10 @@ export const SearchBar = () => {
     document.body.style.overflow = '';
   };
 
-  const handleSuggestionClick = (suggestion: SearchSuggestion) => {
+  const handleSuggestionClick = (suggestion: SearchSuggestionDto) => {
     setSearchText(suggestion.name);
     setShowSuggestions(false);
     document.body.style.overflow = '';
-    // Here you would typically trigger a search with the selected suggestion
   };
 
   const getScrollClass = () => {
@@ -105,7 +99,6 @@ export const SearchBar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      // Ensure body scrolling is restored when component unmounts
       document.body.style.overflow = '';
     };
   }, []);
@@ -150,7 +143,6 @@ export const SearchBar = () => {
         </button>
       </div>
 
-      {/* Render the SearchBarSuggestionsList component */}
       {showSuggestions && (
         <SearchBarSuggestionsList
           searchText={searchText}
@@ -158,6 +150,7 @@ export const SearchBar = () => {
           onSearchTextChange={handleSearchTextChange}
           onSuggestionClick={handleSuggestionClick}
           onClose={handleSuggestionsClose}
+          isLoading={isLoading}
         />
       )}
     </div>
