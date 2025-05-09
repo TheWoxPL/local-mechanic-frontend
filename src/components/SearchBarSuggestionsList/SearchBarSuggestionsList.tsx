@@ -12,6 +12,7 @@ interface SearchBarSuggestionsListProps {
   onSuggestionClick: (suggestion: SearchSuggestionDto) => void;
   onClose: () => void;
   isLoading?: boolean;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
 }
 
 export const SearchBarSuggestionsList = ({
@@ -21,6 +22,7 @@ export const SearchBarSuggestionsList = ({
   onSuggestionClick,
   onClose,
   isLoading = false,
+  onKeyDown,
 }: SearchBarSuggestionsListProps) => {
   const overlayInputRef = useRef<HTMLInputElement>(null);
 
@@ -52,6 +54,7 @@ export const SearchBarSuggestionsList = ({
             placeholder="Search"
             value={searchText}
             onChange={handleSearchChange}
+            onKeyDown={onKeyDown}
             autoFocus
           />
         </div>

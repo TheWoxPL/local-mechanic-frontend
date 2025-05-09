@@ -219,6 +219,14 @@ class ApiUtils {
       );
       return response.data;
     },
+
+    async searchServices(query: string): Promise<ServiceDTO[]> {
+      const response = await callApi<ServiceDTO[]>(
+        `/search/services?query=${encodeURIComponent(query)}`,
+        'GET'
+      );
+      return response.data;
+    },
   };
 }
 

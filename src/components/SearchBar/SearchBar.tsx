@@ -9,7 +9,11 @@ import ApiUtils from 'src/shared/api/apiUtils';
 import { SearchSuggestionDto } from 'src/shared/dtos';
 import { debounce } from 'lodash';
 
-export const SearchBar = () => {
+interface SearchBarProps {
+  onSearch: (searchTerm: string) => void;
+}
+
+export const SearchBar = ({ onSearch }: SearchBarProps) => {
   const [searchText, setSearchText] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [suggestions, setSuggestions] = useState<SearchSuggestionDto[]>([]);
@@ -75,11 +79,35 @@ export const SearchBar = () => {
     setSearchText(suggestion.name);
     setShowSuggestions(false);
     document.body.style.overflow = '';
+
+    // TODO: remove when Companies are implemented
+    // Only trigger search for service suggestions, not company suggestions
+    if (suggestion.category === 'Service') {
+      onSearch(suggestion.name);
+    } else {
+      // For company suggestions, you might want to do something else or nothing
+      onSearch('');
+    }
+  };
+
+  const handleSearchSubmit = () => {
+    if (searchText.trim() !== '') {
+      setShowSuggestions(false);
+      document.body.style.overflow = '';
+      onSearch(searchText);
+    }
   };
 
   const getScrollClass = () => {
     if (!isScrolled) return '';
     return scrollDirection === 'down' ? styles.minimized : styles.scrolledUp;
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSearchSubmit();
+    }
   };
 
   useEffect(() => {
@@ -136,9 +164,14 @@ export const SearchBar = () => {
             value={searchText}
             onChange={handleSearchInputChange}
             onFocus={handleSearchFocus}
+            onKeyDown={handleKeyDown}
           />
         </div>
-        <button className={styles.filterButton} title="Filter options">
+        <button
+          className={styles.filterButton}
+          title="Filter options"
+          onClick={handleSearchSubmit}
+        >
           <img src={FilterSVG} alt="filter svg" />
         </button>
       </div>
@@ -151,6 +184,7 @@ export const SearchBar = () => {
           onSuggestionClick={handleSuggestionClick}
           onClose={handleSuggestionsClose}
           isLoading={isLoading}
+          onKeyDown={handleKeyDown}
         />
       )}
     </div>

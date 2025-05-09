@@ -1,36 +1,54 @@
 import { Offer } from '../Offer/Offer';
 import styles from './AllOffers.module.scss';
-import { UserAuth } from 'src/context';
 import { useEffect, useState } from 'react';
 import { ServiceDTO } from 'src/shared/dtos';
 import ApiUtils from 'src/shared/api/apiUtils';
+import Spinner from '../Spinner/Spinner';
 
-export const AllOffers = () => {
-  const { loading } = UserAuth();
+interface AllOffersProps {
+  searchTerm?: string;
+}
+
+export const AllOffers = ({ searchTerm = '' }: AllOffersProps) => {
   const [services, setServices] = useState<ServiceDTO[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchServices = async () => {
       try {
-        const result: ServiceDTO[] =
-          await ApiUtils.services.generateServicesForUser();
+        setLoading(true);
+        const result = await ApiUtils.search.searchServices(searchTerm);
         setServices(result);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching services:', error);
+        setServices([]);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchData();
-  }, []);
+
+    fetchServices();
+  }, [searchTerm]);
 
   if (loading) {
-    return <div></div>;
+    return (
+      <div className={styles.loadingContainer}>
+        <Spinner />
+      </div>
+    );
   }
 
   return (
     <div className={styles.container}>
-      {services.map((offer) => {
-        return <Offer key={offer.id} {...offer} />;
-      })}
+      {services.length > 0 ? (
+        services.map((offer) => <Offer key={offer.id} {...offer} />)
+      ) : (
+        <div className={styles.noResults}>
+          {searchTerm
+            ? `No services matching "${searchTerm}" found`
+            : 'No services available'}
+        </div>
+      )}
     </div>
   );
 };
