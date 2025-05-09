@@ -13,19 +13,26 @@ import ApiUtils from 'src/shared/api/apiUtils';
 import { CreateOrderDto } from 'src/shared/dtos/create-order.dto';
 import { ServiceDTO } from 'src/shared/dtos';
 import Spinner from '../Spinner/Spinner';
+import { AvailableSlot } from 'src/types/AvailableSlot';
 
 interface OneOfferDetailsProps {
   serviceId: string;
+  availableSlots?: AvailableSlot[];
+  isLoading?: boolean;
 }
 
 export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
   serviceId,
+  availableSlots,
+  isLoading: slotsLoading = false,
 }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [service, setService] = useState<ServiceDTO>(null);
   const [isFetching, setIsFetching] = useState(true);
+  const [estimatedTimeInMinutes, setEstimatedTimeInMinutes] =
+    useState<number>(30);
 
   useEffect(() => {
     const fetchService = async () => {
@@ -33,6 +40,11 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
         const fetchedService =
           await ApiUtils.services.getServiceById(serviceId);
         setService(fetchedService);
+
+        if (fetchedService && fetchedService.estimatedTime) {
+          const estimatedTime = parseInt(fetchedService.estimatedTime, 10);
+          setEstimatedTimeInMinutes(estimatedTime);
+        }
 
         const favoriteResponse =
           await ApiUtils.favorites.isServiceFavorite(serviceId);
@@ -138,7 +150,15 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
         </div>
       </div>
       <div className={styles.reservation}>
-        <Calendar handleSelectData={handleSelectData} />
+        {slotsLoading ? (
+          <Spinner />
+        ) : (
+          <Calendar
+            handleSelectData={handleSelectData}
+            availableTimeslots={availableSlots}
+            estimatedTimeInMinutes={estimatedTimeInMinutes}
+          />
+        )}
       </div>
       {selectedDate && (
         <button className={styles.orderButton} onClick={handleOrder}>

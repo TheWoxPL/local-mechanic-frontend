@@ -1,46 +1,40 @@
 import { ScheduleMeeting } from 'react-schedule-meeting';
+import { AvailableSlot } from 'src/types/AvailableSlot';
 
 interface CalendarProps {
   handleSelectData: (date: Date) => void;
+  availableTimeslots?: AvailableSlot[];
+  estimatedTimeInMinutes?: number;
 }
 
-const Calendar: React.FC<CalendarProps> = ({ handleSelectData }) => {
-  const generateSequence = (num: number) =>
-    Array.from({ length: num }, (_, i) => i);
-
+const Calendar: React.FC<CalendarProps> = ({
+  handleSelectData,
+  availableTimeslots,
+  estimatedTimeInMinutes,
+}) => {
   const handleTimeslotClicked = (startTimeEventEmit) => {
     handleSelectData(startTimeEventEmit.startTime);
   };
 
-  const availableTimeslots = generateSequence(9).map((id) => {
-    return {
+  const slots =
+    availableTimeslots?.map((slot, id) => ({
       id,
-      startTime: new Date(
-        new Date(new Date().setDate(new Date().getDate() + id)).setHours(
-          9,
-          30,
-          0,
-          0
-        )
-      ),
-      endTime: new Date(
-        new Date(new Date().setDate(new Date().getDate() + id)).setHours(
-          17,
-          0,
-          0,
-          0
-        )
-      ),
-    };
-  });
+      startTime:
+        slot.startTime instanceof Date
+          ? slot.startTime
+          : new Date(slot.startTime),
+      endTime:
+        slot.endTime instanceof Date ? slot.endTime : new Date(slot.endTime),
+    })) || [];
 
   return (
     <ScheduleMeeting
       borderRadius={10}
       primaryColor="#dd3737"
-      eventDurationInMinutes={30}
-      availableTimeslots={availableTimeslots}
+      eventDurationInMinutes={estimatedTimeInMinutes}
+      availableTimeslots={slots}
       onStartTimeSelect={handleTimeslotClicked}
+      eventStartTimeSpreadInMinutes={0}
     />
   );
 };

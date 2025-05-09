@@ -1,3 +1,4 @@
+import { AvailableSlot } from 'src/types/AvailableSlot';
 import { callApi } from '../../utils/callApi';
 // import DtoMapping from '../../utils/dtoMapping';
 import {
@@ -143,6 +144,14 @@ class ApiUtils {
         '/services/upload-image-to-service',
         'POST',
         formData
+      );
+      return response.data;
+    },
+
+    async getAvailableSlots(serviceId: string): Promise<AvailableSlot[]> {
+      const response = await callApi<AvailableSlot[]>(
+        `/services/${serviceId}/available-slots`,
+        'GET'
       );
       return response.data;
     },
