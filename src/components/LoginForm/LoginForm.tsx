@@ -73,7 +73,7 @@ export const LoginForm = ({ onSwitchToRegister }) => {
     <div className={styles.container}>
       <h2 className={styles.title}>Login</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email"></label>
+        <label htmlFor="email">Email</label>
         <div className={styles.inputContainer}>
           <input
             type="email"
@@ -99,7 +99,7 @@ export const LoginForm = ({ onSwitchToRegister }) => {
           </AnimatePresence>
         </div>
 
-        <label htmlFor="password"></label>
+        <label htmlFor="password">Password</label>
         <div className={styles.inputContainer}>
           <input
             type="password"
