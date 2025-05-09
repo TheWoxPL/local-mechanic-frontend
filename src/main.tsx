@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { createRoot } from 'react-dom/client';
-import { LoginPage } from './pages/loginPage/loginPage';
 import { HomePage } from './pages/homePage/homePage';
 import { ProfilePage } from './pages/profilePage/profilePage';
 {
@@ -15,7 +14,6 @@ import { YourCompanyPage } from './pages/yourCompanyPage/yourCompanyPage';
 import { AuthContextProvider } from './context';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { OfferDetailsPage } from './pages/offerDetailsPage/offerDetailsPage';
-import RegisterPage from './pages/registerPage/RegisterPage';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -29,7 +27,7 @@ createRoot(document.getElementById('root')!).render(
               element={<YourCompanyPage />}
             />
             <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<ProfilePage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/favorite" element={<FavoritePage />} />
             <Route path="/orders" element={<OrdersPage />} />
@@ -42,7 +40,6 @@ createRoot(document.getElementById('root')!).render(
 
           {/* TODO: delete line below before merge, to tests only */}
           <Route path="/dev" element={<LoginViewDev />} />
-          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>
