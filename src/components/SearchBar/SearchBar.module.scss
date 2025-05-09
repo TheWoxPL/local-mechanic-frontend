@@ -13,7 +13,6 @@
   box-sizing: border-box;
   animation: slideDown 0.25s ease-in-out;
 
-
   &.minimized {
     padding: 6px 0px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -36,7 +35,7 @@
         height: 38px;
         width: 38px;
 
-        img{
+        img {
           width: 24px;
           height: 24px;
         }
@@ -51,7 +50,7 @@
   align-items: center;
   height: 100%;
 
-  .logo{
+  .logo {
     margin-top: -5px;
     height: 30px;
   }
@@ -81,7 +80,8 @@
 .locationPin {
   margin-right: 5px;
   font-size: 16px;
-  img{
+
+  img {
     width: 20px;
   }
 }
