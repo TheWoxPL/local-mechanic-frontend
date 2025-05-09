@@ -1,4 +1,3 @@
-import { Link } from 'react-router';
 import styles from './LoginForm.module.scss';
 import GoogleLogoSVG from 'src/assets/svgs/google-logo.svg';
 import { UserAuth } from 'src/context';
@@ -16,7 +15,7 @@ const formSchema = z.object({
     .regex(/[a-zA-Z0-9]/, { message: 'Password must be alphanumeric' }),
 });
 
-export const LoginForm = () => {
+export const LoginForm = ({ onSwitchToRegister }) => {
   const { login, loginWithEmailAndPassword } = UserAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {
@@ -72,6 +71,7 @@ export const LoginForm = () => {
 
   return (
     <div className={styles.container}>
+      <h2 className={styles.title}>Login</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="email"></label>
         <div className={styles.inputContainer}>
@@ -154,9 +154,9 @@ export const LoginForm = () => {
 
       <span className={styles.createAccountText}>
         Don't have account? &nbsp;
-        <Link to="/register" className={styles.createAccountLink}>
+        <span onClick={onSwitchToRegister} className={styles.createAccountLink}>
           Create now
-        </Link>
+        </span>
       </span>
     </div>
   );
