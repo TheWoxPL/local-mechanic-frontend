@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styles from './CompanyOnProfile.module.scss';
 import { useNavigate } from 'react-router';
 
@@ -16,7 +17,12 @@ export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className={styles.container}>
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.1 }}
+      className={styles.container}
+    >
       <div className={styles.mechanicAvatar}>
         <img src={avatar.src} alt={avatar.alt} />
       </div>
@@ -30,6 +36,6 @@ export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
           Show details
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };

@@ -8,7 +8,7 @@ import { CompanyDTO } from 'src/shared/dtos';
 
 export const AllCompaniesOnProfile = () => {
   const navigate = useNavigate();
-  const [companies, setCompanies] = useState<CompanyDTO[]>([]);
+  const [companies, setCompanies] = useState<CompanyDTO[]>(undefined);
 
   useEffect(() => {
     console.log('asd');
@@ -19,6 +19,10 @@ export const AllCompaniesOnProfile = () => {
     };
     fetchData();
   }, []);
+
+  if (!companies) {
+    return <div></div>;
+  }
 
   return (
     <div className={styles.container}>
