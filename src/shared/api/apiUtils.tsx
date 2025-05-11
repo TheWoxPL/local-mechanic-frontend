@@ -65,6 +65,15 @@ class ApiUtils {
       );
       return response.data;
     },
+
+    async uploadCompanyImage(formData: FormData): Promise<string> {
+      const response = await callApi<string>(
+        '/companies/upload-image-to-company',
+        'POST',
+        formData
+      );
+      return response.data;
+    },
   };
   static staticData = {
     async getCurrencies(): Promise<CurrencyDTO[]> {

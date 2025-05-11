@@ -11,17 +11,18 @@
     width: 100%;
 
     .avatar {
-      background-color: rgb(255, 255, 255);
-      width: fit-content;
-      height: fit-content;
       display: flex;
-      padding: 3px;
-      border-radius: 50px;
+      border-radius: 10px;
       margin: 5px;
       align-self: center;
+      min-width: 130px;
+      justify-content: center;
 
       img{
-        width: 100%;
+        width: auto;
+        max-width: 80px;
+        padding: 5px;
+        max-height: 120px;
       }
     }
     .infoDetails {
@@ -79,7 +80,7 @@
     }
 
     .oneOwnerCreator{
-      background-color: #009c05;
+      background: linear-gradient(135deg, #0db836 0%, #0dff39 100%);
       font-weight: 900;
     }
   }

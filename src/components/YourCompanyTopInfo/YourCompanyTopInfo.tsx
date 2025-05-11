@@ -3,20 +3,26 @@ import styles from './YourCompanyTopInfo.module.scss';
 import AvatarSVG from 'src/assets/svgs/avatar-mechanic.svg';
 import { useEffect, useState } from 'react';
 import ApiUtils from 'src/shared/api/apiUtils';
-import { useParams } from 'react-router';
 import { CompanyDTO } from 'src/shared/dtos';
 
-export const YourCompanyTopInfo = () => {
-  const { companyId } = useParams<{ companyId: string }>();
+interface YourCompanyTopInfoProps {
+  companyId: string;
+}
+
+export const YourCompanyTopInfo = ({ companyId }: YourCompanyTopInfoProps) => {
   const { loading } = UserAuth();
   const [companyData, setCompanyData] = useState<CompanyDTO>();
   const [isFetching, setIsFetching] = useState(true);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await ApiUtils.companies.getCompanyById(companyId);
         setCompanyData(data);
+        if (data.imageUrl) {
+          setImagePreview(data.imageUrl);
+        }
       } catch (error) {
         console.error('Error fetching company data:', error);
       } finally {
@@ -34,7 +40,11 @@ export const YourCompanyTopInfo = () => {
     <div className={styles.container}>
       <div className={styles.info}>
         <div className={styles.avatar}>
-          <img src={AvatarSVG} alt="Avatar" />
+          <img
+            src={imagePreview || AvatarSVG}
+            alt="Company avatar"
+            className={styles.avatarImage}
+          />
         </div>
         <div className={styles.infoDetails}>
           <span className={styles.companyName}>{companyData.companyName}</span>

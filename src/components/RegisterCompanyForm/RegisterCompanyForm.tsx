@@ -118,6 +118,7 @@ export const RegisterCompanyForm = () => {
         const formDataForFile = new FormData();
         formDataForFile.append('file', companyFile);
         formDataForFile.append('companyId', response.id);
+        await ApiUtils.companies.uploadCompanyImage(formDataForFile);
       }
 
       loadRoles();

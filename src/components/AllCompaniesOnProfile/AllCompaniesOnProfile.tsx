@@ -1,6 +1,5 @@
 import { CompanyOnProfile } from '../CompanyOnProfile/CompanyOnProfile';
 import styles from './AllCompaniesOnProfile.module.scss';
-import AvatarMechanicSVG from 'src/assets/svgs/avatar-mechanic.svg';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import ApiUtils from 'src/shared/api/apiUtils';
@@ -11,7 +10,6 @@ export const AllCompaniesOnProfile = () => {
   const [companies, setCompanies] = useState<CompanyDTO[]>(undefined);
 
   useEffect(() => {
-    console.log('asd');
     const fetchData = async () => {
       ApiUtils.companies.getUserCompanies().then((response) => {
         setCompanies(response);
@@ -30,10 +28,10 @@ export const AllCompaniesOnProfile = () => {
         {companies.map((company) => (
           <CompanyOnProfile
             key={company.id}
-            avatar={{ src: AvatarMechanicSVG, alt: 'Mechanic avatar' }}
             companyName={company.companyName}
             address={'Address'}
             uuid={company.id}
+            imageUrl={company.imageUrl}
           />
         ))}
       </div>

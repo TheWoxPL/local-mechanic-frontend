@@ -18,13 +18,20 @@
   }
 
   .mechanicAvatar {
-    width: 90px;
-    height: 90px;
     display: flex;
     box-sizing: border-box;
     border-radius: 50px;
     margin: 10px;
     justify-content: center;
+    min-width: 95px;
+
+    img{
+      width: auto;
+      max-width: 95px;
+      height: auto;
+      max-height: 130px;
+      margin-right: 5px;
+    }
   }
 
   .info {

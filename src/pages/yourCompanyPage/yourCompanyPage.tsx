@@ -6,9 +6,14 @@ import { NavigatorBar } from 'src/components/NavigatorBar/NavigatorBar';
 
 export const YourCompanyPage = () => {
   const { companyId } = useParams<{ companyId: string }>();
+
+  if (!companyId) {
+    return <div>Company not found</div>;
+  }
+
   return (
     <div className={styles.container}>
-      <YourCompanyTopInfo />
+      <YourCompanyTopInfo companyId={companyId} />
       <YourOffers companyId={companyId} />
       <NavigatorBar indicatorIndex={3} />
     </div>

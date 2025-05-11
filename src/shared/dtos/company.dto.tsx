@@ -10,4 +10,5 @@ export class CompanyDTO extends BaseDto {
     from: number;
     to: number;
   };
+  imageUrl?: string;
 }

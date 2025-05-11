@@ -1,19 +1,20 @@
 import { motion } from 'framer-motion';
 import styles from './CompanyOnProfile.module.scss';
 import { useNavigate } from 'react-router';
+import AvatarSVG from 'src/assets/svgs/avatar-mechanic.svg';
 
 interface CompanyOnProfileProps {
-  avatar: { src: string; alt: string };
   companyName: string;
   address: string;
   uuid: string;
+  imageUrl?: string;
 }
 
 export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
-  avatar,
   companyName,
   address,
   uuid,
+  imageUrl,
 }) => {
   const navigate = useNavigate();
   return (
@@ -24,7 +25,11 @@ export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
       className={styles.container}
     >
       <div className={styles.mechanicAvatar}>
-        <img src={avatar.src} alt={avatar.alt} />
+        <img
+          src={imageUrl || AvatarSVG}
+          alt={'Company avatar'}
+          className={styles.avatarImage}
+        />
       </div>
       <div className={styles.info}>
         <span className={styles.name}>{companyName}</span>
