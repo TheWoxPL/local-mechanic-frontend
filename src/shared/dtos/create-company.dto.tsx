@@ -8,4 +8,5 @@ export class CreateCompanyDTO {
     from: number;
     to: number;
   };
+  phoneNumber?: string;
 }

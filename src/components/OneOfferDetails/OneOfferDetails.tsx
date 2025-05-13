@@ -6,6 +6,7 @@ import HeartRedSVG from '../../assets/svgs/heart-red.svg';
 import StarSVG from '../../assets/svgs/star.svg';
 import MapPointSVG from '../../assets/svgs/map-point.svg';
 import ClockSVG from '../../assets/svgs/clock.svg';
+import PhoneSVG from '../../assets/svgs/phone.svg';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import Calendar from '../Calendar/Calendar';
@@ -137,6 +138,16 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
                 </div>
               </div>
             </div>
+            {service.company.phoneNumber && (
+              <div className={styles.oneShortInfo}>
+                <img src={PhoneSVG} alt="Phone icon" />
+                <div className={styles.info}>
+                  <div className={styles.main}>
+                    {service.company.phoneNumber}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className={styles.price}>
             <div className={styles.charge}>

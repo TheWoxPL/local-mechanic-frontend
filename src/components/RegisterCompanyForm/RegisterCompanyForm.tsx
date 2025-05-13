@@ -16,6 +16,7 @@ const formSchema = z.object({
   foundDate: z.date().optional(),
   workingHoursFrom: z.number().min(0).max(24),
   workingHoursTo: z.number().min(0).max(24),
+  phoneNumber: z.string().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -45,6 +46,7 @@ export const RegisterCompanyForm = () => {
       foundDate: new Date(),
       workingHoursFrom: 8,
       workingHoursTo: 16,
+      phoneNumber: '',
     },
   });
 
@@ -110,6 +112,7 @@ export const RegisterCompanyForm = () => {
         from: data.workingHoursFrom,
         to: data.workingHoursTo,
       };
+      companyData.phoneNumber = data.phoneNumber || '';
 
       const response: CompanyDTO =
         await ApiUtils.companies.addCompany(companyData);
@@ -233,6 +236,20 @@ export const RegisterCompanyForm = () => {
                 {errors.workingHoursFrom?.message ||
                   errors.workingHoursTo?.message}
               </span>
+            )}
+          </div>
+
+          <div className={styles.row}>
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <input
+              type="text"
+              id="phoneNumber"
+              placeholder="123-456-789"
+              {...register('phoneNumber')}
+              className={errors.phoneNumber ? styles.inputError : ''}
+            />
+            {errors.phoneNumber && (
+              <span className={styles.error}>{errors.phoneNumber.message}</span>
             )}
           </div>
 
