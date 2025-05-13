@@ -14,6 +14,8 @@ import { YourCompanyPage } from './pages/yourCompanyPage/yourCompanyPage';
 import { AuthContextProvider } from './context';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { OfferDetailsPage } from './pages/offerDetailsPage/offerDetailsPage';
+import { YourCompaniesPage } from './pages/yourCompaniesPage/yourCompaniesPage';
+import { CompanyOrdersPage } from './pages/companyOrdersPage/companyOrdersPage';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -30,6 +32,8 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/login" element={<ProfilePage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/favorite" element={<FavoritePage />} />
+            <Route path="/your-companies" element={<YourCompaniesPage />} />
+            <Route path="/company-orders" element={<CompanyOrdersPage />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route
