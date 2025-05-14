@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
   height: 100dvh;
+  box-sizing: border-box;
+  padding-bottom: 60px;
+  overflow: scroll;
 
   .header {
     background: linear-gradient(135deg, #d84040 0%, #a31d1d 100%);
@@ -87,7 +90,6 @@
     }
   }
 
- 
 
   .ordersContainer {
     flex-grow: 1;
@@ -104,6 +106,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    margin: 0px 15px;
   }
 
   .orderHeader {
@@ -136,7 +139,7 @@
     color: #333;
   }
 
-  .customerName {
+  .serviceName {
     font-size: 14px;
     color: #777;
     margin: 0;
@@ -196,7 +199,7 @@
     color: white;
 
     &:hover {
-      background-color: darken(#28a745, 10%);
+      background-color: #1d7a33;
     }
   }
 
@@ -205,7 +208,7 @@
     color: white;
 
     &:hover {
-      background-color: darken(#dc3545, 10%);
+      background-color:#b82d3b;
     }
   }
 

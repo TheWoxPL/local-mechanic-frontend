@@ -8,6 +8,7 @@ import { ConfirmationModal } from 'src/components/ConfirmationModal/Confirmation
 import { UserAuth } from 'src/context';
 import { RoleType } from 'src/shared/enums/role-type.enum';
 import { CompanyDTO } from 'src/shared/dtos';
+import ApiUtils from 'src/shared/api/apiUtils';
 
 type ViewMode = 'pending' | 'confirmed' | 'rejected' | 'completed';
 
@@ -39,7 +40,6 @@ export const CompanyOrdersPage = () => {
   const [actionType, setActionType] = useState<'confirm' | 'reject' | null>(
     null
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [processingOrder, setProcessingOrder] = useState<string | null>(null);
 
   const { roles } = UserAuth();
@@ -55,9 +55,11 @@ export const CompanyOrdersPage = () => {
 
     const fetchUserCompanies = async () => {
       try {
-        // TODO: implement fetching data from backend
-        const companies = [];
+        const companies = await ApiUtils.companies.getUserCompanies();
         setUserCompanies(companies);
+        if (companies.length > 0) {
+          setActiveCompanyId('all');
+        }
       } catch (error) {
         console.error('Error fetching user companies:', error);
       } finally {
@@ -72,8 +74,14 @@ export const CompanyOrdersPage = () => {
     const fetchCompanyOrders = async () => {
       setLoading(true);
       try {
-        // TODO: implement fetching data from backend
-        setOrders([]);
+        let fetchedOrders: OrderDto[];
+        if (activeCompanyId === 'all') {
+          fetchedOrders = await ApiUtils.orders.getAllCompanyOrders();
+        } else {
+          fetchedOrders =
+            await ApiUtils.orders.getCompanyOrders(activeCompanyId);
+        }
+        setOrders(fetchedOrders);
       } catch (error) {
         console.error('Error fetching company orders:', error);
       } finally {
@@ -81,8 +89,10 @@ export const CompanyOrdersPage = () => {
       }
     };
 
-    fetchCompanyOrders();
-  }, [activeCompanyId]);
+    if (userCompanies.length > 0 || activeCompanyId === 'all') {
+      fetchCompanyOrders();
+    }
+  }, [activeCompanyId, userCompanies.length]);
 
   const switchTab = (mode: ViewMode) => {
     if (animating || mode === viewMode) return;
@@ -136,8 +146,34 @@ export const CompanyOrdersPage = () => {
   };
 
   const confirmOrderAction = async () => {
-    // TODO: implement order confirmation/rejection logic
-    return;
+    if (!selectedOrderId || !actionType) return;
+
+    try {
+      setProcessingOrder(selectedOrderId);
+
+      if (actionType === 'confirm') {
+        await ApiUtils.orders.confirmOrder(selectedOrderId);
+      } else {
+        await ApiUtils.orders.rejectOrder(selectedOrderId);
+      }
+
+      if (activeCompanyId === 'all') {
+        const updatedOrders = await ApiUtils.orders.getAllCompanyOrders();
+        setOrders(updatedOrders);
+      } else {
+        const updatedOrders =
+          await ApiUtils.orders.getCompanyOrders(activeCompanyId);
+        setOrders(updatedOrders);
+      }
+    } catch (error) {
+      console.error(
+        `Error ${actionType === 'confirm' ? 'confirming' : 'rejecting'} order:`,
+        error
+      );
+    } finally {
+      setProcessingOrder(null);
+      closeActionModal();
+    }
   };
 
   if (loading) {
@@ -156,10 +192,6 @@ export const CompanyOrdersPage = () => {
     if (viewMode === 'completed') return order.orderStatus === 'COMPLETED';
     return false;
   });
-
-  const getServiceInitial = (title: string): string => {
-    return title.charAt(0).toUpperCase();
-  };
 
   const renderEmptyState = () => {
     const messages = {
@@ -255,14 +287,14 @@ export const CompanyOrdersPage = () => {
                 <div key={order.id} className={styles.orderCard}>
                   <div className={styles.orderHeader}>
                     <div className={styles.serviceInitial}>
-                      {getServiceInitial(order.serviceName)}
+                      {order.service.title.slice(0, 1).toUpperCase()}
                     </div>
                     <div className={styles.orderDetails}>
                       <h3 className={styles.serviceName}>
                         {order.serviceName}
                       </h3>
-                      <p className={styles.customerName}>
-                        Customer: {order.customerName || 'Anonymous'}
+                      <p className={styles.serviceName}>
+                        {order.service.title}
                       </p>
                     </div>
                   </div>

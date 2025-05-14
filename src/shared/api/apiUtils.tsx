@@ -189,6 +189,34 @@ class ApiUtils {
       );
       return response.data;
     },
+    async getCompanyOrders(companyId: string): Promise<OrderDto[]> {
+      const response = await callApi<OrderDto[]>(
+        `/orders/get-company-orders/${companyId}`,
+        'GET'
+      );
+      return response.data;
+    },
+    async getAllCompanyOrders(): Promise<OrderDto[]> {
+      const response = await callApi<OrderDto[]>(
+        '/orders/get-all-company-orders',
+        'GET'
+      );
+      return response.data;
+    },
+    async confirmOrder(orderId: string): Promise<void> {
+      const response = await callApi<void>(
+        `/orders/confirm-order/${orderId}`,
+        'POST'
+      );
+      return response.data;
+    },
+    async rejectOrder(orderId: string): Promise<void> {
+      const response = await callApi<void>(
+        `/orders/reject-order/${orderId}`,
+        'POST'
+      );
+      return response.data;
+    },
   };
 
   static favorites = {
