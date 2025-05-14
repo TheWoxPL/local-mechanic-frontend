@@ -11,9 +11,19 @@ import { ConfirmationModal } from 'src/components/ConfirmationModal/Confirmation
 
 type ViewMode = 'upcoming' | 'completed';
 
-const isOrderExpired = (scheduledDate: Date): boolean => {
-  const now = new Date();
-  return new Date(scheduledDate) < now;
+const getStatusClass = (orderStatus: string): string => {
+  switch (orderStatus) {
+    case 'PENDING':
+      return styles.pending;
+    case 'CONFIRMED':
+      return styles.confirmed;
+    case 'REJECTED':
+      return styles.rejected;
+    case 'COMPLETED':
+      return styles.completed;
+    default:
+      return styles.pending;
+  }
 };
 
 const formatDate = (
@@ -32,20 +42,6 @@ const formatDate = (
   });
 
   return { day, monthYear, time };
-};
-
-const getStatusClass = (scheduledDate: Date): string => {
-  const now = new Date();
-  const orderDate = new Date(scheduledDate);
-
-  if (orderDate < now) {
-    return styles.completed;
-  } else {
-    const timeDifference = orderDate.getTime() - now.getTime();
-    const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-
-    return daysDifference <= 1 ? styles.confirmed : styles.pending;
-  }
 };
 
 export const OrdersPage = () => {
@@ -81,11 +77,16 @@ export const OrdersPage = () => {
     if (orders.length > 0) {
       if (viewMode === 'upcoming') {
         setFilteredOrders(
-          orders.filter((order) => !isOrderExpired(order.scheduledDate))
+          orders.filter(
+            (order) =>
+              order.orderStatus === 'PENDING' ||
+              order.orderStatus === 'CONFIRMED' ||
+              order.orderStatus === 'REJECTED'
+          )
         );
       } else {
         setFilteredOrders(
-          orders.filter((order) => isOrderExpired(order.scheduledDate))
+          orders.filter((order) => order.orderStatus === 'COMPLETED')
         );
       }
     } else {
@@ -206,8 +207,6 @@ export const OrdersPage = () => {
         {filteredOrders.length > 0 ? (
           <div className={styles.orders}>
             {filteredOrders.map((order) => {
-              const expired = isOrderExpired(order.scheduledDate);
-              const statusClass = getStatusClass(order.scheduledDate);
               const { day, monthYear, time } = formatDate(order.scheduledDate);
 
               return (
@@ -264,7 +263,7 @@ export const OrdersPage = () => {
                     </div>
                   </div>
 
-                  {!expired && (
+                  {order.orderStatus !== 'COMPLETED' && (
                     <div className={styles.actions}>
                       <button
                         className={styles.details}
@@ -284,7 +283,7 @@ export const OrdersPage = () => {
                     </div>
                   )}
 
-                  {expired && (
+                  {order.orderStatus === 'COMPLETED' && (
                     <div className={styles.actions}>
                       <button
                         className={styles.details}
@@ -295,12 +294,10 @@ export const OrdersPage = () => {
                     </div>
                   )}
 
-                  <div className={`${styles.status} ${statusClass}`}>
-                    {expired
-                      ? 'Completed'
-                      : statusClass === styles.confirmed
-                        ? 'Confirmed'
-                        : 'Pending'}
+                  <div
+                    className={`${styles.status} ${getStatusClass(order.orderStatus)}`}
+                  >
+                    {order.orderStatus}
                   </div>
                 </div>
               );

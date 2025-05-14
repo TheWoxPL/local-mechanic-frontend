@@ -15,8 +15,7 @@ export class OrderDto {
 
   price!: number;
 
-  // Fields needed for company orders display
-  status?: OrderStatus;
+  orderStatus?: OrderStatus;
 
   customerName?: string;
 

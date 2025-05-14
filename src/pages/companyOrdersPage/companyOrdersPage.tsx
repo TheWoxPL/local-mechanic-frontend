@@ -150,10 +150,10 @@ export const CompanyOrdersPage = () => {
   }
 
   const filteredOrders = orders.filter((order) => {
-    if (viewMode === 'pending') return order.status === 'PENDING';
-    if (viewMode === 'confirmed') return order.status === 'CONFIRMED';
-    if (viewMode === 'rejected') return order.status === 'REJECTED';
-    if (viewMode === 'completed') return order.status === 'COMPLETED';
+    if (viewMode === 'pending') return order.orderStatus === 'PENDING';
+    if (viewMode === 'confirmed') return order.orderStatus === 'CONFIRMED';
+    if (viewMode === 'rejected') return order.orderStatus === 'REJECTED';
+    if (viewMode === 'completed') return order.orderStatus === 'COMPLETED';
     return false;
   });
 
