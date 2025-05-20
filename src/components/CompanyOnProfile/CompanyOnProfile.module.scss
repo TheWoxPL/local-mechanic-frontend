@@ -19,18 +19,20 @@
 
   .mechanicAvatar {
     display: flex;
-    box-sizing: border-box;
-    border-radius: 50px;
+    border-radius: 10px;
     margin: 10px;
+    align-self: center;
     justify-content: center;
-    min-width: 95px;
+    width: 150px;
+    height: 90px;
+    max-height: 120px;
+    overflow: hidden;
 
-    img{
-      width: auto;
-      max-width: 95px;
-      height: auto;
-      max-height: 130px;
-      margin-right: 5px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
   }
 
