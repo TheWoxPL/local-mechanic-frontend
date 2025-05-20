@@ -9,4 +9,5 @@ export class CreateCompanyDTO {
     to: number;
   };
   phoneNumber?: string;
+  address?: string;
 }

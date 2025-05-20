@@ -113,6 +113,7 @@ export const RegisterCompanyForm = () => {
         to: data.workingHoursTo,
       };
       companyData.phoneNumber = data.phoneNumber || '';
+      companyData.address = data.localization || '';
 
       const response: CompanyDTO =
         await ApiUtils.companies.addCompany(companyData);

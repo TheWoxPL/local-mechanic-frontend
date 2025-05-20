@@ -48,9 +48,12 @@ export const YourCompanyTopInfo = ({ companyId }: YourCompanyTopInfoProps) => {
         </div>
         <div className={styles.infoDetails}>
           <span className={styles.companyName}>{companyData.companyName}</span>
-          <span>address</span>
-          <span>created at</span>
-          <span>Services: 21</span>
+          <span>{companyData.address || 'Address not available'}</span>
+          <span>
+            Found date:
+            {' ' + new Date(companyData.foundDate).toLocaleDateString('de-DE')}
+          </span>
+          <span>{companyData.phoneNumber}</span>
         </div>
         <div className={styles.editSide}>
           <button>Edit</button>

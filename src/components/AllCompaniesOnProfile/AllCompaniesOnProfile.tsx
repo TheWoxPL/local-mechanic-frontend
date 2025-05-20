@@ -29,7 +29,7 @@ export const AllCompaniesOnProfile = () => {
           <CompanyOnProfile
             key={company.id}
             companyName={company.companyName}
-            address={'Address'}
+            address={company.address || 'No address provided'}
             uuid={company.id}
             imageUrl={company.imageUrl}
           />
