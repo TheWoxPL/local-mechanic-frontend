@@ -42,6 +42,8 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
   });
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -84,6 +86,8 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError('');
 
     try {
       const serviceData = { ...formData };
@@ -104,6 +108,8 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
       fetchServices();
     } catch (error) {
       console.error('Error creating service:', error);
+      setError('Failed to create service. Please try again.');
+      setIsSubmitting(false);
     }
   };
 
@@ -362,7 +368,15 @@ export const AddServiceForm: React.FC<AddServiceFormProps> = ({
             </div>
           </div>
 
-          <input type="submit" className={styles.submitButton} />
+          {error && <div className={styles.error}>{error}</div>}
+
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Adding Service...' : 'Add Service'}
+          </button>
         </form>
       </div>
     </div>
