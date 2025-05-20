@@ -12,3 +12,4 @@ export * from './create-service.dto';
 export * from './search-suggestion.dto';
 export * from './create-order.dto';
 export * from './order.dto';
+export * from './update-company.dto';

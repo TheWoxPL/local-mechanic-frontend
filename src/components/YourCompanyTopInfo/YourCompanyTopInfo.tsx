@@ -4,6 +4,7 @@ import AvatarSVG from 'src/assets/svgs/avatar-mechanic.svg';
 import { useEffect, useState } from 'react';
 import ApiUtils from 'src/shared/api/apiUtils';
 import { CompanyDTO } from 'src/shared/dtos';
+import { EditCompanyForm } from '../EditCompanyForm/EditCompanyForm';
 
 interface YourCompanyTopInfoProps {
   companyId: string;
@@ -14,6 +15,7 @@ export const YourCompanyTopInfo = ({ companyId }: YourCompanyTopInfoProps) => {
   const [companyData, setCompanyData] = useState<CompanyDTO>();
   const [isFetching, setIsFetching] = useState(true);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [showEditForm, setShowEditForm] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +34,18 @@ export const YourCompanyTopInfo = ({ companyId }: YourCompanyTopInfoProps) => {
     fetchData();
   }, [companyId, loading]);
 
-  if (loading || isFetching) {
+  const handleCompanyUpdate = (updatedCompany: CompanyDTO) => {
+    setCompanyData(updatedCompany);
+    if (updatedCompany.imageUrl) {
+      setImagePreview(updatedCompany.imageUrl);
+    }
+  };
+
+  const toggleEditForm = () => {
+    setShowEditForm(!showEditForm);
+  };
+
+  if (loading || isFetching || !companyData) {
     return <div></div>;
   }
 
@@ -56,7 +69,7 @@ export const YourCompanyTopInfo = ({ companyId }: YourCompanyTopInfoProps) => {
           <span>{companyData.phoneNumber}</span>
         </div>
         <div className={styles.editSide}>
-          <button>Edit</button>
+          <button onClick={toggleEditForm}>Edit</button>
         </div>
       </div>
       <div className={styles.owners}>
@@ -65,6 +78,15 @@ export const YourCompanyTopInfo = ({ companyId }: YourCompanyTopInfoProps) => {
         <div className={styles.oneOwner}>John Doe</div>
       </div>
       <div className={styles.description}>{companyData.description}</div>
+
+      {showEditForm && (
+        <EditCompanyForm
+          companyId={companyId}
+          companyData={companyData}
+          onClose={toggleEditForm}
+          onUpdate={handleCompanyUpdate}
+        />
+      )}
     </div>
   );
 };

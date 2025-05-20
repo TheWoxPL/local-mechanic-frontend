@@ -48,7 +48,8 @@
       button {
         font-size: 1.8rem;
         border-radius: 10px;
-        background-color: #d9d9d9;
+        background: linear-gradient(135deg, #727272 0%, #b1b1b1 100%);
+        color: white;
         height: 28px;
         width: 71px;
         text-align: center;
@@ -94,5 +95,79 @@
     -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .editForm {
+    width: 100%;
+    padding: 15px;
+    background-color: #aa6060;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    .formGroup {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        font-size: 1.6rem;
+
+        &:focus {
+          outline: none;
+          border-color: #954545;
+          box-shadow: 0 0 0 2px rgba(149, 69, 69, 0.2);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+    }
+
+    .formActions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+
+      button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.6rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &.saveButton {
+          background-color: #0db836;
+          color: white;
+
+          &:hover {
+            background-color: #0a9e2e;
+          }
+        }
+
+        &.cancelButton {
+          background-color: #d9d9d9;
+          color: #333;
+
+          &:hover {
+            background-color: #c0c0c0;
+          }
+        }
+      }
+    }
   }
 }

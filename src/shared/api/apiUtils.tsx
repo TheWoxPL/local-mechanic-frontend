@@ -14,6 +14,7 @@ import {
   SearchSuggestionDto,
   CreateOrderDto,
   OrderDto,
+  UpdateCompanyDTO,
 } from '../dtos';
 
 class ApiUtils {
@@ -71,6 +72,18 @@ class ApiUtils {
         '/companies/upload-image-to-company',
         'POST',
         formData
+      );
+      return response.data;
+    },
+
+    async updateCompany(
+      companyId: string,
+      updateData: UpdateCompanyDTO
+    ): Promise<CompanyDTO> {
+      const response = await callApi<CompanyDTO>(
+        `/companies/update-company/${companyId}`,
+        'POST',
+        updateData
       );
       return response.data;
     },
