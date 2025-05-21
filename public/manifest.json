@@ -1,6 +1,6 @@
 {
   "short_name": "MechanicApp",
-  "name": "Local Mechanic Finder",
+  "name": "Local Service Mechanic",
   "icons": [
     {
       "src": "logo.svg",
@@ -11,6 +11,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#a31d1d",
   "background_color": "#ffffff"
 }
