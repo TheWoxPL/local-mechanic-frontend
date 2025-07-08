@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const formSchema = z.object({
   companyName: z.string().min(2, { message: 'Company name is required' }),
   description: z.string().optional(),
-  localization: z.string().min(2, { message: 'Localization is required' }),
+  address: z.string().min(2, { message: 'Address is required' }),
   foundDate: z.date().optional(),
   workingHoursFrom: z.number().min(0).max(24),
   workingHoursTo: z.number().min(0).max(24),
@@ -42,7 +42,7 @@ export const RegisterCompanyForm = () => {
     defaultValues: {
       companyName: '',
       description: '',
-      localization: '',
+      address: '',
       foundDate: new Date(),
       workingHoursFrom: 8,
       workingHoursTo: 16,
@@ -113,7 +113,7 @@ export const RegisterCompanyForm = () => {
         to: data.workingHoursTo,
       };
       companyData.phoneNumber = data.phoneNumber || '';
-      companyData.address = data.localization || '';
+      companyData.address = data.address || '';
 
       const response: CompanyDTO =
         await ApiUtils.companies.addCompany(companyData);
@@ -196,18 +196,16 @@ export const RegisterCompanyForm = () => {
           </div>
 
           <div className={styles.row}>
-            <label htmlFor="localization">Localization</label>
+            <label htmlFor="address">Address</label>
             <input
               type="text"
-              id="localization"
+              id="address"
               placeholder="cracow st. długa 12a"
-              {...register('localization')}
-              className={errors.localization ? styles.inputError : ''}
+              {...register('address')}
+              className={errors.address ? styles.inputError : ''}
             />
-            {errors.localization && (
-              <span className={styles.error}>
-                {errors.localization.message}
-              </span>
+            {errors.address && (
+              <span className={styles.error}>{errors.address.message}</span>
             )}
           </div>
 

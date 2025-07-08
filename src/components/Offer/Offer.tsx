@@ -21,7 +21,6 @@ export const Offer: React.FC<ServiceDTO> = ({
   price,
   currency,
   serviceUnit,
-  // location,
   // distance,
   company,
   isFavorite,
@@ -33,7 +32,6 @@ export const Offer: React.FC<ServiceDTO> = ({
   const [isFavoriteVisibility, setIsFavoriteVisibility] = useState(isFavorite);
   const rating = 4.6;
   const countOpinions = 14;
-  const location = 'Kraków, Długa 12a';
   const distance = '3.5km';
   const navigate = useNavigate();
 
@@ -91,7 +89,9 @@ export const Offer: React.FC<ServiceDTO> = ({
           <div className={styles.oneShortInfo}>
             <img src={MapPointSVG} alt="alternative" />
             <div className={styles.info}>
-              <div className={styles.main}>{location}</div>
+              <div className={styles.main}>
+                {company.address || 'address not avaible'}
+              </div>
               <div className={styles.additional}>{distance}</div>
             </div>
           </div>
