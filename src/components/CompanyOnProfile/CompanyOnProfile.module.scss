@@ -12,6 +12,7 @@
   -webkit-box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
   -moz-box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
   box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
+  position: relative;
 
   &:first-child {
     margin-top: 0px;
@@ -46,11 +47,40 @@
       font-weight: 900;
       align-self: flex-start;
       margin-top: 5px;
+      max-width: 190px;
     }
 
     .address {
       font-size: 1.3rem;
     }
+
+    .rating {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      color: rgb(255, 255, 255);
+      background-color: rgba(255, 255, 255, 0.171);
+      border-radius: 15px;
+      padding: 3px 6px ;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      border: 2px solid rgba(255, 255, 255, 0.692);
+      z-index: 4;
+
+      img {
+        width: 14px;
+        height: 14px;
+      }
+
+      span:last-child {
+        color: #ffffff;
+      }
+    }
+
     .submitButton {
       width: 120px;
       font-size: 1.5rem;

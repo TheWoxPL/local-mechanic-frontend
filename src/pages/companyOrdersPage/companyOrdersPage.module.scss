@@ -144,6 +144,24 @@
     margin: 0;
   }
 
+  .serviceRating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    margin-top: 4px;
+    color: #555;
+
+    img {
+      width: 12px;
+      height: 12px;
+    }
+
+    span:last-child {
+      color: #767676;
+    }
+  }
+
   .orderDate {
     display: flex;
     justify-content: space-between;

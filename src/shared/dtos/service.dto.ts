@@ -31,4 +31,8 @@ export class ServiceDTO extends BaseDto {
   isFavorite?: boolean;
 
   imageUrl?: string;
+
+  opinionCount!: number;
+
+  averageRating!: number;
 }

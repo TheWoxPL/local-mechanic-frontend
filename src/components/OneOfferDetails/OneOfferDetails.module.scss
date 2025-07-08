@@ -56,36 +56,31 @@
       }
     }
 
-    .opinions {
-      display: flex;
-      flex-direction: row;
-      background-color: rgb(255, 255, 255);
-      max-width: 150px;
-      overflow: scroll;
-      padding: 0px 6px;
-      justify-items: center;
-      height: 23px;
+    .rating {
       position: absolute;
-      bottom: 5px;
-      right: 5px;
-      border-radius: 20px;
-      font-size: 1.2rem;
+      right: 4px;
+      bottom: 4px;
+      color: rgb(255, 255, 255);
+      background-color: rgb(255, 180, 74);
+      border-radius: 15px;
+      padding: 3px 6px;
+      width: fit-content;
+      display: flex;
       align-items: center;
-
-      .rating {
-        min-width: 15px;
-        padding-right: 3px;
-      }
+      gap: 4px;
+      font-size: 1.2rem;
+      margin-top: 2px;
+      font-weight: 900;
+      border: 2px solid rgba(255, 232, 199, 1);
+      z-index: 4;
 
       img {
-        position: relative;
-        width: 16px;
-        padding-right: 3px;
-        height: 16px;
-        top: -1px;
+        width: 12px;
+        height: 12px;
       }
-      .opinionsCount {
-        color: #767676;
+
+      span:last-child {
+        color: #ffffff;
       }
     }
   }

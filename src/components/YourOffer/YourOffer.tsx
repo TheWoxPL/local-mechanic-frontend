@@ -13,8 +13,6 @@ import ApiUtils from 'src/shared/api/apiUtils';
 export const YourOffer: React.FC<
   ServiceDTO & { fetchServices: () => void }
 > = ({
-  // rating,
-  // countOpinions,
   id,
   title,
   estimatedTime,
@@ -23,17 +21,12 @@ export const YourOffer: React.FC<
   price,
   currency,
   serviceUnit,
-  // location,
-  // distance,
   company,
-  // orders,
-  // views,
-  // favorites,
   fetchServices,
   imageUrl,
+  opinionCount,
+  averageRating,
 }) => {
-  const rating = 4.6;
-  const countOpinions = 14;
   const location = 'Kraków, Długa 12a';
   const distance = '3.5km';
   const orders = 5;
@@ -78,10 +71,10 @@ export const YourOffer: React.FC<
         }`}
       >
         <div className={styles.left}>
-          <div className={styles.opinions}>
-            <div className={styles.rating}>{rating}</div>
-            <img src={StarSVG} alt="Star svg" />
-            <div className={styles.opinionsCount}>({countOpinions})</div>
+          <div className={styles.rating}>
+            <span>{averageRating}</span>
+            <img src={StarSVG} alt="Star" />
+            <span>({opinionCount})</span>
           </div>
           <img src={imageUrl || img} alt="Image of service" />
         </div>

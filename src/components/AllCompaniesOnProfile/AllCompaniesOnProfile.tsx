@@ -32,6 +32,8 @@ export const AllCompaniesOnProfile = () => {
             address={company.address || 'No address provided'}
             uuid={company.id}
             imageUrl={company.imageUrl}
+            averageRating={company.averageRating}
+            opinionCount={company.opinionCount}
           />
         ))}
       </div>

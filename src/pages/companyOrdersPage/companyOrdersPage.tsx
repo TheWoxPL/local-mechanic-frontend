@@ -9,6 +9,7 @@ import { UserAuth } from 'src/context';
 import { RoleType } from 'src/shared/enums/role-type.enum';
 import { CompanyDTO } from 'src/shared/dtos';
 import ApiUtils from 'src/shared/api/apiUtils';
+import StarSVG from 'src/assets/svgs/star.svg';
 
 type ViewMode = 'pending' | 'confirmed' | 'rejected' | 'completed';
 
@@ -296,6 +297,14 @@ export const CompanyOrdersPage = () => {
                       <p className={styles.serviceName}>
                         {order.service.title}
                       </p>
+                      {order.service.averageRating &&
+                        order.service.opinionCount && (
+                          <div className={styles.serviceRating}>
+                            <span>{order.service.averageRating}</span>
+                            <img src={StarSVG} alt="Star" />
+                            <span>({order.service.opinionCount})</span>
+                          </div>
+                        )}
                     </div>
                   </div>
 

@@ -2,12 +2,15 @@ import { motion } from 'framer-motion';
 import styles from './CompanyOnProfile.module.scss';
 import { useNavigate } from 'react-router';
 import AvatarSVG from 'src/assets/svgs/avatar-mechanic.svg';
+import StarSVG from 'src/assets/svgs/star.svg';
 
 interface CompanyOnProfileProps {
   companyName: string;
   address: string;
   uuid: string;
   imageUrl?: string;
+  averageRating?: number;
+  opinionCount?: number;
 }
 
 export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
@@ -15,6 +18,8 @@ export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
   address,
   uuid,
   imageUrl,
+  averageRating,
+  opinionCount,
 }) => {
   const navigate = useNavigate();
   return (
@@ -34,6 +39,13 @@ export const CompanyOnProfile: React.FC<CompanyOnProfileProps> = ({
       <div className={styles.info}>
         <span className={styles.name}>{companyName}</span>
         <span className={styles.address}>{address}</span>
+        {averageRating && opinionCount && (
+          <div className={styles.rating}>
+            <span>{averageRating}</span>
+            <img src={StarSVG} alt="Star" />
+            <span>({opinionCount})</span>
+          </div>
+        )}
         <button
           className={styles.submitButton}
           onClick={() => navigate(`/your-company/${uuid}`)}

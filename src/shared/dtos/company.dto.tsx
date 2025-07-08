@@ -13,4 +13,6 @@ export class CompanyDTO extends BaseDto {
   imageUrl?: string;
   phoneNumber?: string;
   address?: string;
+  opinionCount!: number;
+  averageRating!: number;
 }

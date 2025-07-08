@@ -111,10 +111,10 @@ export const OneOfferDetails: React.FC<OneOfferDetailsProps> = ({
             <img src={HeartSVG} alt="heart button" />
           )}
         </div>
-        <div className={styles.opinions}>
-          <div className={styles.rating}>{4.5}</div>
-          <img src={StarSVG} alt="Star svg" />
-          <div className={styles.opinionsCount}>({123})</div>
+        <div className={styles.rating}>
+          <span>{service.averageRating}</span>
+          <img src={StarSVG} alt="Star" />
+          <span>({service.opinionCount})</span>
         </div>
       </div>
       <div className={styles.info}>
