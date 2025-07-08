@@ -26,12 +26,12 @@ export const YourOffer: React.FC<
   imageUrl,
   opinionCount,
   averageRating,
+  views,
+  orders,
+  favorites,
 }) => {
   const location = 'Kraków, Długa 12a';
   const distance = '3.5km';
-  const orders = 5;
-  const views = 22;
-  const favorites = 2;
 
   const [isConfirmRemoveVisible, setIsConfirmRemoveVisible] = useState(false);
 

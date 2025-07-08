@@ -35,4 +35,10 @@ export class ServiceDTO extends BaseDto {
   opinionCount!: number;
 
   averageRating!: number;
+
+  views!: number;
+
+  orders!: number;
+
+  favorites!: number;
 }
