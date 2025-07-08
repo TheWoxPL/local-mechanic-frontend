@@ -3,7 +3,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #954545;
+  background-color: rgb(189, 9, 9);
   color: white;
 
   .info {
@@ -47,7 +47,7 @@
 
       button {
         font-size: 1.8rem;
-        border-radius: 10px;
+        border-radius: 15px;
         background: linear-gradient(90deg, #db0000 0%, #c70101 100%);
         color: white;
         height: 28px;
@@ -57,6 +57,7 @@
         -webkit-box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.295);
         -moz-box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.295);
         box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.295);
+        border: 2px solid rgba(255, 255, 255, 0.63);
       }
     }
   }
@@ -74,13 +75,14 @@
       min-width: 30px;
       text-align: center;
       font-size: 1.6rem;
-      height: 18px;
-      border-radius: 10px;
-      background-color: #ffffff7c;
+      height: 16px;
+      border-radius: 15px;
+      background-color: #4d67ff;
       margin-right: 10px;
       -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.13);
       -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.13);
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.13);
+      border: 2px solid rgba(255, 255, 255, 0.658);
     }
 
     .oneOwnerCreator {
@@ -89,12 +91,14 @@
     }
   }
   .description {
-    background-color: #aa6060;
+  background-color: rgba(204, 2, 2, 0.801);
     margin: 10px 5px;
     padding: 10px;
     -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.411);
+    border-radius: 5px;
   }
 
   .editForm {
