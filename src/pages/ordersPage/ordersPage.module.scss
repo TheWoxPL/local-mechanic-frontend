@@ -5,7 +5,7 @@
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: #f5f7fa;
+  background-color: rgb(255, 254, 246);
 }
 
 .header {
@@ -18,7 +18,7 @@
   margin-bottom: -16px;
   position: relative;
   z-index: 5;
-  
+
   h1 {
     margin: 0;
     font-size: 2.4rem;
@@ -40,7 +40,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   position: relative;
   z-index: 10;
-  
+
   .tab {
     flex: 1;
     text-align: center;
@@ -54,7 +54,7 @@
     border: none;
     background: transparent;
     color: #777;
-    
+
     &.active {
       background-color: #d84040;
       color: white;
@@ -66,37 +66,37 @@
   flex: 1;
   padding: 24px 16px;
   transition: opacity 0.3s ease;
-  
+
   &.animating {
     opacity: 0.5;
   }
-  
+
   .orders {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    
+
     .orderCard {
       background-color: white;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       transition: transform 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
       &:last-child {
         margin-bottom: 40px;
       }
-      
+
       &:active {
         transform: scale(0.98);
       }
-      
+
       .mainInfo {
         display: flex;
         padding: 18px 16px;
         gap: 14px;
         align-items: center;
-        
+
         .serviceLogo {
           width: 44px;
           height: 44px;
@@ -109,38 +109,38 @@
           color: #d84040;
           flex-shrink: 0;
         }
-        
+
         .serviceInfo {
           flex-grow: 1;
-          
+
           .serviceTitle {
             font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 2px;
             color: #222;
           }
-          
+
           .companyName {
             font-size: 1.2rem;
             color: #777;
           }
         }
-        
+
         .dateInfo {
           text-align: right;
           flex-shrink: 0;
-          
+
           .day {
             font-size: 1.8rem;
             font-weight: 800;
             color: #333;
           }
-          
+
           .monthYear {
             font-size: 1.1rem;
             color: #888;
           }
-          
+
           .time {
             margin-top: 2px;
             font-size: 1.2rem;
@@ -149,40 +149,40 @@
           }
         }
       }
-      
+
       .divider {
         height: 1px;
         background-color: #f0f0f0;
         margin: 0 16px;
       }
-      
+
       .detailsRow {
         display: flex;
         justify-content: space-between;
         padding: 14px 16px;
-        
+
         .detail {
           display: flex;
           align-items: center;
           gap: 6px;
-          
+
           .icon {
             width: 18px;
             height: 18px;
             color: #d84040;
           }
-          
+
           .label {
             font-size: 1.2rem;
             color: #666;
           }
         }
-        
+
         .price {
           font-weight: 700;
           font-size: 1.6rem;
           color: #d84040;
-          
+
           .currency {
             font-size: 1.1rem;
             font-weight: 400;
@@ -190,12 +190,12 @@
           }
         }
       }
-      
+
       .actions {
         padding: 12px 16px 16px;
         display: flex;
         gap: 10px;
-        
+
         button {
           flex: 1;
           padding: 12px 0;
@@ -206,42 +206,42 @@
           transition: all 0.2s;
           border: none;
         }
-        
+
         .details {
           background-color: #f5f7fa;
           color: #333;
-          
+
           &:hover {
             background-color: #ebeef2;
           }
         }
-        
+
         .resign {
           background-color: #d84040;
           color: white;
-          
+
           &:hover {
             background-color: #c63535;
           }
         }
       }
-      
+
       .status {
         text-align: center;
         padding: 8px 0;
         font-size: 1.2rem;
         font-weight: 600;
-        
+
         &.pending {
           background-color: #fff8e1;
           color: #f57f17;
         }
-        
+
         &.confirmed {
           background-color: #b8fae9;
           color: #00897b;
         }
-        
+
         &.completed {
           background-color: #f5f5f5;
           color: #757575;
@@ -253,7 +253,7 @@
       }
     }
   }
-  
+
   .emptyState {
     margin-top: 40px;
     display: flex;
@@ -262,7 +262,7 @@
     text-align: center;
     padding: 30px 20px;
     animation: fadeIn 0.5s ease-in;
-    
+
     .icon {
       width: 80px;
       height: 80px;
@@ -275,21 +275,21 @@
       justify-content: center;
       margin-bottom: 24px;
     }
-    
+
     .title {
       font-size: 2rem;
       font-weight: 700;
       color: #333;
       margin-bottom: 12px;
     }
-    
+
     .message {
       font-size: 1.4rem;
       color: #777;
       margin-bottom: 24px;
       line-height: 1.5;
     }
-    
+
     .browseButton {
       background-color: #d84040;
       color: white;
@@ -302,13 +302,15 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s;
-      
+      transition:
+        transform 0.2s,
+        background-color 0.2s;
+
       &:hover {
         background-color: #c63535;
         transform: translateY(-2px);
       }
-      
+
       &:active {
         transform: translateY(0);
       }

@@ -6,11 +6,12 @@
   align-items: center;
   padding: 0px 10px 70px 10px;
   height: 100dvh;
-  
+  background-color: rgb(255, 254, 246);
+
   .profileInfo {
     margin-top: 10px;
     color: white;
-    background-color: #C92828;
+    background-color: #c92828;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -20,7 +21,7 @@
     -webkit-box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
     -moz-box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
     box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
-    
+
     .avatar {
       background-color: rgb(255, 255, 255);
       width: 90px;
@@ -37,21 +38,21 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      
-      .hello{
+
+      .hello {
         margin-top: 6px;
         font-size: 2.4rem;
         align-self: flex-start;
         font-weight: 900;
       }
-      .date{
+      .date {
         font-size: 1.5rem;
       }
-      .editDataButton{
+      .editDataButton {
         width: 120px;
         font-size: 1.5rem;
         font-weight: 900;
-        background-color: #FF8080;
+        background-color: #ff8080;
         border: 0px;
         padding: 6px 0px;
         border-radius: 15px;
@@ -61,9 +62,9 @@
     }
   }
 
-  .mechanicInfo{
+  .mechanicInfo {
     color: white;
-    background-color: #FFA424;
+    background-color: #ffa424;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -75,7 +76,7 @@
     -moz-box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
     box-shadow: 0px 4px 4px 0px rgb(199, 199, 199);
 
-    .mechanicAvatar{
+    .mechanicAvatar {
       width: 90px;
       height: 90px;
       display: flex;
@@ -89,16 +90,16 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      
-      .text{
+
+      .text {
         padding-top: 5px;
         font-size: 1.3rem;
       }
-      .submitButton{
+      .submitButton {
         width: 120px;
         font-size: 1.5rem;
         font-weight: 900;
-        background-color: #FF8080;
+        background-color: #ff8080;
         border: 0px;
         padding: 6px 0px;
         border-radius: 15px;

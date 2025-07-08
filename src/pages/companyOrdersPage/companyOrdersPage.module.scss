@@ -7,6 +7,7 @@
   box-sizing: border-box;
   padding-bottom: 60px;
   overflow: scroll;
+  background-color: rgb(255, 254, 246);
 
   .header {
     background: linear-gradient(135deg, #d84040 0%, #a31d1d 100%);
@@ -18,7 +19,7 @@
     margin-bottom: 16px;
     position: relative;
     z-index: 5;
-  
+
     h1 {
       margin: 0;
       font-size: 2.4rem;
@@ -36,7 +37,6 @@
     padding: 4px;
     margin: 0px 15px;
     z-index: 10;
-
 
     button {
       flex: 1;
@@ -58,7 +58,7 @@
     }
   }
 
-.companySelector {
+  .companySelector {
     padding: 5px 15px;
     display: flex;
     flex-direction: column;
@@ -90,7 +90,6 @@
     }
   }
 
-
   .ordersContainer {
     flex-grow: 1;
     display: flex;
@@ -102,11 +101,11 @@
     background: white;
     border-radius: 12px;
     padding: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     gap: 12px;
     margin: 0px 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
   .orderHeader {
@@ -208,7 +207,7 @@
     color: white;
 
     &:hover {
-      background-color:#b82d3b;
+      background-color: #b82d3b;
     }
   }
 
