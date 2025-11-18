@@ -37,7 +37,10 @@ export const ProfilePage = () => {
   return (
     <div className={styles.container}>
       {user ? (
-        <ProfileLogged />
+        <>
+          <ProfileLogged />
+          <NavigatorBar indicatorIndex={3} />
+        </>
       ) : (
         <>
           <LoginTopLogo />
@@ -48,7 +51,6 @@ export const ProfilePage = () => {
           )}
         </>
       )}
-      <NavigatorBar indicatorIndex={3} />
     </div>
   );
 };
