@@ -1,0 +1,215 @@
+.hero {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 72px 24px 40px;
+  background: linear-gradient(120deg, #c2181a 0%, #930707 100%);
+  color: white;
+  display: grid;
+  gap: 32px;
+  z-index: 1;
+  padding-top: 120px;
+  
+  @media (min-width: 1024px) {
+    padding-top: 220px;;
+    grid-template-columns: 3fr 2fr;
+    align-items: stretch;
+  }
+}
+
+.heroContent {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heroTitle {
+  font-size: clamp(42px, 4vw, 64px);
+  line-height: 1.1;
+  font-weight: 800;
+  margin: 0;
+
+  span {
+    color: #ffe6c1;
+  }
+}
+
+.heroDescription {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.primaryCta,
+.secondaryCta {
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.primaryCta {
+  background: #ffe6c1;
+  color: #821717;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.secondaryCta {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.heroStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 18px 22px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  min-width: 90px;
+  max-width: 150px;
+  backdrop-filter: blur(6px);
+}
+
+.statValue {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.statLabel {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.heroHighlight {
+  background: #fff9f0;
+  border-radius: 28px;
+  padding: 32px;
+  color: #1f1f1f;
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.25);
+  align-self: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroHighlight::after {
+  content: '';
+  position: absolute;
+  inset: 18px;
+  border-radius: 24px;
+  border: 1px dashed rgba(130, 23, 23, 0.2);
+  pointer-events: none;
+}
+
+.highlightBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(130, 23, 23, 0.08);
+  color: #821717;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.highlightContent {
+  position: relative;
+  z-index: 1;
+
+  h3 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: #4b321f;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    li {
+      position: relative;
+      padding-left: 18px;
+      font-weight: 500;
+      color: #5e3927;
+
+      &::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        background: #c2181a;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 8px;
+      }
+    }
+  }
+}
+
+.highlightFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  button {
+    border: none;
+    border-radius: 999px;
+    padding: 12px 22px;
+    background: #c2181a;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.highlightPrice {
+  font-size: 30px;
+  font-weight: 700;
+  color: #c2181a;
+}
+
+.highlightCaption {
+  display: block;
+  font-size: 14px;
+  color: #7a5a3e;
+}

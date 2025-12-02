@@ -2,12 +2,60 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 15px;
-  padding-top: 75px;
-  margin-top: 35px;
+  gap: 20px;
+  padding: 20px;
+  padding-top: 180px;
   max-height: calc(100% - 20px);
   overflow-x: scroll;
-  padding-bottom: 50px;
-  background-color: rgb(255, 254, 246);
+  padding-bottom: 80px;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  padding-top: 50px;
+
+  @media (min-width: 768px) {
+    padding: 24px 40px;
+    padding-bottom: 30px;
+    gap: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    overflow: visible;
+  }
+
+  @media (min-width: 1200px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 1600px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding-top: 180px;
+}
+
+.noResults {
+  text-align: center;
+  padding: 60px 20px;
+  padding-top: 180px;
+  font-size: 18px;
+  color: #666;
+  font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 20px;
+    padding-top: 200px;
+  }
 }

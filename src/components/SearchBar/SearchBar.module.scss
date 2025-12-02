@@ -4,7 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: rgb(189, 9, 9);
+  background: linear-gradient(120deg, #c2181a 0%, #930707 100%);
   position: fixed;
   z-index: 10;
   padding: 8px 12px;
@@ -12,6 +12,9 @@
   transition: all 0.3s ease;
   box-sizing: border-box;
   animation: slideDown 0.25s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
 
   &.minimized {
     padding: 6px 0px;

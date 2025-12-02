@@ -8,6 +8,7 @@ import GarageSVG from 'src/assets/svgs/garage.svg';
 import { Link } from 'react-router';
 import { UserAuth } from 'src/context';
 import { RoleType } from 'src/shared/enums/role-type.enum';
+import { useState } from 'react';
 
 interface NavigatorBarProps {
   indicatorIndex: number;
@@ -18,63 +19,99 @@ export const NavigatorBar: React.FC<NavigatorBarProps> = ({
 }) => {
   const { roles } = UserAuth();
   const isEntrepreneur = roles?.includes(RoleType.ENTREPRENEUR);
+  const [isDesktopRailCollapsed, setIsDesktopRailCollapsed] = useState(false);
+
+  const navItems = [
+    {
+      to: '/home',
+      label: 'Home',
+      subtitle: 'Main dashboard',
+      icon: HomeSVG,
+      alt: 'Home Page',
+    },
+    {
+      to: isEntrepreneur ? '/your-companies' : '/favorite',
+      label: isEntrepreneur ? 'Companies' : 'Favorite',
+      subtitle: isEntrepreneur ? 'Manage company' : 'Saved offers',
+      icon: isEntrepreneur ? GarageSVG : HeartSVG,
+      alt: isEntrepreneur ? 'My Companies' : 'Favorite offers',
+    },
+    {
+      to: isEntrepreneur ? '/company-orders' : '/orders',
+      label: 'Orders',
+      subtitle: isEntrepreneur ? 'Customer requests' : 'Your jobs',
+      icon: CartSVG,
+      alt: isEntrepreneur ? 'Incoming Orders' : 'Orders',
+    },
+    {
+      to: '/profile',
+      label: 'Profile',
+      subtitle: 'Account settings',
+      icon: ProfileSVG,
+      alt: 'Profile',
+    },
+  ];
+
+  const toggleDesktopRail = () =>
+    setIsDesktopRailCollapsed((previous) => !previous);
 
   return (
-    <div className={styles.container}>
-      <Link to={'/home'}>
-        <div
-          className={
-            indicatorIndex === 0
-              ? `${styles.item} ${styles.itemActive}`
-              : `${styles.item}`
-          }
-        >
-          <img src={HomeSVG} alt="Home Page" />
-          <span>Home</span>
+    <>
+      <nav className={styles.container}>
+        {navItems.map((item, idx) => (
+          <Link key={`mobile-${item.label}`} to={item.to}>
+            <div
+              className={`${styles.item} ${
+                indicatorIndex === idx ? styles.itemActive : ''
+              }`}
+            >
+              <img src={item.icon} alt={item.alt} />
+              <span>{item.label}</span>
+            </div>
+          </Link>
+        ))}
+      </nav>
+
+      <nav
+        className={`${styles.desktopRail} ${
+          isDesktopRailCollapsed ? styles.desktopRailHidden : ''
+        }`}
+      >
+        <div className={styles.desktopRailInner}>
+          <p className={styles.desktopLabel}>Navigation</p>
+          {navItems.map((item, idx) => (
+            <Link key={item.label} to={item.to} className={styles.desktopLink}>
+              <div
+                className={`${styles.desktopItem} ${
+                  indicatorIndex === idx ? styles.desktopItemActive : ''
+                }`}
+              >
+                <span className={styles.desktopIconWrapper}>
+                  <img src={item.icon} alt={item.alt} />
+                </span>
+                <div>
+                  <span>{item.label}</span>
+                  <small>{item.subtitle}</small>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </Link>
-      <Link to={isEntrepreneur ? '/your-companies' : '/favorite'}>
-        <div
-          className={
-            indicatorIndex === 1
-              ? `${styles.item} ${styles.itemActive}`
-              : `${styles.item}`
-          }
-        >
-          <img
-            src={isEntrepreneur ? GarageSVG : HeartSVG}
-            alt={isEntrepreneur ? 'My Companies' : 'Favorite offers'}
-          />
-          <span>{isEntrepreneur ? 'Companies' : 'Favorite'}</span>
-        </div>
-      </Link>
-      <Link to={isEntrepreneur ? '/company-orders' : '/orders'}>
-        <div
-          className={
-            indicatorIndex === 2
-              ? `${styles.item} ${styles.itemActive}`
-              : `${styles.item}`
-          }
-        >
-          <img
-            src={CartSVG}
-            alt={isEntrepreneur ? 'Incoming Orders' : 'Orders'}
-          />
-          <span>Orders</span>
-        </div>
-      </Link>
-      <Link to={'/profile'}>
-        <div
-          className={
-            indicatorIndex === 3
-              ? `${styles.item} ${styles.itemActive}`
-              : `${styles.item}`
-          }
-        >
-          <img src={ProfileSVG} alt="Profile" />
-          <span>Profile</span>
-        </div>
-      </Link>
-    </div>
+      </nav>
+
+      <button
+        type="button"
+        className={`${styles.desktopRailToggle} ${
+          isDesktopRailCollapsed ? styles.desktopRailToggleCollapsed : ''
+        }`}
+        onClick={toggleDesktopRail}
+        aria-label={
+          isDesktopRailCollapsed ? 'Expand navigation' : 'Collapse navigation'
+        }
+        aria-expanded={!isDesktopRailCollapsed}
+      >
+        <span />
+      </button>
+    </>
   );
 };

@@ -2,6 +2,112 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
-  background-color: rgb(255, 254, 246);
+  background: linear-gradient(135deg, #fefef6 0%, #fff5e6 100%);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: linear-gradient(
+      180deg,
+      rgba(189, 9, 9, 0.05) 0%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.searchWrapper {
+  width: 100%;
+  padding: 0 16px;
+  margin-top: 16px;
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: 1023px) {
+    padding: 0;
+    margin: 0;
+    height: 0;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0 32px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 1200px;
+    margin: -100px auto 0;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0px 16px 0;
+  z-index: 1;
+
+  @media (min-width: 1024px) {
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-size: 28px;
+    color: #2c1c11;
+    margin-bottom: 6px;
+  }
+
+  p {
+    color: #7c675b;
+    margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0px 8vw 0;
+    margin-top: 5px;
+  }
+}
+
+.quickFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filterChip {
+  border-radius: 999px;
+  border: 1px solid rgba(130, 23, 23, 0.2);
+  padding: 10px 18px;
+  background: white;
+  color: #701212;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.filterChipActive,
+.filterChip:hover {
+  background: #c2181a;
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 10px 24px rgba(194, 24, 26, 0.25);
+}
+
+.offersSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
+  padding-top: 0;
 }
