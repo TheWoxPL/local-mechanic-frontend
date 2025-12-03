@@ -108,7 +108,6 @@ export const NavigatorBar: React.FC<NavigatorBarProps> = ({
         aria-label={
           isDesktopRailCollapsed ? 'Expand navigation' : 'Collapse navigation'
         }
-        aria-expanded={!isDesktopRailCollapsed}
       >
         <span />
       </button>
